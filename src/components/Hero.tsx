@@ -370,7 +370,7 @@ const Hero: React.FC<HeroProps> = ({ isSidebarCollapsed, specificSlide }: HeroPr
   };
 
   return (
-    <section id="hero" className={`relative overflow-hidden transition-all duration-500 w-full pt-[25px] px-[25px] pb-[25px] ${isDark ? 'bg-gray-900' : 'bg-white'}`}>
+    <section id="hero" className={`relative overflow-hidden transition-all duration-500 w-full pt-[100px] md:pt-[25px] px-[25px] pb-[25px] ${isDark ? 'bg-gray-900' : 'bg-white'}`}>
       <AnimatePresence mode="wait">
         {heroSlides.map((slide, index) => {
           // For specific slide routes, only render that slide
@@ -729,7 +729,7 @@ const Hero: React.FC<HeroProps> = ({ isSidebarCollapsed, specificSlide }: HeroPr
                       {/* Logo positioning: top-right corner */}
                       {slide.id === 0 && (
                         <motion.div 
-                          className="absolute z-10 top-2 right-4 sm:top-4 sm:right-6 md:top-6 md:right-8 transition-all duration-500 ease-in-out"
+                          className="absolute z-10 top-8 right-4 sm:top-12 sm:right-6 md:top-6 md:right-8 transition-all duration-500 ease-in-out"
                           initial={{ opacity: 0, x: 20, y: 20, scale: 0.9 }}
                           animate={{ opacity: 1, x: 0, y: 0, scale: 0.9 }}
                           transition={{ delay: 1, duration: 0.5 }}

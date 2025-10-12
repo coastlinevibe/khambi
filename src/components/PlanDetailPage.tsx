@@ -181,7 +181,7 @@ const PlanDetailPage: React.FC = () => {
         />
 
         <div className="flex-1 w-0">
-          <main className="w-full py-8 md:py-12">
+          <main className="w-full pt-20 md:pt-8 pb-8 md:pb-12">
             {/* Page header */}
             <motion.div
               className={`max-w-[73rem] mx-auto px-4 md:px-6`}

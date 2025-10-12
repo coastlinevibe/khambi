@@ -416,7 +416,7 @@ const Hero: React.FC<HeroProps> = ({ isSidebarCollapsed, specificSlide }: HeroPr
                   url(${slide.backgroundImage})
                 `,
                 backgroundSize: 'cover',
-                backgroundPosition: 'center',
+                backgroundPosition: 'center bottom',
                 backgroundBlendMode: 'darken',
                 marginLeft: window.innerWidth < 768 ? '0rem' : (isSidebarCollapsed ? '6rem' : '16rem'),
                 borderRadius: '1.5rem',
@@ -755,15 +755,31 @@ const Hero: React.FC<HeroProps> = ({ isSidebarCollapsed, specificSlide }: HeroPr
                           slide.id === 1 ? 'w-full sm:min-w-[300px] md:min-w-[400px] h-auto' : 'min-w-[180px] sm:min-w-[200px] h-14 sm:h-20 md:h-24'
                         }`}>
                           {slide.id === 0 ? (
-                            <SlideUpTypewriter 
-                              words={slide.typewriterWords.map(word => word.text)}
-                              className={`font-manrope font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl leading-tight ${
-                                slide.backgroundImage ? 'text-white' : (isDark ? 'text-slate-300' : 'text-ubuntugift-primary')
-                              }`}
-                              letterDelay={80}
-                              wordDisplayTime={1500}
-                              wordExitTime={400}
-                            />
+                            <>
+                              {/* Large "Gift Ai" text above main heading - Mobile only */}
+                              <motion.div
+                                className="text-center mb-4 sm:mb-6 md:hidden"
+                                initial={{ y: 20, opacity: 0 }}
+                                animate={{ y: 0, opacity: 1 }}
+                                transition={{ delay: 0.3, duration: 0.6 }}
+                              >
+                                <h1 className={`font-manrope font-bold text-5xl sm:text-6xl md:text-7xl lg:text-8xl ${
+                                  slide.backgroundImage ? 'text-white' : (isDark ? 'text-slate-300' : 'text-ubuntugift-primary')
+                                } leading-tight`}>
+                                  Gift Ai
+                                </h1>
+                              </motion.div>
+                              
+                              <SlideUpTypewriter 
+                                words={slide.typewriterWords.map(word => word.text)}
+                                className={`font-manrope font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl leading-tight ${
+                                  slide.backgroundImage ? 'text-white' : (isDark ? 'text-slate-300' : 'text-ubuntugift-primary')
+                                }`}
+                                letterDelay={80}
+                                wordDisplayTime={1500}
+                                wordExitTime={400}
+                              />
+                            </>
                           ) : (
                             <span className={`font-manrope font-bold opacity-100 block ${
                               slide.id === 1 
@@ -784,7 +800,7 @@ const Hero: React.FC<HeroProps> = ({ isSidebarCollapsed, specificSlide }: HeroPr
                             >
                               <HeroCTAButton
                                 className="font-manrope font-bold text-xl text-ubuntugift-primary"
-                                defaultText={isSidebarCollapsed ? "Talk to Gift Ai" : "Enter"}
+                                defaultText="Chat to Gift Ai"
                                 onClick={() => {
                                   // Wait for typewriter to finish before scrolling
                                   setTimeout(() => {
@@ -849,7 +865,7 @@ const Hero: React.FC<HeroProps> = ({ isSidebarCollapsed, specificSlide }: HeroPr
                           slide.id === 1 
                             ? 'text-center mt-8 mb-8' // Reduced margins for slide 1
                             : (slide.id === 0 
-                                ? 'mt-[63px] mb-12' // Move down 15px for slide 0 (48px + 15px)
+                                ? 'mt-[70px] mb-12' // Increased further from mt-[50px] for more space
                                 : 'mt-12 mb-12') // Default for other slides
                         }`}
                         style={slide.id === 0 ? { marginLeft: '0px', textAlign: 'center' } : {}}

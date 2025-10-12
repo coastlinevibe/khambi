@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { CreditCard, Check, Phone, Mail } from 'lucide-react';
+import { CreditCard, Check, Phone, Mail, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 
 interface Casket {
@@ -24,6 +24,16 @@ const CasketSelection: React.FC = () => {
       if (next.has(id)) next.delete(id); else next.add(id);
       return next;
     });
+  };
+
+  // Carousel state
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  // Items per slide configuration
+  const itemsPerSlide = {
+    mobile: 1,
+    tablet: 2,
+    desktop: 3
   };
 
   const caskets: Casket[] = [
@@ -105,6 +115,32 @@ const CasketSelection: React.FC = () => {
     ? caskets
     : caskets.filter(casket => casket.category === selectedCategory);
 
+  // Carousel navigation functions
+  const getItemsPerSlide = () => {
+    if (typeof window !== 'undefined') {
+      if (window.innerWidth < 768) return itemsPerSlide.mobile;
+      if (window.innerWidth < 1024) return itemsPerSlide.tablet;
+      return itemsPerSlide.desktop;
+    }
+    return itemsPerSlide.desktop;
+  };
+
+  const maxSlides = Math.ceil(filteredCaskets.length / getItemsPerSlide());
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % maxSlides);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + maxSlides) % maxSlides);
+  };
+
+  const getVisibleCaskets = () => {
+    const itemsPerSlide = getItemsPerSlide();
+    const startIndex = currentSlide * itemsPerSlide;
+    return filteredCaskets.slice(startIndex, startIndex + itemsPerSlide);
+  };
+
   const categories = [
     { id: 'all', label: 'All Caskets', count: caskets.length },
     { id: 'traditional', label: 'Traditional', count: caskets.filter(c => c.category === 'traditional').length },
@@ -153,104 +189,162 @@ const CasketSelection: React.FC = () => {
         </div>
       </div>
 
-      {/* Caskets Grid */}
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-12">
-        {filteredCaskets.map((casket) => {
-          const isExpanded = expandedCards.has(casket.id);
-          return (
-          <div
-            key={casket.id}
-            className={`rounded-2xl overflow-hidden shadow-lg border transition-all duration-300 hover:shadow-xl hover:-translate-y-1 ${
-              isDark ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'
-            }`}
-          >
-            {/* Casket Image Placeholder */}
-            <div className={`aspect-square relative overflow-hidden ${
-              isDark ? 'bg-gray-700' : 'bg-gray-100'
-            }`}>
-              <div className="w-full h-full flex items-center justify-center">
-                <div className="text-center">
-                  <CreditCard className={`w-16 h-16 mx-auto mb-4 ${
-                    isDark ? 'text-gray-500' : 'text-gray-400'
-                  }`} />
-                  <p className={`text-sm font-medium ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
-                    {casket.name}
-                  </p>
+      {/* Caskets Carousel */}
+      <div className="relative mb-12">
+        {/* Navigation Arrows */}
+        {maxSlides > 1 && (
+          <>
+            <button
+              onClick={prevSlide}
+              className={`absolute left-4 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full shadow-lg transition-all duration-200 ${
+                isDark
+                  ? 'bg-gray-800 hover:bg-gray-700 text-gray-300 hover:text-white'
+                  : 'bg-white hover:bg-gray-50 text-gray-700 hover:text-gray-900'
+              }`}
+              aria-label="Previous caskets"
+            >
+              <ChevronLeft className="w-6 h-6" />
+            </button>
+            <button
+              onClick={nextSlide}
+              className={`absolute right-4 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full shadow-lg transition-all duration-200 ${
+                isDark
+                  ? 'bg-gray-800 hover:bg-gray-700 text-gray-300 hover:text-white'
+                  : 'bg-white hover:bg-gray-50 text-gray-700 hover:text-gray-900'
+              }`}
+              aria-label="Next caskets"
+            >
+              <ChevronRight className="w-6 h-6" />
+            </button>
+          </>
+        )}
+
+        {/* Carousel Container */}
+        <div className="overflow-hidden">
+          <div className="flex transition-transform duration-500 ease-in-out" style={{ transform: `translateX(-${currentSlide * 100}%)` }}>
+            {Array.from({ length: maxSlides }).map((_, slideIndex) => (
+              <div key={slideIndex} className="flex-shrink-0 w-full">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4">
+                  {filteredCaskets.slice(slideIndex * getItemsPerSlide(), (slideIndex + 1) * getItemsPerSlide()).map((casket) => {
+                    const isExpanded = expandedCards.has(casket.id);
+                    return (
+                      <div
+                        key={casket.id}
+                        className={`rounded-2xl overflow-hidden shadow-lg border transition-all duration-300 hover:shadow-xl hover:-translate-y-1 ${
+                          isDark ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'
+                        }`}
+                      >
+                        {/* Casket Image Placeholder */}
+                        <div className={`aspect-square relative overflow-hidden ${
+                          isDark ? 'bg-gray-700' : 'bg-gray-100'
+                        }`}>
+                          <div className="w-full h-full flex items-center justify-center">
+                            <div className="text-center">
+                              <CreditCard className={`w-16 h-16 mx-auto mb-4 ${
+                                isDark ? 'text-gray-500' : 'text-gray-400'
+                              }`} />
+                              <p className={`text-sm font-medium ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
+                                {casket.name}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Casket Details */}
+                        <div className="p-6">
+                          <div className="flex justify-between items-start mb-2">
+                            <h3 className={`text-lg font-semibold ${
+                              isDark ? 'text-white' : 'text-gray-900'
+                            }`}>
+                              {casket.name}
+                            </h3>
+                            <span className="text-lg font-bold text-green-600">
+                              {casket.price}
+                            </span>
+                          </div>
+
+                          <p className={`text-sm mb-3 font-medium ${
+                            isDark ? 'text-gray-400' : 'text-gray-600'
+                          }`}>
+                            {casket.material}
+                          </p>
+
+                          {isExpanded && (
+                            <p className={`text-sm mb-4 leading-relaxed ${
+                              isDark ? 'text-gray-300' : 'text-gray-700'
+                            }`}>
+                              {casket.description}
+                            </p>
+                          )}
+
+                          {/* Features */}
+                          {isExpanded && (
+                            <div className="mb-4">
+                              <h4 className={`text-sm font-medium mb-2 ${
+                                isDark ? 'text-gray-300' : 'text-gray-700'
+                              }`}>
+                                Includes:
+                              </h4>
+                              <ul className="text-xs space-y-1">
+                                {casket.features.map((feature, index) => (
+                                  <li key={index} className={`flex items-center ${
+                                    isDark ? 'text-gray-400' : 'text-gray-600'
+                                  }`}>
+                                    <Check className="w-3 h-3 text-green-500 mr-2 flex-shrink-0" />
+                                    {feature}
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          )}
+
+                          {/* Action Buttons */}
+                          <div className="flex gap-2">
+                            <button
+                              onClick={() => toggleCard(casket.id)}
+                              className={`flex-1 px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
+                                isDark
+                                  ? 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                              }`}
+                            >
+                              {isExpanded ? 'Hide Details' : 'View Details'}
+                            </button>
+                            <button className={`flex-1 px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
+                              isDark
+                                ? 'bg-green-600 hover:bg-green-500 text-white'
+                                : 'bg-green-500 hover:bg-green-600 text-white'
+                            }`}>
+                              Inquire Now
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
-            </div>
-
-            {/* Casket Details */}
-            <div className="p-6">
-              <div className="flex justify-between items-start mb-2">
-                <h3 className={`text-lg font-semibold ${
-                  isDark ? 'text-white' : 'text-gray-900'
-                }`}>
-                  {casket.name}
-                </h3>
-                <span className="text-lg font-bold text-green-600">
-                  {casket.price}
-                </span>
-              </div>
-
-              <p className={`text-sm mb-3 font-medium ${
-                isDark ? 'text-gray-400' : 'text-gray-600'
-              }`}>
-                {casket.material}
-              </p>
-
-              {isExpanded && (
-                <p className={`text-sm mb-4 leading-relaxed ${
-                  isDark ? 'text-gray-300' : 'text-gray-700'
-                }`}>
-                  {casket.description}
-                </p>
-              )}
-
-              {/* Features */}
-              {isExpanded && (
-                <div className="mb-4">
-                  <h4 className={`text-sm font-medium mb-2 ${
-                    isDark ? 'text-gray-300' : 'text-gray-700'
-                  }`}>
-                    Includes:
-                  </h4>
-                  <ul className="text-xs space-y-1">
-                    {casket.features.map((feature, index) => (
-                      <li key={index} className={`flex items-center ${
-                        isDark ? 'text-gray-400' : 'text-gray-600'
-                      }`}>
-                        <Check className="w-3 h-3 text-green-500 mr-2 flex-shrink-0" />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-
-              {/* Action Buttons */}
-              <div className="flex gap-2">
-                <button
-                  onClick={() => toggleCard(casket.id)}
-                  className={`flex-1 px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
-                    isDark
-                      ? 'bg-gray-700 text-gray-300 hover:bg-gray-600'
-                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                  }`}
-                >
-                  {isExpanded ? 'Hide Details' : 'View Details'}
-                </button>
-                <button className={`flex-1 px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
-                  isDark
-                    ? 'bg-green-600 hover:bg-green-500 text-white'
-                    : 'bg-green-500 hover:bg-green-600 text-white'
-                }`}>
-                  Inquire Now
-                </button>
-              </div>
-            </div>
+            ))}
           </div>
-        );})}
+        </div>
+
+        {/* Carousel Indicators */}
+        {maxSlides > 1 && (
+          <div className="flex justify-center gap-2 mt-6">
+            {Array.from({ length: maxSlides }).map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentSlide(index)}
+                className={`w-2 h-2 rounded-full transition-all duration-200 ${
+                  index === currentSlide
+                    ? (isDark ? 'bg-green-400' : 'bg-green-600')
+                    : (isDark ? 'bg-gray-600' : 'bg-gray-300')
+                }`}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Call to Action */}

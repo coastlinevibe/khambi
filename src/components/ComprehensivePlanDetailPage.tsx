@@ -291,7 +291,7 @@ const ComprehensivePlanDetailPage: React.FC = () => {
         />
 
         <div className="flex-1 w-0">
-          <main className="w-full py-8 md:py-12">
+          <main className="w-full pt-20 md:pt-8 pb-8 md:pb-12">
             {/* Hero / Title */}
             <section className={`${isDark ? 'bg-gradient-to-b from-gray-900 via-gray-900 to-gray-900' : 'bg-gradient-to-b from-white via-gray-50 to-gray-50'} border-y ${isDark ? 'border-gray-800' : 'border-gray-200'} py-6 md:py-8 mb-6`}>
               <motion.div

@@ -250,7 +250,7 @@ const Header: React.FC<HeaderProps> = ({
         <div className="flex items-center justify-between px-4 py-3">
           {/* Logo */}
           <div className="flex flex-col">
-            <span className={`text-lg font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>GiftAi</span>
+            <span className={`text-lg font-bold ${isDark ? 'text-white' : 'text-orange-600'}`}>GiftAi</span>
             <span className={`text-xs ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>Funeral Services</span>
           </div>
 
@@ -258,7 +258,7 @@ const Header: React.FC<HeaderProps> = ({
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className={`p-2 rounded-lg transition-colors ${
-              isDark ? 'hover:bg-gray-800 text-gray-300' : 'hover:bg-gray-100 text-gray-700'
+              isDark ? 'hover:bg-gray-800 text-gray-300' : 'hover:bg-orange-100 text-orange-600'
             }`}
             aria-label="Toggle mobile menu"
           >
@@ -302,7 +302,7 @@ const Header: React.FC<HeaderProps> = ({
                         className={`w-full flex items-center px-4 py-3 rounded-lg text-left transition-colors ${
                           isActive
                             ? `text-white ${isDark ? 'bg-ubuntugift-primary' : 'bg-ubuntugift-primary'}`
-                            : `hover:bg-gray-100 ${isDark ? 'text-gray-300 hover:bg-gray-800' : 'text-gray-700 hover:bg-gray-100'}`
+                            : `${isDark ? 'text-gray-300 hover:bg-gray-800' : 'text-white hover:bg-transparent'}`
                         }`}
                       >
                         <item.icon className="w-5 h-5 mr-3" />

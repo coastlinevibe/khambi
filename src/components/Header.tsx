@@ -367,15 +367,15 @@ const Header: React.FC<HeaderProps> = ({
                 }}
                 className={`flex flex-col items-center justify-center p-2 rounded-lg transition-all duration-200 min-w-0 ${
                   isActive
-                    ? 'text-ubuntugift-primary bg-ubuntugift-primary/10'
-                    : 'text-gray-500 hover:text-ubuntugift-primary hover:bg-gray-50 dark:hover:bg-gray-800'
+                    ? 'text-white bg-ubuntugift-primary'
+                    : 'text-gray-700 dark:text-gray-300 hover:text-ubuntugift-primary hover:bg-gray-50 dark:hover:bg-gray-800'
                 }`}
               >
                 <item.icon className={`w-6 h-6 mb-1 transition-transform duration-200 ${
-                  isActive ? 'scale-110' : ''
+                  isActive ? 'scale-110 text-white' : 'text-gray-700 dark:text-gray-300'
                 }`} />
                 <span className={`text-xs font-medium transition-colors duration-200 ${
-                  isActive ? 'text-ubuntugift-primary' : ''
+                  isActive ? 'text-white' : 'text-gray-700 dark:text-gray-300'
                 }`}>
                   {item.label}
                 </span>

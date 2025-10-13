@@ -95,6 +95,30 @@ html {
   .tools-description {
     display: none;
   }
+  
+  /* Force mobile navigation text to be dark on light theme */
+  nav button:not(.bg-ubuntugift-primary) {
+    color: #374151 !important; /* gray-700 */
+  }
+  
+  nav button:not(.bg-ubuntugift-primary) svg {
+    color: #374151 !important; /* gray-700 */
+  }
+  
+  /* Active mobile navigation - white text and icons */
+  nav button.bg-ubuntugift-primary,
+  nav button.bg-ubuntugift-primary svg {
+    color: white !important;
+  }
+  
+  /* Dark mode mobile navigation */
+  .dark nav button:not(.bg-ubuntugift-primary) {
+    color: #d1d5db !important; /* gray-300 */
+  }
+  
+  .dark nav button:not(.bg-ubuntugift-primary) svg {
+    color: #d1d5db !important; /* gray-300 */
+  }
 }
 
 /* Focus states for accessibility - UbuntuGift dignified colors */

@@ -30,8 +30,9 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     }
   }, []);
 
-  // Apply theme class to html element
+  // Save theme to localStorage and apply theme class to html element
   useEffect(() => {
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
     const html = document.documentElement;
     if (isDark) {
       html.classList.add('dark');

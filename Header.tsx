@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Phone, Mail, ChevronLeft, ChevronRight, Home, Settings, HelpCircle, MessageSquare, Users, Package, Calendar, BookOpen, Globe, Star, Shield } from 'lucide-react';
- './ui/gift-ai-tooltip.css';
+import { useTheme } from './src/contexts/ThemeContext';
+'./ui/gift-ai-tooltip.css';
 
 interface HeaderProps {
   activeSection: string;
@@ -245,7 +246,7 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection, onNavi
                 {isSidebarCollapsed ? (
                   <MessageSquare className={`w-5 h-5 shrink-0 ${isDark ? 'text-gray-200' : 'text-gray-900'}`} />
                 ) : (
-                  \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <div\ className=""tooltip-container"">\n\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <span\ className=""tooltip"">Uiverse\.io</span>\n\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <span\ className=""text"">Gift\ Ai\ ??</span>\n\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <span>Hello!\ ??</span>\n\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ </div>
+                  'Gift AI'
                 )}
               </button>
               <button
@@ -347,7 +348,7 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection, onNavi
                 className={`flex flex-col items-center justify-center p-2 rounded-lg transition-all duration-200 min-w-0 ${
                   isActive
                     ? 'text-ubuntugift-primary bg-ubuntugift-primary/10'
-                    : 'text-gray-500 hover:text-ubuntugift-primary hover:bg-gray-50 dark:hover:bg-gray-800'
+                    : 'text-gray-500 dark:text-gray-300 hover:text-ubuntugift-primary hover:bg-gray-50 dark:hover:bg-gray-800'
                 }`}
               >
                 <item.icon className={`w-6 h-6 mb-1 transition-transform duration-200 ${

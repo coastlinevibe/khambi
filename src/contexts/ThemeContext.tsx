@@ -30,9 +30,14 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     }
   }, []);
 
-  // Save theme to localStorage when changed
+  // Apply theme class to html element
   useEffect(() => {
-    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    const html = document.documentElement;
+    if (isDark) {
+      html.classList.add('dark');
+    } else {
+      html.classList.remove('dark');
+    }
   }, [isDark]);
 
   const toggleTheme = () => {

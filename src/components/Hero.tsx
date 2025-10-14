@@ -413,18 +413,25 @@ const Hero: React.FC<HeroProps> = ({ isSidebarCollapsed, specificSlide }: HeroPr
                   zIndex: 0
                 }}
               >
-                {/* Fixed Background Layer */}
+                {/* Fixed Background Layer - NO OVERLAY */}
                 {slide.backgroundImage && (
-                  <div 
-                    className="hero-bg-fixed"
+                  <OptimizedImage
+                    src={slide.backgroundImage}
+                    alt="Hero background"
+                    className="hero-bg-fixed object-cover w-full h-full"
+                    priority={true}
                     style={{
-                      backgroundImage: `
-                        rgba(0, 0, 0, 0.3),
-                        url(${slide.backgroundImage})
-                      `,
-                      borderRadius: '1.5rem'
+                      borderRadius: '1.5rem',
+                      zIndex: -1
                     }}
                   />
+                )}
+                
+                {/* Debug: Show if image path exists */}
+                {slide.backgroundImage && process.env.NODE_ENV === 'development' && (
+                  <div style={{ position: 'absolute', top: '10px', left: '10px', background: 'rgba(0,0,0,0.8)', color: 'white', padding: '5px', fontSize: '12px', zIndex: 1000 }}>
+                    Image: {slide.backgroundImage}
+                  </div>
                 )}
               </div>
 
@@ -435,7 +442,7 @@ const Hero: React.FC<HeroProps> = ({ isSidebarCollapsed, specificSlide }: HeroPr
               exit={{ opacity: 0 }}
               transition={{ duration: 0.5 }}
               className={`min-h-[60vh] sm:min-h-[75vh] flex items-center justify-center transition-colors duration-500 ease-in-out relative rounded-3xl overflow-hidden ${
-                slide.backgroundImage ? 'text-white bg-transparent' : 'bg-gradient-to-br'
+                slide.backgroundImage ? 'bg-transparent' : 'bg-gradient-to-br'
               } ${
                 !slide.backgroundImage && isDark && (slide.id === 3 || slide.id === 0)
                   ? (slide.id === 3 ? 'from-gray-900 to-gray-800' : 'from-gray-950 to-gray-900')
@@ -448,7 +455,9 @@ const Hero: React.FC<HeroProps> = ({ isSidebarCollapsed, specificSlide }: HeroPr
                 marginLeft: window.innerWidth < 768 ? '0rem' : (isSidebarCollapsed ? '6rem' : '16rem'),
                 borderRadius: '1.5rem',
                 position: 'relative',
-                zIndex: 1
+                zIndex: 1,
+                // Add text shadow for better visibility without overlay
+                textShadow: slide.backgroundImage ? '2px 2px 4px rgba(0, 0, 0, 0.8)' : 'none'
               }}
             >
               <div 

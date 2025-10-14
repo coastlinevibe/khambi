@@ -56,9 +56,20 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
   useEffect(() => {
     if (!isInView) return;
 
-    // Try WebP format first, fallback to original
-    const webpSrc = src.replace(/\.(jpg|jpeg|png)$/i, '.webp');
-    
+    // Create multiple size variants for responsive loading
+    const createResponsiveSrc = (originalSrc: string) => {
+      const extension = originalSrc.match(/\.(jpg|jpeg|png)$/i)?.[1] || 'jpg';
+      const baseName = originalSrc.replace(/\.(jpg|jpeg|png)$/i, '');
+      
+      // Try WebP first, then AVIF, then original
+      const formats = ['webp', 'avif', extension.toLowerCase()];
+      const sizes = ['400w', '800w', '1200w', '1600w'];
+      
+      return formats.map(format => 
+        sizes.map(size => `${baseName}-${size}.${format} ${size}`)
+      ).flat();
+    };
+
     // Check if WebP is supported
     const supportsWebP = () => {
       const canvas = document.createElement('canvas');
@@ -67,25 +78,14 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
       return canvas.toDataURL('image/webp').indexOf('data:image/webp') === 0;
     };
 
-    // Use WebP if supported and available, otherwise use original
-    const checkImageExists = (url: string): Promise<boolean> => {
-      return new Promise((resolve) => {
-        const img = new Image();
-        img.onload = () => resolve(true);
-        img.onerror = () => resolve(false);
-        img.src = url;
-      });
-    };
-
-    const loadOptimalImage = async () => {
+    // Use WebP if supported, otherwise original
+    const loadOptimalImage = () => {
       if (supportsWebP()) {
-        const webpExists = await checkImageExists(webpSrc);
-        if (webpExists) {
-          setImageSrc(webpSrc);
-          return;
-        }
+        const webpSrc = src.replace(/\.(jpg|jpeg|png)$/i, '.webp');
+        setImageSrc(webpSrc);
+      } else {
+        setImageSrc(src);
       }
-      setImageSrc(src);
     };
 
     loadOptimalImage();

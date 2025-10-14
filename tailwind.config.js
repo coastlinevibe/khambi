@@ -2,6 +2,14 @@
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   darkMode: 'class',
+  // Purge unused CSS more aggressively
+  purge: {
+    enabled: true,
+    content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+    options: {
+      safelist: ['dark', 'light'],
+    }
+  },
   theme: {
     extend: {
       colors: {

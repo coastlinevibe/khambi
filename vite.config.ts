@@ -15,6 +15,8 @@ export default defineConfig({
   optimizeDeps: {
     exclude: ['lucide-react'],
     include: ['framer-motion', 'react-router-dom'],
+    // Force pre-bundling of heavy dependencies
+    force: true,
   },
   build: {
     // Optimize for mobile performance
@@ -33,15 +35,34 @@ export default defineConfig({
     },
     rollupOptions: {
       output: {
-        manualChunks: {
-          vendor: ['react', 'react-dom'],
-          router: ['react-router-dom'],
-          animations: ['framer-motion'],
-          icons: ['lucide-react', 'react-icons'],
-          ui: ['@radix-ui/react-avatar', '@radix-ui/react-slot'],
-          particles: ['@tsparticles/react', '@tsparticles/slim'],
-          dnd: ['react-beautiful-dnd'],
-          utils: ['class-variance-authority', 'clsx', 'tailwind-merge'],
+        manualChunks: (id) => {
+          // Vendor chunks
+          if (id.includes('node_modules')) {
+            if (id.includes('react') || id.includes('react-dom')) {
+              return 'vendor-react';
+            }
+            if (id.includes('framer-motion')) {
+              return 'vendor-animations';
+            }
+            if (id.includes('lucide-react') || id.includes('react-icons')) {
+              return 'vendor-icons';
+            }
+            if (id.includes('@radix-ui')) {
+              return 'vendor-ui';
+            }
+            if (id.includes('tsparticles') || id.includes('react-beautiful-dnd')) {
+              return 'vendor-heavy';
+            }
+            return 'vendor-misc';
+          }
+          
+          // Component chunks
+          if (id.includes('/components/ui/')) {
+            return 'ui-components';
+          }
+          if (id.includes('/components/')) {
+            return 'components';
+          }
         },
         // Optimize chunk loading
         chunkFileNames: 'assets/[name]-[hash].js',
@@ -62,10 +83,12 @@ export default defineConfig({
     },
     // Enable gzip compression
     reportCompressedSize: true,
-    chunkSizeWarningLimit: 300,
-    // Optimize assets
-    assetsInlineLimit: 2048,
+    chunkSizeWarningLimit: 200,
+    // Optimize assets - reduce inline limit for better caching
+    assetsInlineLimit: 1024,
     cssCodeSplit: true,
+    // Experimental: reduce bundle size
+    sourcemap: false,
   },
   css: {
     postcss: './postcss.config.js',

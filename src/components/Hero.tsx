@@ -390,7 +390,7 @@ const Hero: React.FC<HeroProps> = ({ isSidebarCollapsed, specificSlide }: HeroPr
   };
 
   return (
-    <section id="hero" className={`relative overflow-hidden transition-all duration-500 w-full pt-[100px] md:pt-[25px] px-[25px] pb-[25px] ${isDark ? 'bg-gray-900' : 'bg-white'}`}>
+    <section id="hero" className={`relative overflow-hidden transition-all duration-500 w-full pt-[100px] md:pt-[25px] ${isDark ? 'bg-gray-900' : 'bg-white'}`}>
       <AnimatePresence mode="wait">
         {heroSlides.map((slide, index) => {
           // For specific slide routes, only render that slide
@@ -402,14 +402,13 @@ const Hero: React.FC<HeroProps> = ({ isSidebarCollapsed, specificSlide }: HeroPr
             <>
               {/* Stable Background Container - Outside of motion.div */}
               <div 
-                className="absolute inset-0 rounded-3xl overflow-hidden"
+                className="absolute inset-0 overflow-hidden"
                 style={{
                   position: 'absolute',
                   top: 0,
                   left: 0,
                   right: 0,
                   bottom: 0,
-                  borderRadius: '1.5rem',
                   zIndex: 0
                 }}
               >
@@ -421,7 +420,6 @@ const Hero: React.FC<HeroProps> = ({ isSidebarCollapsed, specificSlide }: HeroPr
                     className="hero-bg-fixed object-cover w-full h-full"
                     priority={true}
                     style={{
-                      borderRadius: '1.5rem',
                       zIndex: -1
                     }}
                   />
@@ -441,7 +439,7 @@ const Hero: React.FC<HeroProps> = ({ isSidebarCollapsed, specificSlide }: HeroPr
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3, ease: "easeOut" }}
-              className={`min-h-[60vh] sm:min-h-[75vh] flex items-center justify-center transition-colors duration-500 ease-in-out relative rounded-3xl overflow-hidden ${
+              className={`min-h-[60vh] sm:min-h-[75vh] flex items-center justify-center transition-colors duration-500 ease-in-out relative overflow-hidden ${
                 slide.backgroundImage ? 'bg-transparent' : 'bg-gradient-to-br'
               } ${
                 !slide.backgroundImage && isDark && (slide.id === 3 || slide.id === 0)
@@ -453,7 +451,6 @@ const Hero: React.FC<HeroProps> = ({ isSidebarCollapsed, specificSlide }: HeroPr
               }`}
               style={{
                 marginLeft: window.innerWidth < 768 ? '0rem' : (isSidebarCollapsed ? '6rem' : '16rem'),
-                borderRadius: '1.5rem',
                 position: 'relative',
                 zIndex: 1,
                 // Add text shadow for better visibility without overlay

@@ -217,6 +217,12 @@ html {
     box-sizing: border-box;
   }
 
+  /* Remove dark borders from hero section */
+  #hero, #hero * {
+    border: none !important;
+    box-shadow: none !important;
+  }
+
   /* Smooth initial render */
   #root {
     opacity: 1;

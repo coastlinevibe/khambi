@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import Header from './Header';
 import Hero from './Hero';
-import ToolsTabs from './ToolsTabs';
-import HowItWorks from './HowItWorks';
-import Feedback from './Feedback';
-import WhyChoose from './WhyChoose';
-import Contact from './Contact';
-import FAQs from './FAQs';
-import Footer from './Footer';
-import Obituaries from './Obituaries';
+import IntersectionObserverWrapper from './ui/intersection-observer';
+
+// Lazy load non-critical components
+const ToolsTabs = lazy(() => import('./ToolsTabs'));
+const HowItWorks = lazy(() => import('./HowItWorks'));
+const Feedback = lazy(() => import('./Feedback'));
+const WhyChoose = lazy(() => import('./WhyChoose'));
+const Contact = lazy(() => import('./Contact'));
+const FAQs = lazy(() => import('./FAQs'));
+const Footer = lazy(() => import('./Footer'));
+const Obituaries = lazy(() => import('./Obituaries'));
 
 interface AppContentProps {
   activeSection: string;
@@ -47,15 +50,62 @@ const AppContent: React.FC<AppContentProps> = ({
         <div className="flex-1 w-0">
           <main className="w-full">
             <Hero isSidebarCollapsed={isSidebarCollapsed} specificSlide={specificSlide} />
-            <div id="tools-tabs" data-section="tools-tabs">
-              <ToolsTabs isSidebarCollapsed={isSidebarCollapsed} />
-            </div>
-            <Obituaries isSidebarCollapsed={isSidebarCollapsed} />
-            <HowItWorks isSidebarCollapsed={isSidebarCollapsed} />
-            <Feedback isSidebarCollapsed={isSidebarCollapsed} />
-            <WhyChoose isSidebarCollapsed={isSidebarCollapsed} />
-            <Contact isSidebarCollapsed={isSidebarCollapsed} />
-            <FAQs isSidebarCollapsed={isSidebarCollapsed} />
+            <IntersectionObserverWrapper>
+              <Suspense fallback={<div className="h-32 bg-gray-100 animate-pulse"></div>}>
+                <div id="tools-tabs" data-section="tools-tabs">
+                  <ToolsTabs isSidebarCollapsed={isSidebarCollapsed} />
+                </div>
+              </Suspense>
+            </IntersectionObserverWrapper>
+            <IntersectionObserverWrapper>
+              <Suspense fallback={<div className="h-32 bg-gray-100 animate-pulse"></div>}>
+                <div id="obituaries" data-section="obituaries">
+                  <Obituaries isSidebarCollapsed={isSidebarCollapsed} />
+                </div>
+              </Suspense>
+            </IntersectionObserverWrapper>
+            <IntersectionObserverWrapper>
+              <Suspense fallback={<div className="h-32 bg-gray-100 animate-pulse"></div>}>
+                <div id="how-it-works" data-section="how-it-works">
+                  <HowItWorks isSidebarCollapsed={isSidebarCollapsed} />
+                </div>
+              </Suspense>
+            </IntersectionObserverWrapper>
+            <IntersectionObserverWrapper>
+              <Suspense fallback={<div className="h-32 bg-gray-100 animate-pulse"></div>}>
+                <div id="feedback" data-section="feedback">
+                  <Feedback isSidebarCollapsed={isSidebarCollapsed} />
+                </div>
+              </Suspense>
+            </IntersectionObserverWrapper>
+            <IntersectionObserverWrapper>
+              <Suspense fallback={<div className="h-32 bg-gray-100 animate-pulse"></div>}>
+                <div id="why-choose" data-section="why-choose">
+                  <WhyChoose isSidebarCollapsed={isSidebarCollapsed} />
+                </div>
+              </Suspense>
+            </IntersectionObserverWrapper>
+            <IntersectionObserverWrapper>
+              <Suspense fallback={<div className="h-32 bg-gray-100 animate-pulse"></div>}>
+                <div id="contact" data-section="contact">
+                  <Contact isSidebarCollapsed={isSidebarCollapsed} />
+                </div>
+              </Suspense>
+            </IntersectionObserverWrapper>
+            <IntersectionObserverWrapper>
+              <Suspense fallback={<div className="h-32 bg-gray-100 animate-pulse"></div>}>
+                <div id="faqs" data-section="faqs">
+                  <FAQs isSidebarCollapsed={isSidebarCollapsed} />
+                </div>
+              </Suspense>
+            </IntersectionObserverWrapper>
+            <IntersectionObserverWrapper>
+              <Suspense fallback={<div className="h-32 bg-gray-100 animate-pulse"></div>}>
+                <div id="footer" data-section="footer">
+                  <Footer isSidebarCollapsed={isSidebarCollapsed} />
+                </div>
+              </Suspense>
+            </IntersectionObserverWrapper>
           </main>
           
           <div
@@ -64,7 +114,6 @@ const AppContent: React.FC<AppContentProps> = ({
               transition: 'padding-left 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
             }}
           >
-            <Footer id="footer" />
           </div>
         </div>
       </div>

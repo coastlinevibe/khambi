@@ -3,10 +3,12 @@ import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import App from './App.tsx';
-import { initializeDemoData } from './utils/demoData';
 
-// Initialize demo data on app startup
-initializeDemoData();
+// Initialize demo data asynchronously to not block initial render
+setTimeout(async () => {
+  const { initializeDemoData } = await import('./utils/demoData');
+  initializeDemoData();
+}, 0);
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

@@ -32,6 +32,61 @@
     <link rel="canonical" href="https://gift-ai-iota.vercel.app/" />
     <link rel="apple-touch-startup-image" href="/icons/icon-512x512.png" />
 
+    <!-- Preload critical resources for better performance -->
+    <link rel="preload" href="/images/cas.jpg" as="image" type="image/jpeg" fetchpriority="high" />
+    <link rel="preload" href="/assets/images/Logo.jpg" as="image" type="image/jpeg" fetchpriority="high" />
+    <link rel="preload" href="/src/main.tsx" as="script" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://avatar.vercel.sh" />
+    <link rel="dns-prefetch" href="https://randomuser.me" />
+    
+    <!-- Critical CSS inlined for faster rendering -->
+    <style>
+      /* Critical above-the-fold styles */
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      html, body { height: 100%; font-family: system-ui, -apple-system, sans-serif; }
+      #root { min-height: 100vh; display: flex; flex-direction: column; }
+      .hero-loading { 
+        background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+        min-height: 60vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        flex: 1;
+      }
+      /* Prevent layout shift */
+      .hero-container {
+        min-height: 60vh;
+        background-color: #f7fafc;
+      }
+      /* Loading spinner */
+      .spinner {
+        border: 4px solid #f3f3f3;
+        border-top: 4px solid #3498db;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        animation: spin 2s linear infinite;
+      }
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+      /* Critical layout styles */
+      .flex { display: flex; }
+      .min-h-screen { min-height: 100vh; }
+      .w-full { width: 100%; }
+      .relative { position: relative; }
+      .absolute { position: absolute; }
+      .inset-0 { top: 0; right: 0; bottom: 0; left: 0; }
+    </style>
+    
+    <!-- Resource hints for better performance -->
+    <link rel="prefetch" href="/src/components/AppContent.tsx" />
+    <link rel="prefetch" href="/src/components/Hero.tsx" />
+
     <title>GiftAi Funeral Services</title>
   </head>
   <body>

@@ -1,19 +1,23 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense, lazy } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
-import AppContent from './components/AppContent';
-import PlanDetailPage from './components/PlanDetailPage';
-import HospitalPlanDetailPage from './components/HospitalPlanDetailPage';
-import ComprehensivePlanDetailPage from './components/ComprehensivePlanDetailPage';
-import SeniorPlanDetailPage from './components/SeniorPlanDetailPage';
-import RegulatoryInformationPage from './components/RegulatoryInformationPage';
-import JuniorExecutivePlanDetailPage from './components/JuniorExecutivePlanDetailPage';
-import ProceduresPage from './components/ProceduresPage';
-import CasketsPage from './components/CasketsPage';
-import AdminLogin from './components/AdminLogin';
-import AdminDashboard from './components/AdminDashboard';
-import AdminOnboarding from './components/AdminOnboarding';
-import NotFoundPage from './components/NotFoundPage';
-import PrivacyPolicy from './components/PrivacyPolicy';
+import { usePerformanceMonitor, useDeviceCapabilities } from './hooks/usePerformanceMonitor';
+import LoadingSkeleton from './components/ui/loading-skeleton';
+
+// Lazy load components for better performance
+const AppContent = lazy(() => import('./components/AppContent'));
+const PlanDetailPage = lazy(() => import('./components/PlanDetailPage'));
+const HospitalPlanDetailPage = lazy(() => import('./components/HospitalPlanDetailPage'));
+const ComprehensivePlanDetailPage = lazy(() => import('./components/ComprehensivePlanDetailPage'));
+const SeniorPlanDetailPage = lazy(() => import('./components/SeniorPlanDetailPage'));
+const RegulatoryInformationPage = lazy(() => import('./components/RegulatoryInformationPage'));
+const JuniorExecutivePlanDetailPage = lazy(() => import('./components/JuniorExecutivePlanDetailPage'));
+const ProceduresPage = lazy(() => import('./components/ProceduresPage'));
+const CasketsPage = lazy(() => import('./components/CasketsPage'));
+const AdminLogin = lazy(() => import('./components/AdminLogin'));
+const AdminDashboard = lazy(() => import('./components/AdminDashboard'));
+const AdminOnboarding = lazy(() => import('./components/AdminOnboarding'));
+const NotFoundPage = lazy(() => import('./components/NotFoundPage'));
+const PrivacyPolicy = lazy(() => import('./components/PrivacyPolicy'));
 import { ThemeProvider } from './contexts/ThemeContext';
 
 function CasketsPageWrapper() {
@@ -42,6 +46,23 @@ function AppWrapper() {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [isFooterInView, setIsFooterInView] = useState(false);
   const location = useLocation();
+  
+  // Performance monitoring
+  const { getMetrics } = usePerformanceMonitor(process.env.NODE_ENV === 'development');
+  const { isLowEndDevice, shouldReduceAnimations } = useDeviceCapabilities();
+  
+  // Log performance metrics in development
+  useEffect(() => {
+    if (process.env.NODE_ENV === 'development') {
+      const logMetrics = () => {
+        const metrics = getMetrics();
+        console.log('Performance Metrics:', metrics);
+      };
+      
+      const interval = setInterval(logMetrics, 10000); // Log every 10 seconds
+      return () => clearInterval(interval);
+    }
+  }, [getMetrics]);
 
   // Get slide number from route
   const getSlideFromRoute = () => {
@@ -212,26 +233,29 @@ function AppWrapper() {
 export default function App() {
   return (
     <ThemeProvider>
-      <Routes>
-        <Route path="/" element={<AppWrapper />} />
-        <Route path="/slide-1" element={<AppWrapper />} />
-        <Route path="/slide-2" element={<AppWrapper />} />
-        <Route path="/slide-3" element={<AppWrapper />} />
-        <Route path="/slide-4" element={<AppWrapper />} />
-        <Route path="/slide-:num" element={<AppWrapper />} />
-        <Route path="/plans/day-to-day" element={<PlanDetailPage />} />
-        <Route path="/plans/hospital" element={<HospitalPlanDetailPage />} />
-        <Route path="/plans/comprehensive" element={<ComprehensivePlanDetailPage />} />
-        <Route path="/plans/senior-plan" element={<SeniorPlanDetailPage />} />
-        <Route path="/plans/junior-executive" element={<JuniorExecutivePlanDetailPage />} />
-        <Route path="/regulatory-information" element={<RegulatoryInformationPage />} />
-        <Route path="/procedures" element={<ProceduresPage />} />
-        <Route path="/privacy-policy" element={<PrivacyPolicyWrapper />} />
-        <Route path="/admin" element={<AdminLogin />} />
-        <Route path="/admin/setup" element={<AdminOnboarding />} />
-        <Route path="/admin/dashboard" element={<AdminDashboard />} />
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
+      <Suspense fallback={<LoadingSkeleton />}>
+        <Routes>
+          <Route path="/" element={<AppWrapper />} />
+          <Route path="/slide-1" element={<AppWrapper />} />
+          <Route path="/slide-2" element={<AppWrapper />} />
+          <Route path="/slide-3" element={<AppWrapper />} />
+          <Route path="/slide-4" element={<AppWrapper />} />
+          <Route path="/slide-:num" element={<AppWrapper />} />
+          <Route path="/plans/day-to-day" element={<PlanDetailPage />} />
+          <Route path="/plans/hospital" element={<HospitalPlanDetailPage />} />
+          <Route path="/plans/comprehensive" element={<ComprehensivePlanDetailPage />} />
+          <Route path="/plans/senior-plan" element={<SeniorPlanDetailPage />} />
+          <Route path="/plans/junior-executive" element={<JuniorExecutivePlanDetailPage />} />
+          <Route path="/regulatory-information" element={<RegulatoryInformationPage />} />
+          <Route path="/procedures" element={<ProceduresPage />} />
+          <Route path="/caskets" element={<CasketsPageWrapper />} />
+          <Route path="/admin" element={<AdminLogin />} />
+          <Route path="/admin/dashboard" element={<AdminDashboard />} />
+          <Route path="/admin/onboarding" element={<AdminOnboarding />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicyWrapper />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </Suspense>
     </ThemeProvider>
   );
 }

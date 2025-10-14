@@ -1,16 +1,23 @@
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useEffect, Suspense, lazy } from 'react';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { HeartPulse, Briefcase, UsersRound, Users2, ShieldCheck, Activity, Heart, Star } from 'lucide-react';
-import { MagnetizeButton } from '@/components/ui/magnetize-button';
-import UniqueButton from '@/components/ui/unique-button';
 import { HeroCTAButton } from './ui/hero-cta-button';
 import type { LucideProps } from 'lucide-react';
-import { ShuffleCards } from '@/components/ui/shuffle-cards';
-import { Marquee } from '@/components/ui/3d-testimonials';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Card, CardContent } from '@/components/ui/card';
-import { SlideUpTypewriter } from '@/components/ui/slide-up-typewriter';
 import { useTheme } from '../contexts/ThemeContext';
+import OptimizedImage from './ui/optimized-image';
+import { HeroSkeleton } from './ui/loading-skeleton';
+
+// Lazy load heavy components
+const MagnetizeButton = lazy(() => import('@/components/ui/magnetize-button').then(module => ({ default: module.MagnetizeButton })));
+const UniqueButton = lazy(() => import('@/components/ui/unique-button'));
+const ShuffleCards = lazy(() => import('@/components/ui/shuffle-cards').then(module => ({ default: module.ShuffleCards })));
+const Marquee = lazy(() => import('@/components/ui/3d-testimonials').then(module => ({ default: module.Marquee })));
+const Avatar = lazy(() => import('@/components/ui/avatar').then(module => ({ default: module.Avatar })));
+const AvatarFallback = lazy(() => import('@/components/ui/avatar').then(module => ({ default: module.AvatarFallback })));
+const AvatarImage = lazy(() => import('@/components/ui/avatar').then(module => ({ default: module.AvatarImage })));
+const Card = lazy(() => import('@/components/ui/card').then(module => ({ default: module.Card })));
+const CardContent = lazy(() => import('@/components/ui/card').then(module => ({ default: module.CardContent })));
+const SlideUpTypewriter = lazy(() => import('@/components/ui/slide-up-typewriter').then(module => ({ default: module.SlideUpTypewriter })));
 
 type IconType = React.ComponentType<LucideProps>;
 
@@ -293,6 +300,19 @@ const Hero: React.FC<HeroProps> = ({ isSidebarCollapsed, specificSlide }: HeroPr
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalTestimonial, setModalTestimonial] = useState<any>(null);
   const { isDark } = useTheme();
+  const shouldReduceMotion = useReducedMotion();
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Detect mobile for performance optimizations
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // Modal handler function
   const handleOpenModal = (testimonial: any) => {
@@ -379,49 +399,57 @@ const Hero: React.FC<HeroProps> = ({ isSidebarCollapsed, specificSlide }: HeroPr
           if (specificSlide === null && currentSlide !== index) return null;
 
           return (
-            <motion.div
+            <>
+              {/* Stable Background Container - Outside of motion.div */}
+              <div 
+                className="absolute inset-0 rounded-3xl overflow-hidden"
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  borderRadius: '1.5rem',
+                  zIndex: 0
+                }}
+              >
+                {/* Fixed Background Layer */}
+                {slide.backgroundImage && (
+                  <div 
+                    className="hero-bg-fixed"
+                    style={{
+                      backgroundImage: `
+                        rgba(0, 0, 0, 0.3),
+                        url(${slide.backgroundImage})
+                      `,
+                      borderRadius: '1.5rem'
+                    }}
+                  />
+                )}
+              </div>
+
+              <motion.div
               key={slide.id}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.5 }}
               className={`min-h-[60vh] sm:min-h-[75vh] flex items-center justify-center transition-colors duration-500 ease-in-out relative rounded-3xl overflow-hidden ${
-                slide.backgroundImage ? 'bg-cover bg-center bg-no-repeat' : 'bg-gradient-to-br'
+                slide.backgroundImage ? 'text-white bg-transparent' : 'bg-gradient-to-br'
               } ${
-                isDark && (slide.id === 3 || slide.id === 0) && !slide.backgroundImage
+                !slide.backgroundImage && isDark && (slide.id === 3 || slide.id === 0)
                   ? (slide.id === 3 ? 'from-gray-900 to-gray-800' : 'from-gray-950 to-gray-900')
-                  : slide.bgColor
+                  : (!slide.backgroundImage ? slide.bgColor : '')
               } ${
                 slide.backgroundImage ? 'text-white' : 
                 (isDark && (slide.id === 3 || slide.id === 0) ? 'text-white' : (slide.textColor || 'text-white'))
               }`}
-              style={slide.backgroundImage ? {
-                backgroundImage: `
-                  linear-gradient(to right, 
-                    ${isDark ? '#111827' : '#ffffff'} 0%, 
-                    ${isDark ? 'rgba(17, 24, 39, 0.8)' : 'rgba(255, 255, 255, 0.8)'} 15%, 
-                    rgba(0, 0, 0, 0.3) 30%, 
-                    rgba(0, 0, 0, 0.5) 70%, 
-                    ${isDark ? 'rgba(17, 24, 39, 0.8)' : 'rgba(255, 255, 255, 0.8)'} 85%, 
-                    ${isDark ? '#111827' : '#ffffff'} 100%
-                  ),
-                  linear-gradient(to bottom, 
-                    ${isDark ? '#111827' : '#ffffff'} 0%, 
-                    ${isDark ? 'rgba(17, 24, 39, 0.7)' : 'rgba(255, 255, 255, 0.7)'} 20%, 
-                    rgba(0, 0, 0, 0.2) 40%, 
-                    rgba(0, 0, 0, 0.2) 60%, 
-                    ${isDark ? 'rgba(17, 24, 39, 0.7)' : 'rgba(255, 255, 255, 0.7)'} 80%, 
-                    ${isDark ? '#111827' : '#ffffff'} 100%
-                  ),
-                  url(${slide.backgroundImage})
-                `,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center bottom',
-                backgroundBlendMode: 'darken',
+              style={{
                 marginLeft: window.innerWidth < 768 ? '0rem' : (isSidebarCollapsed ? '6rem' : '16rem'),
                 borderRadius: '1.5rem',
-                backgroundAttachment: 'fixed'
-              } : {}}
+                position: 'relative',
+                zIndex: 1
+              }}
             >
               <div 
                 className={`w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 transition-all duration-500 ease-in-out ${getContentPadding()}`}
@@ -582,14 +610,14 @@ const Hero: React.FC<HeroProps> = ({ isSidebarCollapsed, specificSlide }: HeroPr
                         {/* Floating Shield Icons */}
                         <motion.div
                           className="absolute top-20 left-10 text-green-500/30"
-                          animate={{
+                          animate={!shouldReduceMotion && !isMobile ? {
                             y: [0, -20, 0],
                             rotate: [0, 10, 0],
                             scale: [1, 1.1, 1]
-                          }}
+                          } : {}}
                           transition={{
-                            duration: 4,
-                            repeat: Infinity,
+                            duration: isMobile ? 6 : 4,
+                            repeat: shouldReduceMotion ? 0 : Infinity,
                             ease: "easeInOut"
                           }}
                         >
@@ -598,14 +626,14 @@ const Hero: React.FC<HeroProps> = ({ isSidebarCollapsed, specificSlide }: HeroPr
                         
                         <motion.div
                           className="absolute top-40 right-16 text-blue-500/30"
-                          animate={{
+                          animate={!shouldReduceMotion && !isMobile ? {
                             y: [0, 15, 0],
                             rotate: [0, -8, 0],
                             scale: [1, 0.9, 1]
-                          }}
+                          } : {}}
                           transition={{
-                            duration: 5,
-                            repeat: Infinity,
+                            duration: isMobile ? 7 : 5,
+                            repeat: shouldReduceMotion ? 0 : Infinity,
                             ease: "easeInOut",
                             delay: 1
                           }}
@@ -615,14 +643,14 @@ const Hero: React.FC<HeroProps> = ({ isSidebarCollapsed, specificSlide }: HeroPr
                         
                         <motion.div
                           className="absolute bottom-32 left-20 text-blue-500/30"
-                          animate={{
+                          animate={!shouldReduceMotion && !isMobile ? {
                             y: [0, -25, 0],
                             rotate: [0, 15, 0],
                             scale: [1, 1.2, 1]
-                          }}
+                          } : {}}
                           transition={{
-                            duration: 6,
-                            repeat: Infinity,
+                            duration: isMobile ? 8 : 6,
+                            repeat: shouldReduceMotion ? 0 : Infinity,
                             ease: "easeInOut",
                             delay: 2
                           }}
@@ -632,14 +660,14 @@ const Hero: React.FC<HeroProps> = ({ isSidebarCollapsed, specificSlide }: HeroPr
                         
                         <motion.div
                           className="absolute bottom-20 right-24 text-green-500/30"
-                          animate={{
+                          animate={!shouldReduceMotion && !isMobile ? {
                             y: [0, 20, 0],
                             rotate: [0, -12, 0],
                             scale: [1, 0.8, 1]
-                          }}
+                          } : {}}
                           transition={{
-                            duration: 4.5,
-                            repeat: Infinity,
+                            duration: isMobile ? 6.5 : 4.5,
+                            repeat: shouldReduceMotion ? 0 : Infinity,
                             ease: "easeInOut",
                             delay: 0.5
                           }}
@@ -647,41 +675,45 @@ const Hero: React.FC<HeroProps> = ({ isSidebarCollapsed, specificSlide }: HeroPr
                           <Star size={36} />
                         </motion.div>
                         
-                        {/* Interactive Hotspots */}
-                        <motion.div
-                          className="absolute top-1/2 left-1/4 w-4 h-4 bg-green-400/60 rounded-full cursor-pointer"
-                          animate={{
-                            scale: [1, 1.5, 1],
-                            opacity: [0.6, 1, 0.6]
-                          }}
-                          transition={{
-                            duration: 2,
-                            repeat: Infinity,
-                            ease: "easeInOut"
-                          }}
-                          whileHover={{
-                            scale: 2,
-                            backgroundColor: "rgba(34, 197, 94, 0.9)"
-                          }}
-                        />
+                        {/* Interactive Hotspots - Hidden on mobile for performance */}
+                        {!isMobile && (
+                          <motion.div
+                            className="absolute top-1/2 left-1/4 w-4 h-4 bg-green-400/60 rounded-full cursor-pointer"
+                            animate={!shouldReduceMotion ? {
+                              scale: [1, 1.5, 1],
+                              opacity: [0.6, 1, 0.6]
+                            } : {}}
+                            transition={{
+                              duration: 2,
+                              repeat: shouldReduceMotion ? 0 : Infinity,
+                              ease: "easeInOut"
+                            }}
+                            whileHover={{
+                              scale: 2,
+                              backgroundColor: "rgba(34, 197, 94, 0.9)"
+                            }}
+                          />
+                        )}
                         
-                        <motion.div
-                          className="absolute top-1/3 right-1/3 w-3 h-3 bg-blue-400/60 rounded-full cursor-pointer"
-                          animate={{
-                            scale: [1, 1.3, 1],
-                            opacity: [0.5, 0.9, 0.5]
-                          }}
-                          transition={{
-                            duration: 3,
-                            repeat: Infinity,
-                            ease: "easeInOut",
-                            delay: 1
-                          }}
-                          whileHover={{
-                            scale: 2.5,
-                            backgroundColor: "rgba(59, 130, 246, 0.9)"
-                          }}
-                        />
+                        {!isMobile && (
+                          <motion.div
+                            className="absolute top-1/3 right-1/3 w-3 h-3 bg-blue-400/60 rounded-full cursor-pointer"
+                            animate={!shouldReduceMotion ? {
+                              scale: [1, 1.3, 1],
+                              opacity: [0.5, 0.9, 0.5]
+                            } : {}}
+                            transition={{
+                              duration: 3,
+                              repeat: shouldReduceMotion ? 0 : Infinity,
+                              ease: "easeInOut",
+                              delay: 1
+                            }}
+                            whileHover={{
+                              scale: 2.5,
+                              backgroundColor: "rgba(59, 130, 246, 0.9)"
+                            }}
+                          />
+                        )}
                         
                         
                         {/* Floating Progress Indicator */}
@@ -734,11 +766,12 @@ const Hero: React.FC<HeroProps> = ({ isSidebarCollapsed, specificSlide }: HeroPr
                           animate={{ opacity: 1, x: 0, y: 0, scale: 0.9 }}
                           transition={{ delay: 1, duration: 0.5 }}
                         >
-                          <img
+                          <OptimizedImage
                             src="/assets/images/Logo.jpg"
                             alt="DAY1HEALTH logo"
                             className="w-12 sm:w-16 md:w-20 lg:w-24 xl:w-28 pointer-events-none select-none"
-                            onError={(e: any) => { e.currentTarget.style.display = 'none'; }}
+                            priority={true}
+                            placeholder="Logo"
                           />
                         </motion.div>
                       )}
@@ -770,15 +803,17 @@ const Hero: React.FC<HeroProps> = ({ isSidebarCollapsed, specificSlide }: HeroPr
                                 </h1>
                               </motion.div>
                               
-                              <SlideUpTypewriter 
-                                words={slide.typewriterWords.map(word => word.text)}
-                                className={`font-manrope font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl leading-tight ${
-                                  slide.backgroundImage ? 'text-white' : (isDark ? 'text-slate-300' : 'text-ubuntugift-primary')
-                                }`}
-                                letterDelay={80}
-                                wordDisplayTime={1500}
-                                wordExitTime={400}
-                              />
+                              <Suspense fallback={<div className="h-16 bg-gray-200 animate-pulse rounded"></div>}>
+                                <SlideUpTypewriter 
+                                  words={slide.typewriterWords.map(word => word.text)}
+                                  className={`font-manrope font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl leading-tight ${
+                                    slide.backgroundImage ? 'text-white' : (isDark ? 'text-slate-300' : 'text-ubuntugift-primary')
+                                  }`}
+                                  letterDelay={80}
+                                  wordDisplayTime={1500}
+                                  wordExitTime={400}
+                                />
+                              </Suspense>
                             </>
                           ) : (
                             <span className={`font-manrope font-bold opacity-100 block ${
@@ -934,6 +969,7 @@ const Hero: React.FC<HeroProps> = ({ isSidebarCollapsed, specificSlide }: HeroPr
                 )}
               </div>
             </motion.div>
+            </>
           );
         })}
       </AnimatePresence>

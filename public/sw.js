@@ -1,14 +1,17 @@
-const CACHE_NAME = 'day1health-v1';
+const CACHE_NAME = 'giftai-v1';
 const urlsToCache = [
   '/',
   '/index.html',
   '/manifest.json',
-  '/icons/icon.svg',
+  '/images/cas.jpg',
+  '/assets/images/Logo.jpg',
+  '/icons/icon-192x192.png',
+  '/icons/icon-512x512.png',
   // Add other critical assets (do not include source files like /src/main.tsx)
 ];
 
 // Bump the cache to invalidate old entries when deploying
-const CACHE_NAME_NEXT = 'day1health-v3';
+const CACHE_NAME_NEXT = 'giftai-v4';
 
 self.addEventListener('install', event => {
   // Take over as soon as installed

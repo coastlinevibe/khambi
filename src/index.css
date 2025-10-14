@@ -43,6 +43,99 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Fixed background for hero section */
+.hero-bg-fixed {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-attachment: scroll !important;
+  background-repeat: no-repeat;
+  background-size: cover !important;
+  background-position: center center !important;
+  will-change: auto;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  pointer-events: none;
+  overflow: hidden;
+  /* Prevent any scaling or movement */
+  min-width: 100%;
+  min-height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+/* Ensure hero section doesn't cause background movement */
+#hero {
+  position: relative;
+  contain: layout style paint;
+}
+
+/* Prevent any transform or movement on background elements */
+.hero-bg-fixed,
+.hero-bg-fixed * {
+  transform: translateZ(0) !important;
+  will-change: auto !important;
+}
+
+/* Additional stability rules for all devices */
+.hero-bg-fixed {
+  /* Lock dimensions and prevent any resize */
+  flex-shrink: 0 !important;
+  flex-grow: 0 !important;
+  /* Prevent any CSS animations from affecting background */
+  animation: none !important;
+  transition: none !important;
+  /* Ensure background stays in bounds */
+  object-fit: cover;
+  object-position: center center;
+}
+
+/* Ensure no background interference when image is present */
+.bg-transparent {
+  background: transparent !important;
+  background-image: none !important;
+  background-color: transparent !important;
+}
+
+/* Mobile specific background fixes */
+@media (max-width: 768px) {
+  .hero-bg-fixed {
+    background-attachment: scroll !important;
+    position: absolute !important;
+    transform: translate3d(0, 0, 0) !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background-size: cover !important;
+    background-position: center center !important;
+    /* Prevent any movement or scaling on mobile */
+    -webkit-transform: translate3d(0, 0, 0) !important;
+    -moz-transform: translate3d(0, 0, 0) !important;
+    -ms-transform: translate3d(0, 0, 0) !important;
+    -o-transform: translate3d(0, 0, 0) !important;
+  }
+  
+  /* Ensure hero section container is stable */
+  #hero {
+    transform: translateZ(0);
+    will-change: auto;
+    overflow: hidden;
+  }
+  
+  /* Lock background container position */
+  #hero > div:first-child {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    transform: none !important;
+  }
+}
+
 .typewriter-text {
   animation: typewriter 3s steps(40, end) infinite;
 }
@@ -94,6 +187,36 @@ html {
   /* Hide tools tabs description on mobile */
   .tools-description {
     display: none;
+  }
+  
+  /* Performance optimizations for mobile */
+  * {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+  
+  /* Reduce animation complexity on mobile */
+  .animate-marquee-vertical {
+    animation-duration: 60s; /* Slower animations */
+  }
+  
+  /* Optimize image rendering */
+  img {
+    image-rendering: optimizeSpeed;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: optimize-contrast;
+  }
+  
+  /* Reduce blur effects on mobile */
+  .backdrop-blur-sm {
+    backdrop-filter: none;
+    background-color: rgba(255, 255, 255, 0.8);
+  }
+  
+  .dark .backdrop-blur-sm {
+    background-color: rgba(0, 0, 0, 0.8);
   }
   
   /* Force mobile navigation text to be dark on light theme */

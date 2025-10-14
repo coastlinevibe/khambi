@@ -81,6 +81,28 @@
       .relative { position: relative; }
       .absolute { position: absolute; }
       .inset-0 { top: 0; right: 0; bottom: 0; left: 0; }
+      
+      /* Prevent visual artifacts and lines during refresh */
+      * { 
+        box-sizing: border-box;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      
+      /* Prevent layout shift */
+      body {
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+        background-color: #ffffff;
+      }
+      
+      /* Smooth loading without artifacts */
+      #root {
+        opacity: 1 !important;
+        transform: translateZ(0);
+        backface-visibility: hidden;
+      }
     </style>
     
     <!-- Resource hints for better performance -->

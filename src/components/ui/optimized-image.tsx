@@ -132,7 +132,15 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
         onLoad={handleLoad}
         onError={handleError}
         style={{
-          aspectRatio: width && height ? `${width}/${height}` : undefined,
+          transform: 'translateZ(0)',
+          backfaceVisibility: 'hidden',
+          imageRendering: 'auto',
+          // Prevent visual artifacts during load
+          willChange: 'auto',
+          contain: 'layout style paint',
+          // Ensure smooth rendering
+          WebkitFontSmoothing: 'antialiased',
+          MozOsxFontSmoothing: 'grayscale',
         }}
       />
     </div>

@@ -39,9 +39,9 @@ CREATE POLICY "Anyone can view approved obituaries"
   ON obituaries FOR SELECT
   USING (status = 'approved');
 
-CREATE POLICY "Authenticated users can create obituaries"
+CREATE POLICY "Anyone can create obituaries"
   ON obituaries FOR INSERT
-  WITH CHECK (auth.role() = 'authenticated');
+  WITH CHECK (true);
 
 CREATE POLICY "Users can update their own obituaries"
   ON obituaries FOR UPDATE

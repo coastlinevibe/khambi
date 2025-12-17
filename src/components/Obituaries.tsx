@@ -275,6 +275,7 @@ const Obituaries: React.FC<ObituariesProps> = ({ isSidebarCollapsed }) => {
                     <input
                       type="date"
                       required
+                      max={new Date().toISOString().split('T')[0]}
                       value={formData.dateFrom}
                       onChange={(e) => setFormData({ ...formData, dateFrom: e.target.value })}
                       className={`w-full px-4 py-3 rounded-lg border transition-colors ${
@@ -293,6 +294,8 @@ const Obituaries: React.FC<ObituariesProps> = ({ isSidebarCollapsed }) => {
                     <input
                       type="date"
                       required
+                      max={new Date().toISOString().split('T')[0]}
+                      min={formData.dateFrom || undefined}
                       value={formData.dateUntil}
                       onChange={(e) => setFormData({ ...formData, dateUntil: e.target.value })}
                       className={`w-full px-4 py-3 rounded-lg border transition-colors ${

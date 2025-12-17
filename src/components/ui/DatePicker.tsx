@@ -202,7 +202,8 @@ export const DatePicker: React.FC<DatePickerProps> = ({
                   date.getFullYear() === today.getFullYear();
                 const isDisabled = 
                   (maxDateObj && date > maxDateObj) ||
-                  (minDateObj && date < minDateObj);
+                  (minDateObj && date < minDateObj) ||
+                  false;
 
                 return (
                   <button

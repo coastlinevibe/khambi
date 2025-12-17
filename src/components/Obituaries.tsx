@@ -75,15 +75,23 @@ const Obituaries: React.FC<ObituariesProps> = ({ isSidebarCollapsed }) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Validate required fields
+    if (!formData.deceasedName || !formData.dateFrom || !formData.dateUntil || !formData.biography) {
+      toast.error('Please fill in all required fields');
+      return;
+    }
+    
     setSubmitting(true);
 
     try {
-      let imageUrl = '';
+      let imageUrl = null;
       
       // Upload image if provided
       if (formData.image) {
         try {
           imageUrl = await obituariesApi.uploadImage(formData.image);
+          console.log('Image uploaded:', imageUrl);
         } catch (uploadError) {
           console.error('Image upload error:', uploadError);
           // Continue without image if upload fails
@@ -91,14 +99,18 @@ const Obituaries: React.FC<ObituariesProps> = ({ isSidebarCollapsed }) => {
         }
       }
 
-      // Create obituary
-      await obituariesApi.create({
+      const obituaryData = {
         name: formData.deceasedName,
         birth_date: formData.dateFrom,
         death_date: formData.dateUntil,
-        biography: formData.biography || formData.message,
-        image_url: imageUrl,
-      });
+        biography: formData.biography,
+        ...(imageUrl && { image_url: imageUrl }),
+      };
+
+      console.log('Submitting obituary:', obituaryData);
+
+      // Create obituary
+      await obituariesApi.create(obituaryData);
 
       toast.success('Obituary submitted successfully! It will be reviewed by our team.');
       setShowMessageForm(false);

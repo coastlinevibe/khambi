@@ -289,7 +289,7 @@ const Obituaries: React.FC<ObituariesProps> = ({ isSidebarCollapsed }) => {
                   <div>
                     <label className={`block text-sm font-medium mb-2 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
                       <Calendar className="w-4 h-4 inline mr-1" />
-                      Death Date *
+                      Passing Date *
                     </label>
                     <input
                       type="date"

@@ -33,6 +33,7 @@ const Obituaries: React.FC<ObituariesProps> = ({ isSidebarCollapsed }) => {
     biography: "",
     deceasedName: "",
   });
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
 
   // Fetch obituaries from database
   useEffect(() => {
@@ -54,8 +55,21 @@ const Obituaries: React.FC<ObituariesProps> = ({ isSidebarCollapsed }) => {
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
-      setFormData({ ...formData, image: e.target.files[0] });
+      const file = e.target.files[0];
+      setFormData({ ...formData, image: file });
+      
+      // Create preview URL
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result as string);
+      };
+      reader.readAsDataURL(file);
     }
+  };
+
+  const removeImage = () => {
+    setFormData({ ...formData, image: null });
+    setImagePreview(null);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -67,7 +81,13 @@ const Obituaries: React.FC<ObituariesProps> = ({ isSidebarCollapsed }) => {
       
       // Upload image if provided
       if (formData.image) {
-        imageUrl = await obituariesApi.uploadImage(formData.image);
+        try {
+          imageUrl = await obituariesApi.uploadImage(formData.image);
+        } catch (uploadError) {
+          console.error('Image upload error:', uploadError);
+          // Continue without image if upload fails
+          toast.error('Image upload failed, but obituary will be submitted without photo.');
+        }
       }
 
       // Create obituary
@@ -91,6 +111,7 @@ const Obituaries: React.FC<ObituariesProps> = ({ isSidebarCollapsed }) => {
         biography: "",
         deceasedName: "",
       });
+      setImagePreview(null);
       
       // Reload obituaries
       loadObituaries();
@@ -310,29 +331,47 @@ const Obituaries: React.FC<ObituariesProps> = ({ isSidebarCollapsed }) => {
                 <div>
                   <label className={`block text-sm font-medium mb-2 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
                     <Upload className="w-4 h-4 inline mr-1" />
-                    Upload Image
+                    Upload Image (Optional)
                   </label>
-                  <div className={`relative border-2 border-dashed rounded-lg p-6 transition-colors ${
-                    isDark
-                      ? 'border-gray-600 hover:border-khambi-accent'
-                      : 'border-gray-300 hover:border-khambi-accent'
-                  }`}>
-                    <input
-                      type="file"
-                      accept="image/*"
-                      onChange={handleImageChange}
-                      className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                    />
-                    <div className="text-center">
-                      <Upload className={`w-8 h-8 mx-auto mb-2 ${isDark ? 'text-gray-400' : 'text-gray-500'}`} />
-                      <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-                        {formData.image ? formData.image.name : 'Click to upload or drag and drop'}
-                      </p>
-                      <p className={`text-xs mt-1 ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>
-                        PNG, JPG up to 10MB
-                      </p>
+                  
+                  {imagePreview ? (
+                    <div className="relative">
+                      <img 
+                        src={imagePreview} 
+                        alt="Preview" 
+                        className="w-full h-48 object-cover rounded-lg"
+                      />
+                      <button
+                        type="button"
+                        onClick={removeImage}
+                        className="absolute top-2 right-2 p-2 bg-red-500 text-white rounded-full hover:bg-red-600 transition-colors"
+                      >
+                        <X className="w-4 h-4" />
+                      </button>
                     </div>
-                  </div>
+                  ) : (
+                    <div className={`relative border-2 border-dashed rounded-lg p-6 transition-colors ${
+                      isDark
+                        ? 'border-gray-600 hover:border-khambi-accent'
+                        : 'border-gray-300 hover:border-khambi-accent'
+                    }`}>
+                      <input
+                        type="file"
+                        accept="image/jpeg,image/jpg,image/png"
+                        onChange={handleImageChange}
+                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                      />
+                      <div className="text-center">
+                        <Upload className={`w-8 h-8 mx-auto mb-2 ${isDark ? 'text-gray-400' : 'text-gray-500'}`} />
+                        <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+                          Click to upload or drag and drop
+                        </p>
+                        <p className={`text-xs mt-1 ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>
+                          PNG, JPG up to 10MB
+                        </p>
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 <div>

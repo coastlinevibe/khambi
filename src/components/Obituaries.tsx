@@ -1,77 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { TestimonialsColumn } from "./ui/testimonials-columns-1";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "../contexts/ThemeContext";
-import { X, MessageSquare, Upload, Calendar } from "lucide-react";
+import { X, MessageSquare, Upload, Calendar, Loader2 } from "lucide-react";
+import { obituariesApi, Obituary } from "../lib/api/obituaries";
+import { toast } from "react-hot-toast";
 
 interface ObituariesProps {
   isSidebarCollapsed: boolean;
 }
 
-const obituaries = [
-  {
-    text: "In loving memory of a devoted mother and grandmother. Her kindness, wisdom, and warm smile will forever remain in our hearts.",
-    image: "https://randomuser.me/api/portraits/women/44.jpg",
-    name: "Margaret Thompson",
-    role: "1945 - 2024",
-  },
-  {
-    text: "A beloved father, husband, and friend. His dedication to family and community inspired all who knew him. Rest in peace.",
-    image: "https://randomuser.me/api/portraits/men/32.jpg",
-    name: "James Mitchell",
-    role: "1952 - 2024",
-  },
-  {
-    text: "Cherished grandmother who touched countless lives with her generosity and love. Her legacy of compassion lives on through us.",
-    image: "https://randomuser.me/api/portraits/women/65.jpg",
-    name: "Elizabeth Johnson",
-    role: "1938 - 2024",
-  },
-  {
-    text: "A loving husband and devoted father. His strength, humor, and unwavering support will be deeply missed by all who knew him.",
-    image: "https://randomuser.me/api/portraits/men/46.jpg",
-    name: "Robert Williams",
-    role: "1960 - 2024",
-  },
-  {
-    text: "In memory of a beautiful soul who brought joy to everyone she met. Her laughter and kindness will echo in our hearts forever.",
-    image: "https://randomuser.me/api/portraits/women/28.jpg",
-    name: "Sarah Davis",
-    role: "1975 - 2024",
-  },
-  {
-    text: "A dedicated teacher and mentor who shaped countless young minds. His passion for education and life will never be forgotten.",
-    image: "https://randomuser.me/api/portraits/men/54.jpg",
-    name: "Michael Brown",
-    role: "1948 - 2024",
-  },
-  {
-    text: "Beloved wife and mother whose grace and strength inspired all. Her memory will be a blessing to those who loved her.",
-    image: "https://randomuser.me/api/portraits/women/36.jpg",
-    name: "Patricia Anderson",
-    role: "1955 - 2024",
-  },
-  {
-    text: "A cherished friend and community leader. His commitment to helping others and making a difference will always be remembered.",
-    image: "https://randomuser.me/api/portraits/men/67.jpg",
-    name: "David Martinez",
-    role: "1942 - 2024",
-  },
-  {
-    text: "In loving memory of a devoted sister and aunt. Her warmth, creativity, and loving spirit touched everyone she encountered.",
-    image: "https://randomuser.me/api/portraits/women/52.jpg",
-    name: "Linda Garcia",
-    role: "1968 - 2024",
-  },
-];
-
-const firstColumn = obituaries.slice(0, 3);
-const secondColumn = obituaries.slice(3, 6);
-const thirdColumn = obituaries.slice(6, 9);
+interface ObituaryDisplay {
+  text: string;
+  image: string;
+  name: string;
+  role: string;
+}
 
 const Obituaries: React.FC<ObituariesProps> = ({ isSidebarCollapsed }) => {
   const { isDark } = useTheme();
   const [showMessageForm, setShowMessageForm] = useState(false);
+  const [obituaries, setObituaries] = useState<Obituary[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [submitting, setSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -79,7 +30,27 @@ const Obituaries: React.FC<ObituariesProps> = ({ isSidebarCollapsed }) => {
     image: null as File | null,
     dateFrom: "",
     dateUntil: "",
+    biography: "",
+    deceasedName: "",
   });
+
+  // Fetch obituaries from database
+  useEffect(() => {
+    loadObituaries();
+  }, []);
+
+  const loadObituaries = async () => {
+    try {
+      setLoading(true);
+      const data = await obituariesApi.getAll();
+      setObituaries(data);
+    } catch (error) {
+      console.error('Error loading obituaries:', error);
+      toast.error('Failed to load obituaries');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -87,13 +58,61 @@ const Obituaries: React.FC<ObituariesProps> = ({ isSidebarCollapsed }) => {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log("Message submitted:", formData);
-    setShowMessageForm(false);
-    setFormData({ name: "", email: "", message: "", image: null, dateFrom: "", dateUntil: "" });
+    setSubmitting(true);
+
+    try {
+      let imageUrl = '';
+      
+      // Upload image if provided
+      if (formData.image) {
+        imageUrl = await obituariesApi.uploadImage(formData.image);
+      }
+
+      // Create obituary
+      await obituariesApi.create({
+        name: formData.deceasedName,
+        birth_date: formData.dateFrom,
+        death_date: formData.dateUntil,
+        biography: formData.biography || formData.message,
+        image_url: imageUrl,
+      });
+
+      toast.success('Obituary submitted successfully! It will be reviewed by our team.');
+      setShowMessageForm(false);
+      setFormData({ 
+        name: "", 
+        email: "", 
+        message: "", 
+        image: null, 
+        dateFrom: "", 
+        dateUntil: "",
+        biography: "",
+        deceasedName: "",
+      });
+      
+      // Reload obituaries
+      loadObituaries();
+    } catch (error) {
+      console.error('Error submitting obituary:', error);
+      toast.error('Failed to submit obituary. Please try again.');
+    } finally {
+      setSubmitting(false);
+    }
   };
+
+  // Convert database obituaries to display format
+  const displayObituaries: ObituaryDisplay[] = obituaries.map(obit => ({
+    text: obit.biography || `In loving memory of ${obit.name}`,
+    image: obit.image_url || 'https://via.placeholder.com/150',
+    name: obit.name,
+    role: `${new Date(obit.birth_date).getFullYear()} - ${new Date(obit.death_date).getFullYear()}`,
+  }));
+
+  const firstColumn = displayObituaries.slice(0, 3);
+  const secondColumn = displayObituaries.slice(3, 6);
+  const thirdColumn = displayObituaries.slice(6, 9);
 
   return (
     <section
@@ -142,15 +161,25 @@ const Obituaries: React.FC<ObituariesProps> = ({ isSidebarCollapsed }) => {
             className="mt-6 flex items-center justify-center gap-2 px-8 py-4 bg-khambi-primary text-white rounded-xl font-semibold text-lg shadow-lg hover:bg-khambi-darkgray hover:shadow-xl hover:scale-105 transition-all duration-200 border-2 border-khambi-accent"
           >
             <MessageSquare className="w-6 h-6 text-khambi-accent" />
-            Add a Message
+            Submit an Obituary
           </button>
         </motion.div>
 
-        <div className="flex justify-center gap-6 mt-10 [mask-image:linear-gradient(to_bottom,transparent,black_25%,black_75%,transparent)] max-h-[740px] overflow-hidden">
-          <TestimonialsColumn testimonials={firstColumn} duration={15} />
-          <TestimonialsColumn testimonials={secondColumn} className="hidden md:block" duration={19} />
-          <TestimonialsColumn testimonials={thirdColumn} className="hidden lg:block" duration={17} />
-        </div>
+        {loading ? (
+          <div className="flex justify-center items-center py-20">
+            <Loader2 className={`w-12 h-12 animate-spin ${isDark ? 'text-khambi-accent' : 'text-khambi-primary'}`} />
+          </div>
+        ) : displayObituaries.length === 0 ? (
+          <div className={`text-center py-20 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+            <p className="text-lg">No obituaries available at this time.</p>
+          </div>
+        ) : (
+          <div className="flex justify-center gap-6 mt-10 [mask-image:linear-gradient(to_bottom,transparent,black_25%,black_75%,transparent)] max-h-[740px] overflow-hidden">
+            <TestimonialsColumn testimonials={firstColumn} duration={15} />
+            <TestimonialsColumn testimonials={secondColumn} className="hidden md:block" duration={19} />
+            <TestimonialsColumn testimonials={thirdColumn} className="hidden lg:block" duration={17} />
+          </div>
+        )}
       </div>
 
       {/* Message Form Modal */}
@@ -168,10 +197,11 @@ const Obituaries: React.FC<ObituariesProps> = ({ isSidebarCollapsed }) => {
               <div className={`p-6 border-b ${isDark ? 'border-gray-700' : 'border-gray-200'}`}>
                 <div className="flex items-center justify-between">
                   <h3 className={`text-xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>
-                    Share Your Memory
+                    Submit an Obituary
                   </h3>
                   <button
                     onClick={() => setShowMessageForm(false)}
+                    disabled={submitting}
                     className={`p-2 rounded-lg transition-colors ${
                       isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-100'
                     }`}
@@ -184,7 +214,25 @@ const Obituaries: React.FC<ObituariesProps> = ({ isSidebarCollapsed }) => {
               <form onSubmit={handleSubmit} className="p-6 space-y-4 max-h-[70vh] overflow-y-auto">
                 <div>
                   <label className={`block text-sm font-medium mb-2 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
-                    Your Name
+                    Deceased Name *
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    value={formData.deceasedName}
+                    onChange={(e) => setFormData({ ...formData, deceasedName: e.target.value })}
+                    className={`w-full px-4 py-3 rounded-lg border transition-colors ${
+                      isDark
+                        ? 'bg-gray-700 border-gray-600 text-white focus:border-khambi-accent'
+                        : 'bg-white border-gray-300 text-gray-900 focus:border-khambi-accent'
+                    } focus:outline-none focus:ring-2 focus:ring-khambi-accent/20`}
+                    placeholder="Full name of the deceased"
+                  />
+                </div>
+
+                <div>
+                  <label className={`block text-sm font-medium mb-2 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
+                    Your Name *
                   </label>
                   <input
                     type="text"
@@ -196,13 +244,13 @@ const Obituaries: React.FC<ObituariesProps> = ({ isSidebarCollapsed }) => {
                         ? 'bg-gray-700 border-gray-600 text-white focus:border-khambi-accent'
                         : 'bg-white border-gray-300 text-gray-900 focus:border-khambi-accent'
                     } focus:outline-none focus:ring-2 focus:ring-khambi-accent/20`}
-                    placeholder="Enter your name"
+                    placeholder="Your full name"
                   />
                 </div>
 
                 <div>
                   <label className={`block text-sm font-medium mb-2 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
-                    Your Email
+                    Your Email *
                   </label>
                   <input
                     type="email"
@@ -214,7 +262,7 @@ const Obituaries: React.FC<ObituariesProps> = ({ isSidebarCollapsed }) => {
                         ? 'bg-gray-700 border-gray-600 text-white focus:border-khambi-accent'
                         : 'bg-white border-gray-300 text-gray-900 focus:border-khambi-accent'
                     } focus:outline-none focus:ring-2 focus:ring-khambi-accent/20`}
-                    placeholder="Enter your email"
+                    placeholder="Your email address"
                   />
                 </div>
 
@@ -222,7 +270,7 @@ const Obituaries: React.FC<ObituariesProps> = ({ isSidebarCollapsed }) => {
                   <div>
                     <label className={`block text-sm font-medium mb-2 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
                       <Calendar className="w-4 h-4 inline mr-1" />
-                      From Date
+                      Birth Date *
                     </label>
                     <input
                       type="date"
@@ -240,7 +288,7 @@ const Obituaries: React.FC<ObituariesProps> = ({ isSidebarCollapsed }) => {
                   <div>
                     <label className={`block text-sm font-medium mb-2 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
                       <Calendar className="w-4 h-4 inline mr-1" />
-                      Until Date
+                      Death Date *
                     </label>
                     <input
                       type="date"
@@ -286,19 +334,19 @@ const Obituaries: React.FC<ObituariesProps> = ({ isSidebarCollapsed }) => {
 
                 <div>
                   <label className={`block text-sm font-medium mb-2 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
-                    Your Message
+                    Biography / Tribute *
                   </label>
                   <textarea
                     required
                     rows={4}
-                    value={formData.message}
-                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                    value={formData.biography}
+                    onChange={(e) => setFormData({ ...formData, biography: e.target.value })}
                     className={`w-full px-4 py-3 rounded-lg border transition-colors resize-none ${
                       isDark
                         ? 'bg-gray-700 border-gray-600 text-white focus:border-khambi-accent'
                         : 'bg-white border-gray-300 text-gray-900 focus:border-khambi-accent'
                     } focus:outline-none focus:ring-2 focus:ring-khambi-accent/20`}
-                    placeholder="Share your condolences and memories..."
+                    placeholder="Share memories, achievements, and what made them special..."
                   />
                 </div>
 
@@ -306,19 +354,28 @@ const Obituaries: React.FC<ObituariesProps> = ({ isSidebarCollapsed }) => {
                   <button
                     type="button"
                     onClick={() => setShowMessageForm(false)}
+                    disabled={submitting}
                     className={`flex-1 px-4 py-3 rounded-lg font-medium transition-colors ${
                       isDark
                         ? 'bg-gray-700 text-white hover:bg-gray-600'
                         : 'bg-gray-100 text-gray-900 hover:bg-gray-200'
-                    }`}
+                    } disabled:opacity-50 disabled:cursor-not-allowed`}
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
-                    className="flex-1 px-4 py-3 bg-khambi-accent hover:bg-khambi-gold text-black rounded-lg font-semibold hover:shadow-lg transition-all duration-200"
+                    disabled={submitting}
+                    className="flex-1 px-4 py-3 bg-khambi-accent hover:bg-khambi-gold text-black rounded-lg font-semibold hover:shadow-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                   >
-                    Send Message
+                    {submitting ? (
+                      <>
+                        <Loader2 className="w-5 h-5 animate-spin" />
+                        Submitting...
+                      </>
+                    ) : (
+                      'Submit Obituary'
+                    )}
                   </button>
                 </div>
               </form>

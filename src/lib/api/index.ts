@@ -8,6 +8,7 @@ export { checklistsApi } from './checklists';
 export { analyticsApi } from './analytics';
 export { auditApi } from './audit';
 export { documentsApi } from './documents';
+export { obituariesApi } from './obituaries';
 
 // Re-export supabase client for direct access if needed
 export { supabase } from '../supabase';

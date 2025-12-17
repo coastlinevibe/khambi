@@ -2,6 +2,7 @@ import { useState, useEffect, Suspense, lazy } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { usePerformanceMonitor, useDeviceCapabilities } from './hooks/usePerformanceMonitor';
 import LoadingSkeleton from './components/ui/loading-skeleton';
+import { Toaster } from 'react-hot-toast';
 
 // Lazy load components for better performance
 const AppContent = lazy(() => import('./components/AppContent'));
@@ -236,6 +237,23 @@ function AppWrapper() {
 export default function App() {
   return (
     <ThemeProvider>
+      <Toaster 
+        position="top-right"
+        toastOptions={{
+          duration: 4000,
+          style: {
+            background: '#1a1a1a',
+            color: '#fff',
+            border: '1px solid #B8935E',
+          },
+          success: {
+            iconTheme: {
+              primary: '#B8935E',
+              secondary: '#fff',
+            },
+          },
+        }}
+      />
       <Suspense fallback={<LoadingSkeleton />}>
         <Routes>
           <Route path="/" element={<AppWrapper />} />

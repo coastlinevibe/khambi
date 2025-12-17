@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import { TestimonialsColumn } from "./ui/testimonials-columns-1";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "../contexts/ThemeContext";
-import { X, MessageSquare, Upload, Calendar, Loader2 } from "lucide-react";
+import { X, MessageSquare, Upload, Loader2 } from "lucide-react";
 import { obituariesApi, Obituary } from "../lib/api/obituaries";
 import { toast } from "react-hot-toast";
+import { DatePicker } from "./ui/DatePicker";
 
 interface ObituariesProps {
   isSidebarCollapsed: boolean;
@@ -288,44 +289,24 @@ const Obituaries: React.FC<ObituariesProps> = ({ isSidebarCollapsed }) => {
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className={`block text-sm font-medium mb-2 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
-                      <Calendar className="w-4 h-4 inline mr-1" />
-                      Birth Date *
-                    </label>
-                    <input
-                      type="date"
-                      required
-                      max={new Date().toISOString().split('T')[0]}
-                      value={formData.dateFrom}
-                      onChange={(e) => setFormData({ ...formData, dateFrom: e.target.value })}
-                      className={`w-full px-4 py-3 rounded-lg border transition-colors ${
-                        isDark
-                          ? 'bg-gray-700 border-gray-600 text-white focus:border-khambi-accent'
-                          : 'bg-white border-gray-300 text-gray-900 focus:border-khambi-accent'
-                      } focus:outline-none focus:ring-2 focus:ring-khambi-accent/20`}
-                    />
-                  </div>
+                  <DatePicker
+                    label="Birth Date"
+                    value={formData.dateFrom}
+                    onChange={(date) => setFormData({ ...formData, dateFrom: date })}
+                    maxDate={new Date().toISOString().split('T')[0]}
+                    required
+                    isDark={isDark}
+                  />
 
-                  <div>
-                    <label className={`block text-sm font-medium mb-2 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
-                      <Calendar className="w-4 h-4 inline mr-1" />
-                      Passing Date *
-                    </label>
-                    <input
-                      type="date"
-                      required
-                      max={new Date().toISOString().split('T')[0]}
-                      min={formData.dateFrom || undefined}
-                      value={formData.dateUntil}
-                      onChange={(e) => setFormData({ ...formData, dateUntil: e.target.value })}
-                      className={`w-full px-4 py-3 rounded-lg border transition-colors ${
-                        isDark
-                          ? 'bg-gray-700 border-gray-600 text-white focus:border-khambi-accent'
-                          : 'bg-white border-gray-300 text-gray-900 focus:border-khambi-accent'
-                      } focus:outline-none focus:ring-2 focus:ring-khambi-accent/20`}
-                    />
-                  </div>
+                  <DatePicker
+                    label="Passing Date"
+                    value={formData.dateUntil}
+                    onChange={(date) => setFormData({ ...formData, dateUntil: date })}
+                    maxDate={new Date().toISOString().split('T')[0]}
+                    minDate={formData.dateFrom || undefined}
+                    required
+                    isDark={isDark}
+                  />
                 </div>
 
                 <div>

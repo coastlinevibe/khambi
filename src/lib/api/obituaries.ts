@@ -81,13 +81,19 @@ export const obituariesApi = {
   async create(obituaryData: CreateObituaryData): Promise<Obituary> {
     const { data: { user } } = await supabase.auth.getUser();
     
+    const insertData: any = {
+      ...obituaryData,
+      status: 'pending' // Requires admin approval
+    };
+    
+    // Only set created_by if user is authenticated
+    if (user?.id) {
+      insertData.created_by = user.id;
+    }
+    
     const { data, error } = await supabase
       .from('obituaries')
-      .insert([{
-        ...obituaryData,
-        created_by: user?.id,
-        status: 'pending' // Requires admin approval
-      }])
+      .insert([insertData])
       .select()
       .single();
 

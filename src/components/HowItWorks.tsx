@@ -41,26 +41,25 @@ const HowItWorks: React.FC<HowItWorksProps> = ({ isSidebarCollapsed }) => {
     <section 
       className={`relative py-20 transition-all duration-700 ease-in-out border-b scroll-mt-32 ${
         isDark ? 'bg-gray-900 border-gray-800' : 'bg-white border-gray-100'
-      } ${
-        isSidebarCollapsed ? 'lg:ml-24' : 'lg:ml-64'
-      } ${
-        isSidebarCollapsed ? 'lg:w-[calc(100%-6rem)]' : 'lg:w-[calc(100%-16rem)]'
       }`}
-      style={{
-        transition: 'margin-left 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94), width 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
-      }}
     >
 
       
       <div className="container mx-auto px-4 relative z-10 pt-16">
         <div className="text-center mb-16">
-          <span className={`inline-block px-3 py-1 text-sm font-medium rounded-full mb-4 ${
+          <div className={`inline-block px-6 py-3 rounded-xl mb-6 ${
             isDark 
-              ? 'bg-ubuntugift-primary/20 text-ubuntugift-primary' 
-              : 'bg-compassion-sage/10 text-ubuntugift-primary'
-          }`}>
-            Our Process
-          </span>
+              ? 'bg-khambi-accent/20' 
+              : 'bg-khambi-accent/10'
+          }`} style={{ borderColor: '#B8935E', borderWidth: '1px' }}>
+            <span className={`text-2xl font-bold ${
+              isDark 
+                ? 'text-khambi-accent' 
+                : 'text-khambi-primary'
+            }`}>
+              Our Process
+            </span>
+          </div>
           <h2 id="how-it-works" className={`text-4xl lg:text-5xl font-bold ${
             isDark ? 'text-white' : 'text-gray-900'
           } mb-1`}>
@@ -181,45 +180,89 @@ const HowItWorks: React.FC<HowItWorksProps> = ({ isSidebarCollapsed }) => {
               {steps.map((step, index) => (
                 <motion.div
                   key={index}
-                  className={`p-6 rounded-xl backdrop-blur-sm ${
+                  className={`p-6 rounded-xl backdrop-blur-sm relative ${
                     isDark 
-                      ? 'bg-gray-800/50 border border-gray-700/20 hover:border-gray-600/40' 
-                      : 'bg-white/70 border border-gray-100/80 hover:border-gray-200/90'
-                  } transition-all duration-300 hover:shadow-lg hover:-translate-y-1`}
+                      ? 'bg-gray-800/50 border-2 border-gray-700/30' 
+                      : 'bg-white/70 border-2 border-gray-100/80'
+                  } shadow-lg`}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
+                  whileHover={{ 
+                    y: -12,
+                    scale: 1.05,
+                    boxShadow: '0 25px 50px -12px rgba(201, 169, 97, 0.4)',
+                    borderColor: 'rgba(201, 169, 97, 0.5)',
+                    transition: { duration: 0.3, ease: "easeOut" }
+                  }}
                   transition={{ 
                     duration: 0.5, 
                     delay: index * 0.1,
                     ease: "easeOut"
                   }}
                   viewport={{ once: true, margin: "-50px" }}
+                  style={{ overflow: 'hidden' }}
                 >
-                  <div className="flex flex-col items-center text-center">
-                    {/* Step Number */}
-                    <div className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold mb-4 ${
-                      isDark ? 'bg-ubuntugift-primary text-ubuntugift-light' : 'bg-ubuntugift-light text-ubuntugift-primary'
+                  {/* Background Images for all cards */}
+                  {index === 0 && (
+                    <>
+                      <div 
+                        className="absolute inset-0 bg-cover bg-center"
+                        style={{ backgroundImage: 'url(/images/step1-connect.jpg)' }}
+                      />
+                      <div className={`absolute inset-0 ${
+                        isDark ? 'bg-black/75' : 'bg-black/65'
+                      }`} />
+                    </>
+                  )}
+                  {index === 1 && (
+                    <>
+                      <div 
+                        className="absolute inset-0 bg-cover bg-center"
+                        style={{ backgroundImage: 'url(/images/step2-connect.jpg)' }}
+                      />
+                      <div className={`absolute inset-0 ${
+                        isDark ? 'bg-black/75' : 'bg-black/65'
+                      }`} />
+                    </>
+                  )}
+                  {index === 2 && (
+                    <>
+                      <div 
+                        className="absolute inset-0 bg-cover bg-center"
+                        style={{ backgroundImage: 'url(/images/step3-planning.jpg)' }}
+                      />
+                      <div className={`absolute inset-0 ${
+                        isDark ? 'bg-black/75' : 'bg-black/65'
+                      }`} />
+                    </>
+                  )}
+                  {index === 3 && (
+                    <>
+                      <div 
+                        className="absolute inset-0 bg-cover bg-center"
+                        style={{ backgroundImage: 'url(/images/step4-connect.jpg)' }}
+                      />
+                      <div className={`absolute inset-0 ${
+                        isDark ? 'bg-black/75' : 'bg-black/65'
+                      }`} />
+                    </>
+                  )}
+                  <div className="flex flex-col items-center text-center relative z-10">
+                    {/* Step Number - larger, in place of icon */}
+                    <div className={`w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold mb-6 shadow-lg ${
+                      index === 2 
+                        ? 'bg-khambi-accent text-black' 
+                        : isDark ? 'bg-khambi-accent text-black' : 'bg-khambi-accent text-black'
                     }`}>
                       {index + 1}
                     </div>
                     
-                    {/* Icon */}
-                    <div className="mb-4">
-                      <div className={`${step.color} w-14 h-14 rounded-full flex items-center justify-center mx-auto shadow-lg`}>
-                        <step.icon className="w-6 h-6 text-white" />
-                      </div>
-                    </div>
-                    
                     {/* Content */}
-                    <h3 className={`text-lg font-semibold mb-2 ${
-                      isDark ? '!text-white' : '!text-gray-900'
-                    }`}>
+                    <h3 className="text-lg font-semibold mb-2 !text-white">
                       {step.title}
                     </h3>
                     
-                    <p className={`text-sm ${
-                      isDark ? '!text-gray-300' : '!text-gray-600'
-                    }`}>
+                    <p className="text-sm !text-white">
                       {step.description}
                     </p>
                   </div>
@@ -273,7 +316,7 @@ const HowItWorks: React.FC<HowItWorksProps> = ({ isSidebarCollapsed }) => {
               transition={{ delay: 0.6, duration: 0.6 }}
               viewport={{ once: true }}
             >
-              Join families across Limpopo who trust Gift Ai for compassionate funeral services.
+              Join families across Gauteng who trust Khambi Funeral Services for compassionate care.
             </motion.p>
             <motion.div 
               className="flex flex-row flex-wrap items-center justify-center gap-3"

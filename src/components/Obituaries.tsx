@@ -100,12 +100,7 @@ const Obituaries: React.FC<ObituariesProps> = ({ isSidebarCollapsed }) => {
       id="obituaries"
       className={`relative py-20 transition-all duration-700 ease-in-out ${
         isDark ? 'bg-gray-900' : 'bg-gray-50'
-      } ${
-        isSidebarCollapsed ? 'lg:ml-24 lg:w-[calc(100%-6rem)]' : 'lg:ml-64 lg:w-[calc(100%-16rem)]'
       }`}
-      style={{
-        transition: 'margin-left 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94), width 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
-      }}
     >
       <div className="container z-10 mx-auto px-4">
         <motion.div
@@ -116,10 +111,18 @@ const Obituaries: React.FC<ObituariesProps> = ({ isSidebarCollapsed }) => {
           className="flex flex-col items-center justify-center max-w-[540px] mx-auto"
         >
           <div className="flex justify-center">
-            <div className={`border py-1 px-4 rounded-lg ${
-              isDark ? 'border-gray-700 text-gray-300' : 'border-gray-300 text-gray-700'
-            }`}>
-              Obituaries
+            <div className={`px-6 py-3 rounded-xl ${
+              isDark 
+                ? 'bg-khambi-accent/20' 
+                : 'bg-khambi-accent/10'
+            }`} style={{ borderColor: '#B8935E', borderWidth: '1px' }}>
+              <span className={`text-2xl font-bold ${
+                isDark 
+                  ? 'text-khambi-accent' 
+                  : 'text-khambi-primary'
+              }`}>
+                Obituaries
+              </span>
             </div>
           </div>
 
@@ -136,9 +139,9 @@ const Obituaries: React.FC<ObituariesProps> = ({ isSidebarCollapsed }) => {
 
           <button
             onClick={() => setShowMessageForm(true)}
-            className="mt-6 flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-orange-500 to-emerald-500 text-white rounded-lg font-medium hover:shadow-lg transition-all duration-200"
+            className="mt-6 flex items-center justify-center gap-2 px-8 py-4 bg-khambi-primary text-white rounded-xl font-semibold text-lg shadow-lg hover:bg-khambi-darkgray hover:shadow-xl hover:scale-105 transition-all duration-200 border-2 border-khambi-accent"
           >
-            <MessageSquare className="w-5 h-5" />
+            <MessageSquare className="w-6 h-6 text-khambi-accent" />
             Add a Message
           </button>
         </motion.div>
@@ -190,9 +193,9 @@ const Obituaries: React.FC<ObituariesProps> = ({ isSidebarCollapsed }) => {
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     className={`w-full px-4 py-3 rounded-lg border transition-colors ${
                       isDark
-                        ? 'bg-gray-700 border-gray-600 text-white focus:border-emerald-500'
-                        : 'bg-white border-gray-300 text-gray-900 focus:border-emerald-500'
-                    } focus:outline-none focus:ring-2 focus:ring-emerald-500/20`}
+                        ? 'bg-gray-700 border-gray-600 text-white focus:border-khambi-accent'
+                        : 'bg-white border-gray-300 text-gray-900 focus:border-khambi-accent'
+                    } focus:outline-none focus:ring-2 focus:ring-khambi-accent/20`}
                     placeholder="Enter your name"
                   />
                 </div>
@@ -208,9 +211,9 @@ const Obituaries: React.FC<ObituariesProps> = ({ isSidebarCollapsed }) => {
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     className={`w-full px-4 py-3 rounded-lg border transition-colors ${
                       isDark
-                        ? 'bg-gray-700 border-gray-600 text-white focus:border-emerald-500'
-                        : 'bg-white border-gray-300 text-gray-900 focus:border-emerald-500'
-                    } focus:outline-none focus:ring-2 focus:ring-emerald-500/20`}
+                        ? 'bg-gray-700 border-gray-600 text-white focus:border-khambi-accent'
+                        : 'bg-white border-gray-300 text-gray-900 focus:border-khambi-accent'
+                    } focus:outline-none focus:ring-2 focus:ring-khambi-accent/20`}
                     placeholder="Enter your email"
                   />
                 </div>
@@ -228,9 +231,9 @@ const Obituaries: React.FC<ObituariesProps> = ({ isSidebarCollapsed }) => {
                       onChange={(e) => setFormData({ ...formData, dateFrom: e.target.value })}
                       className={`w-full px-4 py-3 rounded-lg border transition-colors ${
                         isDark
-                          ? 'bg-gray-700 border-gray-600 text-white focus:border-emerald-500'
-                          : 'bg-white border-gray-300 text-gray-900 focus:border-emerald-500'
-                      } focus:outline-none focus:ring-2 focus:ring-emerald-500/20`}
+                          ? 'bg-gray-700 border-gray-600 text-white focus:border-khambi-accent'
+                          : 'bg-white border-gray-300 text-gray-900 focus:border-khambi-accent'
+                      } focus:outline-none focus:ring-2 focus:ring-khambi-accent/20`}
                     />
                   </div>
 
@@ -246,9 +249,9 @@ const Obituaries: React.FC<ObituariesProps> = ({ isSidebarCollapsed }) => {
                       onChange={(e) => setFormData({ ...formData, dateUntil: e.target.value })}
                       className={`w-full px-4 py-3 rounded-lg border transition-colors ${
                         isDark
-                          ? 'bg-gray-700 border-gray-600 text-white focus:border-emerald-500'
-                          : 'bg-white border-gray-300 text-gray-900 focus:border-emerald-500'
-                      } focus:outline-none focus:ring-2 focus:ring-emerald-500/20`}
+                          ? 'bg-gray-700 border-gray-600 text-white focus:border-khambi-accent'
+                          : 'bg-white border-gray-300 text-gray-900 focus:border-khambi-accent'
+                      } focus:outline-none focus:ring-2 focus:ring-khambi-accent/20`}
                     />
                   </div>
                 </div>
@@ -260,8 +263,8 @@ const Obituaries: React.FC<ObituariesProps> = ({ isSidebarCollapsed }) => {
                   </label>
                   <div className={`relative border-2 border-dashed rounded-lg p-6 transition-colors ${
                     isDark
-                      ? 'border-gray-600 hover:border-emerald-500'
-                      : 'border-gray-300 hover:border-emerald-500'
+                      ? 'border-gray-600 hover:border-khambi-accent'
+                      : 'border-gray-300 hover:border-khambi-accent'
                   }`}>
                     <input
                       type="file"
@@ -292,9 +295,9 @@ const Obituaries: React.FC<ObituariesProps> = ({ isSidebarCollapsed }) => {
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     className={`w-full px-4 py-3 rounded-lg border transition-colors resize-none ${
                       isDark
-                        ? 'bg-gray-700 border-gray-600 text-white focus:border-emerald-500'
-                        : 'bg-white border-gray-300 text-gray-900 focus:border-emerald-500'
-                    } focus:outline-none focus:ring-2 focus:ring-emerald-500/20`}
+                        ? 'bg-gray-700 border-gray-600 text-white focus:border-khambi-accent'
+                        : 'bg-white border-gray-300 text-gray-900 focus:border-khambi-accent'
+                    } focus:outline-none focus:ring-2 focus:ring-khambi-accent/20`}
                     placeholder="Share your condolences and memories..."
                   />
                 </div>
@@ -313,7 +316,7 @@ const Obituaries: React.FC<ObituariesProps> = ({ isSidebarCollapsed }) => {
                   </button>
                   <button
                     type="submit"
-                    className="flex-1 px-4 py-3 bg-gradient-to-r from-orange-500 to-emerald-500 text-white rounded-lg font-medium hover:shadow-lg transition-all duration-200"
+                    className="flex-1 px-4 py-3 bg-khambi-accent hover:bg-khambi-gold text-black rounded-lg font-semibold hover:shadow-lg transition-all duration-200"
                   >
                     Send Message
                   </button>
@@ -328,3 +331,4 @@ const Obituaries: React.FC<ObituariesProps> = ({ isSidebarCollapsed }) => {
 };
 
 export default Obituaries;
+

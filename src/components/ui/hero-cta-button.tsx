@@ -11,7 +11,7 @@ interface HeroCTAButtonProps {
 export const HeroCTAButton: React.FC<HeroCTAButtonProps> = ({ 
   onClick, 
   className = "",
-  defaultText = "Talk to Gift Ai",
+  defaultText = "Chat to Khambi Ai",
   sentText = "Going Down"
 }) => {
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -95,23 +95,25 @@ export const HeroCTAButton: React.FC<HeroCTAButtonProps> = ({
               <span style={{'--i': 4} as React.CSSProperties}>U</span>
               <span style={{'--i': 5} as React.CSSProperties}>s</span>
             </>
-          ) : defaultText === 'Talk to Gift Ai' ? (
+          ) : defaultText === 'Chat to Khambi Ai' ? (
             <>
-              <span style={{'--i': 0} as React.CSSProperties}>T</span>
-              <span style={{'--i': 1} as React.CSSProperties}>a</span>
-              <span style={{'--i': 2} as React.CSSProperties}>l</span>
-              <span style={{'--i': 3} as React.CSSProperties}>k</span>
+              <span style={{'--i': 0} as React.CSSProperties}>C</span>
+              <span style={{'--i': 1} as React.CSSProperties}>h</span>
+              <span style={{'--i': 2} as React.CSSProperties}>a</span>
+              <span style={{'--i': 3} as React.CSSProperties}>t</span>
               <span style={{'--i': 4} as React.CSSProperties}>&nbsp;</span>
               <span style={{'--i': 5} as React.CSSProperties}>t</span>
               <span style={{'--i': 6} as React.CSSProperties}>o</span>
               <span style={{'--i': 7} as React.CSSProperties}>&nbsp;</span>
-              <span style={{'--i': 8} as React.CSSProperties}>G</span>
-              <span style={{'--i': 9} as React.CSSProperties}>i</span>
-              <span style={{'--i': 10} as React.CSSProperties}>f</span>
-              <span style={{'--i': 11} as React.CSSProperties}>t</span>
-              <span style={{'--i': 12} as React.CSSProperties}>&nbsp;</span>
-              <span style={{'--i': 13} as React.CSSProperties}>A</span>
-              <span style={{'--i': 14} as React.CSSProperties}>i</span>
+              <span style={{'--i': 8} as React.CSSProperties}>K</span>
+              <span style={{'--i': 9} as React.CSSProperties}>h</span>
+              <span style={{'--i': 10} as React.CSSProperties}>a</span>
+              <span style={{'--i': 11} as React.CSSProperties}>m</span>
+              <span style={{'--i': 12} as React.CSSProperties}>b</span>
+              <span style={{'--i': 13} as React.CSSProperties}>i</span>
+              <span style={{'--i': 14} as React.CSSProperties}>&nbsp;</span>
+              <span style={{'--i': 15} as React.CSSProperties}>A</span>
+              <span style={{'--i': 16} as React.CSSProperties}>i</span>
             </>
           ) : defaultText === 'Apply Now' ? (
             <>
@@ -223,3 +225,4 @@ export const HeroCTAButton: React.FC<HeroCTAButtonProps> = ({
     </button>
   );
 };
+

@@ -60,7 +60,7 @@ const heroSlides: HeroSlide[] = [
     textColor: 'text-gray-900',
     buttonBg: 'bg-[#16a34a] hover:bg-[#15803d]',
     iconColor: 'text-blue-500',
-    backgroundImage: '/images/cas.jpg',
+    backgroundImage: '/images/h.jpg',
   },
 ];
 
@@ -404,33 +404,24 @@ const Hero: React.FC<HeroProps> = ({ isSidebarCollapsed, specificSlide }: HeroPr
               <div 
                 className="absolute inset-0 overflow-hidden"
                 style={{
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  bottom: 0,
                   zIndex: 0
                 }}
               >
                 {/* Fixed Background Layer - NO OVERLAY */}
                 {slide.backgroundImage && (
-                  <OptimizedImage
+                  <img
                     src={slide.backgroundImage}
                     alt="Hero background"
-                    className="hero-bg-fixed object-cover w-full h-full"
-                    priority={true}
+                    className="absolute inset-0 w-full h-full"
                     style={{
-                      zIndex: -1
+                      zIndex: -1,
+                      objectFit: 'cover',
+                      objectPosition: 'center center'
                     }}
                   />
                 )}
                 
-                {/* Debug: Show if image path exists */}
-                {slide.backgroundImage && process.env.NODE_ENV === 'development' && (
-                  <div style={{ position: 'absolute', top: '10px', left: '10px', background: 'rgba(0,0,0,0.8)', color: 'white', padding: '5px', fontSize: '12px', zIndex: 1000 }}>
-                    Image: {slide.backgroundImage}
-                  </div>
-                )}
+
               </div>
 
               <motion.div
@@ -450,7 +441,6 @@ const Hero: React.FC<HeroProps> = ({ isSidebarCollapsed, specificSlide }: HeroPr
                 (isDark && (slide.id === 3 || slide.id === 0) ? 'text-white' : (slide.textColor || 'text-white'))
               }`}
               style={{
-                marginLeft: window.innerWidth < 768 ? '0rem' : (isSidebarCollapsed ? '6rem' : '16rem'),
                 position: 'relative',
                 zIndex: 1,
                 // Add text shadow for better visibility without overlay
@@ -764,23 +754,6 @@ const Hero: React.FC<HeroProps> = ({ isSidebarCollapsed, specificSlide }: HeroPr
                         </h1>
                       )}
 
-                      {/* Logo positioning: top-right corner */}
-                      {slide.id === 0 && (
-                        <motion.div 
-                          className="absolute z-10 top-8 right-4 sm:top-12 sm:right-6 md:top-6 md:right-8 transition-all duration-500 ease-in-out"
-                          initial={{ opacity: 0, x: 20, y: 20, scale: 0.9 }}
-                          animate={{ opacity: 1, x: 0, y: 0, scale: 0.9 }}
-                          transition={{ delay: 1, duration: 0.5 }}
-                        >
-                          <OptimizedImage
-                            src="/assets/images/Logo.jpg"
-                            alt="DAY1HEALTH logo"
-                            className="w-12 sm:w-16 md:w-20 lg:w-24 xl:w-28 pointer-events-none select-none"
-                            priority={true}
-                            placeholder="Logo"
-                          />
-                        </motion.div>
-                      )}
                       
                       {/* Typewriter Section - Large and Prominent */}
                       <div className={`${slide.id === 1 ? 'mb-4 sm:mb-8' : 'mb-4 sm:mb-8'} flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-4 items-center justify-center`} 
@@ -795,7 +768,7 @@ const Hero: React.FC<HeroProps> = ({ isSidebarCollapsed, specificSlide }: HeroPr
                         }`}>
                           {slide.id === 0 ? (
                             <>
-                              {/* Large "Gift Ai" text above main heading - Mobile only */}
+                              {/* Large "Khambi" text above main heading - Mobile only */}
                               <motion.div
                                 className="text-center mb-4 sm:mb-6 md:hidden"
                                 initial={{ y: 20, opacity: 0 }}
@@ -803,9 +776,9 @@ const Hero: React.FC<HeroProps> = ({ isSidebarCollapsed, specificSlide }: HeroPr
                                 transition={{ delay: 0.3, duration: 0.6 }}
                               >
                                 <h1 className={`font-manrope font-bold text-5xl sm:text-6xl md:text-7xl lg:text-8xl ${
-                                  slide.backgroundImage ? 'text-white' : (isDark ? 'text-slate-300' : 'text-ubuntugift-primary')
+                                  slide.backgroundImage ? 'text-white' : (isDark ? 'text-slate-300' : 'text-khambi-accent')
                                 } leading-tight`}>
-                                  Gift Ai
+                                  Khambi
                                 </h1>
                               </motion.div>
                               
@@ -840,8 +813,8 @@ const Hero: React.FC<HeroProps> = ({ isSidebarCollapsed, specificSlide }: HeroPr
                               style={{ marginTop: '140px' }}
                             >
                               <HeroCTAButton
-                                className="font-manrope font-bold text-xl text-ubuntugift-primary"
-                                defaultText="Chat to Gift Ai"
+                                className="font-manrope font-bold text-xl text-black"
+                                defaultText="Chat to Khambi Ai"
                                 onClick={() => {
                                   // Wait for typewriter to finish before scrolling
                                   setTimeout(() => {
@@ -1088,3 +1061,4 @@ const Hero: React.FC<HeroProps> = ({ isSidebarCollapsed, specificSlide }: HeroPr
 };
 
 export default Hero;
+

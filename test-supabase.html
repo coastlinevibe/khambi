@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Supabase Connection</title>
+</head>
+<body>
+    <h1>Supabase Connection Test</h1>
+    <div id="result"></div>
+    
+    <script type="module">
+        import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
+        
+        const supabaseUrl = 'https://tfcnxmebuypzgkektdve.supabase.co'
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRmY254bWVidXlwemdrZWt0ZHZlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU1MjI0MjUsImV4cCI6MjA4MTA5ODQyNX0.Vz7aSAa3VhWfuJ7wLsF6GOzNfrS-ivXtfVrw2rEBFOs'
+        
+        const supabase = createClient(supabaseUrl, supabaseKey)
+        
+        async function testLogin() {
+            const resultDiv = document.getElementById('result')
+            resultDiv.innerHTML = 'Testing login...'
+            
+            try {
+                const { data, error } = await supabase.auth.signInWithPassword({
+                    email: 'grace.admin@khambifunerals.com',
+                    password: 'Admin@2024'
+                })
+                
+                if (error) {
+                    resultDiv.innerHTML = `<p style="color: red;">Error: ${error.message}</p>`
+                    console.error('Login error:', error)
+                } else {
+                    resultDiv.innerHTML = `<p style="color: green;">Success! User: ${data.user.email}</p>`
+                    console.log('Login success:', data)
+                }
+            } catch (err) {
+                resultDiv.innerHTML = `<p style="color: red;">Exception: ${err.message}</p>`
+                console.error('Exception:', err)
+            }
+        }
+        
+        testLogin()
+    </script>
+</body>
+</html>

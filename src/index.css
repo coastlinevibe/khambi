@@ -43,6 +43,20 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Hide scrollbar utility */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+
+
+
+
 /* Fixed background for hero section */
 .hero-bg-fixed {
   position: absolute;
@@ -72,7 +86,6 @@ html {
 /* Ensure hero section doesn't cause background movement */
 #hero {
   position: relative;
-  contain: layout style paint;
 }
 
 /* Prevent any transform or movement on background elements */
@@ -98,7 +111,6 @@ html {
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   will-change: auto;
-  contain: layout style paint;
 }
 
 /* Ensure no background interference when image is present */

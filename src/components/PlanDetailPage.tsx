@@ -57,7 +57,7 @@ const PlanDetailPage: React.FC = () => {
   const [childCount, setChildCount] = useState(0);
   const [searchParams, setSearchParams] = useSearchParams();
   const variantParam = (searchParams.get('variant') || 'single').toLowerCase();
-  const variantDisplay = variantParam === 'couple' || variantParam === 'couples' ? 'Family Members Plan' : variantParam === 'family' ? 'Extended Family Members Plan' : 'Single Member Plan';
+  const variantDisplay = variantParam === 'couple' || variantParam === 'couples' ? 'SILVER Plan' : variantParam === 'family' ? 'GOLD Plan' : 'BRONZE Plan';
   const pageTitle = variantDisplay;
   // Expanded state for Related products cards
   type CardKey = 'single' | 'couple' | 'family';

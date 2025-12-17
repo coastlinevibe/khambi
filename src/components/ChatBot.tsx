@@ -18,7 +18,7 @@ const ChatBot: React.FC<ChatBotProps> = ({ isSidebarCollapsed, inline = false })
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
-      content: "Hello! I'm Gift, your compassionate AI assistant for Gift Ai funeral services. I'm here to help you with any questions about our packages, planning, or cultural traditions. How can I assist you today?",
+      content: "Hello! I'm Khambi Ai, your compassionate AI assistant for Khambi Funeral Services. I'm here to help you with any questions about our packages, planning, or cultural traditions. How can I assist you today?",
       sender: 'bot',
       timestamp: new Date()
     }
@@ -38,13 +38,13 @@ const ChatBot: React.FC<ChatBotProps> = ({ isSidebarCollapsed, inline = false })
 
   const callGroqAPI = async (userMessage: string) => {
     const apiKey = import.meta.env.VITE_GROQ_API_KEY;
-    const systemPrompt = `You are Gift, a compassionate AI assistant for Gift Ai funeral services in Limpopo, South Africa. You help grieving families navigate funeral planning with dignity and care.
+    const systemPrompt = `You are Khambi Ai, a compassionate AI assistant for Khambi Funeral Services in South Africa. You help grieving families navigate funeral planning with dignity and care.
 
-Key information about Gift Ai:
-- Packages: Basic Dignity (R8,500), Premium Memorial (R18,500), Complete Celebration (R35,000)
+Key information about Khambi Funeral Services:
+- Packages: BRONZE (R15,000 Cover - Flat Lid Coffin, 1 Family Car, 50 Chairs), SILVER (R20,000 Cover - Face-view Casket, 2 Family Cars, 50 Chairs), GOLD (R25,000 Cover - Half-view Casket, 2 Family Cars, 100 Chairs & VIP Toilet)
 - Services: Traditional ceremonies, modern memorials, casket selection, transportation, personalized planning
-- Cultural respect: Honor all traditions across Limpopo (Sepedi, Xitsonga, English, Venda)
-- Contact: support@giftai.co.za, info@giftai.co.za, 0860 111 222
+- Cultural respect: Honor all traditions (Sepedi, Xitsonga, English, Venda, Zulu, Xhosa)
+- Contact: khambi@khambifunerals.co.za, 012 820 1084, 084 583 7299 (Mobile), www.khambifunerals.com
 - AI support: OpenAI integration ready for compassionate guidance
 
 Always respond with empathy, cultural sensitivity, and practical help. Keep responses concise but caring. If asked about pricing, be transparent about the packages. If emotional support is needed, provide compassionate guidance.`;
@@ -87,8 +87,8 @@ Always respond with empathy, cultural sensitivity, and practical help. Keep resp
       console.error('Groq API error details:', error);
       // Fallback to simulated response if API fails
       const responses = [
-        "Thank you for your question. At Gift Ai, we offer three main packages: Basic Dignity (R8,500), Premium Memorial (R18,500), and Complete Celebration (R35,000). Each package includes essential services like casket selection, transportation, and ceremony coordination. Which package interests you most?",
-        "I'm here to help with your funeral planning needs. Our compassionate team understands how difficult this time can be. We honor all cultural traditions across Limpopo province. Would you like me to explain our services or connect you with our support team?",
+        "Thank you for your question. At Khambi Funeral Services, we offer three main packages: Basic Dignity (R8,500), Premium Memorial (R18,500), and Complete Celebration (R35,000). Each package includes essential services like casket selection, transportation, and ceremony coordination. Which package interests you most?",
+        "I'm here to help with your funeral planning needs. Our compassionate team understands how difficult this time can be. We honor all cultural traditions. Would you like me to explain our services or connect you with our support team?",
         "We provide comprehensive funeral services with dignity and respect for every family. Our packages are designed to honor your loved one according to your cultural traditions. Please feel free to ask about any specific aspect of our services.",
         "During this difficult time, we're committed to supporting your family with compassion. Our services include traditional ceremonies, modern memorials, and personalized planning. How can I assist you today?",
       ];
@@ -154,13 +154,13 @@ Always respond with empathy, cultural sensitivity, and practical help. Keep resp
           isDark ? 'border-gray-700' : 'border-gray-200'
         }`}>
           <div className={`w-12 h-12 rounded-full flex items-center justify-center ${
-            isDark ? 'bg-green-900/50' : 'bg-green-100'
+            isDark ? 'bg-khambi-accent/20' : 'bg-khambi-accent/10'
           }`}>
-            <Bot className={`w-6 h-6 ${isDark ? 'text-green-400' : 'text-green-600'}`} />
+            <Bot className={`w-6 h-6 ${isDark ? 'text-khambi-accent' : 'text-khambi-gold'}`} />
           </div>
           <div>
             <h4 className={`font-semibold text-lg ${isDark ? 'text-white' : 'text-gray-900'}`}>
-              Gift - AI Assistant
+              Khambi Ai Assistant
             </h4>
             <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
               Online • Ready to help
@@ -178,15 +178,15 @@ Always respond with empathy, cultural sensitivity, and practical help. Keep resp
               >
                 {message.sender === 'bot' && (
                   <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
-                    isDark ? 'bg-green-900/50' : 'bg-green-100'
+                    isDark ? 'bg-khambi-accent/20' : 'bg-khambi-accent/10'
                   }`}>
-                    <Bot className={`w-4 h-4 ${isDark ? 'text-green-400' : 'text-green-600'}`} />
+                    <Bot className={`w-4 h-4 ${isDark ? 'text-khambi-accent' : 'text-khambi-gold'}`} />
                   </div>
                 )}
                 <div
                   className={`max-w-[75%] rounded-2xl px-4 py-3 ${
                     message.sender === 'user'
-                      ? `rounded-br-md ${isDark ? 'bg-green-600 text-white' : 'bg-green-500 text-white'}`
+                      ? `rounded-br-md ${isDark ? 'bg-khambi-primary text-white' : 'bg-khambi-primary text-white'}`
                       : `rounded-bl-md ${isDark ? 'bg-gray-700 text-white' : 'bg-gray-100 text-gray-900'}`
                   }`}
                 >
@@ -317,7 +317,7 @@ Always respond with empathy, cultural sensitivity, and practical help. Keep resp
         >
           <Bot className={`w-6 h-6 ${isDark ? 'text-green-400' : 'text-green-600'}`} />
           <span className={`font-medium ${isDark ? 'text-white' : 'text-gray-900'}`}>
-            Talk to Grace
+            Talk to Khambi Ai
           </span>
         </button>
       </div>
@@ -343,7 +343,7 @@ Always respond with empathy, cultural sensitivity, and practical help. Keep resp
             </div>
             <div>
               <h3 className={`font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>
-                Talk to Grace
+                Talk to Khambi Ai
               </h3>
               <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
                 AI Assistant
@@ -494,3 +494,4 @@ Always respond with empathy, cultural sensitivity, and practical help. Keep resp
 };
 
 export default ChatBot;
+

@@ -1,13 +1,14 @@
 /* Hero CTA Button - Independent from Contact Button */
 .hero-cta-button {
-  --primary: #FF6B35; /* Vibrant Orange for better visibility */
+  --primary: #C9A961; /* Gold for icon */
+  --text-color: #000000; /* Black for text */
   --neutral-1: #f7fafc;
   --neutral-2: #e2e8f0;
   --radius: 14px;
 
   cursor: pointer;
   border-radius: var(--radius);
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+  text-shadow: none;
   border: none;
   box-shadow: 0 0.5px 0.5px 1px rgba(255, 255, 255, 0.2),
     0 10px 20px rgba(0, 0, 0, 0.2), 0 4px 5px 0px rgba(0, 0, 0, 0.05);
@@ -133,6 +134,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  color: var(--text-color);
+}
+.hero-state .hero-icon {
   color: var(--primary);
 }
 .hero-state .hero-icon {
@@ -254,7 +258,7 @@
 /* Plane */
 .hero-state--default .hero-icon svg {
   animation: hero-land 0.6s ease forwards;
-  color: #FF6B35; /* Vibrant Orange for airplane icon */
+  color: var(--primary); /* Gold for airplane icon */
 }
 .hero-cta-button:hover .hero-state--default .hero-icon {
   transform: rotate(45deg) scale(1.25);
@@ -347,7 +351,7 @@
   justify-content: center;
 }
 .hero-state--sent svg {
-  color: #FF6B35; /* Vibrant Orange for checkmark */
+  color: var(--primary); /* Gold for checkmark */
 }
 .hero-cta-button:focus .hero-state--default {
   position: absolute;

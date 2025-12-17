@@ -5,18 +5,20 @@ export type CEOHotlineCTAProps = {
   href?: string; // e.g. "/ceo-hotline" → your 2-step flow entry
   className?: string;
   onClick?: () => void; // use if you open a modal first
-  variant?: 'emerald' | 'blue'; // quick theme toggle
+  variant?: 'emerald' | 'blue' | 'gold'; // quick theme toggle
 };
 
 export default function CEOHotlineCTA({
   href = '/ceo-hotline',
   className,
   onClick,
-  variant = 'emerald',
+  variant = 'gold',
 }: CEOHotlineCTAProps) {
-  // Map 'emerald' to our brand green palette to stay consistent with site colors
+  // Map variant to brand colors
   const palette =
-    variant === 'emerald'
+    variant === 'gold'
+      ? 'from-[#C9A961] via-[#B8935E] to-[#A67C3C]'
+      : variant === 'emerald'
       ? 'from-green-500 via-green-600 to-green-700'
       : 'from-sky-500 via-sky-600 to-sky-700';
 
@@ -30,7 +32,9 @@ export default function CEOHotlineCTA({
       className={cn(
         'group relative block w-full rounded-2xl p-[2px] transition',
         'focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2',
-        'focus-visible:ring-green-400/70 dark:focus-visible:ring-green-300/70',
+        variant === 'gold' 
+          ? 'focus-visible:ring-[#C9A961]/70 dark:focus-visible:ring-[#C9A961]/70'
+          : 'focus-visible:ring-green-400/70 dark:focus-visible:ring-green-300/70',
         className
       )}
       data-cta="ceo-hotline"
@@ -67,7 +71,11 @@ export default function CEOHotlineCTA({
         aria-hidden="true"
         className={cn(
           'pointer-events-none absolute -inset-0.5 rounded-3xl blur transition',
-          variant === 'emerald' ? 'bg-green-500/0 group-hover:bg-green-500/20' : 'bg-sky-500/0 group-hover:bg-sky-500/20'
+          variant === 'gold' 
+            ? 'bg-[#C9A961]/0 group-hover:bg-[#C9A961]/20' 
+            : variant === 'emerald' 
+            ? 'bg-green-500/0 group-hover:bg-green-500/20' 
+            : 'bg-sky-500/0 group-hover:bg-sky-500/20'
         )}
       />
     </Wrapper>

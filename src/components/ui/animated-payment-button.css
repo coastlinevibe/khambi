@@ -32,7 +32,7 @@
   left: 0;
   width: 22px; /* match container */
   height: 22px;
-  color: #22c55e;
+  color: #C9A961; /* Khambi gold */
   opacity: 1;
   visibility: visible;
   transition: opacity 0.28s ease, transform 0.28s ease;
@@ -63,27 +63,47 @@
 
 /* Removed keyframes and staggered animations; handled by Framer Motion */
 
-/* Color variants for different pricing tiers */
-.pay-btn.platinum {
-  background: linear-gradient(135deg, #22c55e, #16a34a);
+/* Color variants for different pricing tiers - Khambi branding */
+.pay-btn.bronze {
+  background: #CD7F32; /* Bronze color */
+  color: #000000;
 }
 
-.pay-btn.gold {
-  background: linear-gradient(135deg, #3b82f6, #2563eb);
+.pay-btn.bronze .icon {
+  color: #000000;
 }
 
 .pay-btn.silver {
-  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  background: #C0C0C0; /* Silver color */
+  color: #000000;
 }
 
-.pay-btn.bronze {
-  background: linear-gradient(135deg, #22c55e, #15803d);
+.pay-btn.silver .icon {
+  color: #000000;
 }
 
-.pay-btn.platinum:hover,
-.pay-btn.gold:hover,
+.pay-btn.gold {
+  background: #C9A961; /* Khambi gold */
+  color: #000000;
+}
+
+.pay-btn.gold .icon {
+  color: #000000;
+}
+
+.pay-btn.platinum {
+  background: #000000; /* Black */
+  color: #FFFFFF;
+}
+
+.pay-btn.platinum .icon {
+  color: #C9A961; /* Gold icon on black */
+}
+
+.pay-btn.bronze:hover,
 .pay-btn.silver:hover,
-.pay-btn.bronze:hover {
+.pay-btn.gold:hover,
+.pay-btn.platinum:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
 }

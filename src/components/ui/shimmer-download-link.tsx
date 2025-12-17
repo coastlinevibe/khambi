@@ -20,8 +20,8 @@ export const ShimmerDownloadLink: React.FC<ShimmerDownloadLinkProps> = ({
       href={href}
       download={download}
       className={`inline-flex items-center gap-2 rounded-lg px-2.5 py-1.5 text-xs md:text-sm font-medium
-        bg-emerald-600 text-white border border-emerald-700 shadow-sm
-        hover:bg-emerald-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 ${className}`}
+        bg-khambi-accent text-black border border-khambi-gold shadow-sm
+        hover:bg-khambi-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-khambi-accent ${className}`}
     >
       <Download className="h-3.5 w-3.5 md:h-4 md:w-4" />
       <span>{text}</span>

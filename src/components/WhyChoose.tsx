@@ -24,12 +24,12 @@ const WhyChoose: React.FC<WhyChooseProps> = ({ isSidebarCollapsed }) => {
     {
       img: '/icons/features-alt.png',
       title: "Cultural Respect",
-      description: "We honor diverse cultural and religious traditions across Limpopo, providing services that reflect each family's unique heritage.",
+      description: "We honor diverse cultural and religious traditions across Gauteng, providing services that reflect each family's unique heritage.",
     },
     {
       img: '/icons/population-globe.png',
       title: "Community Network",
-      description: "Extensive network of trusted funeral homes and service providers across Limpopo province for comprehensive support.",
+      description: "Extensive network of trusted funeral homes and service providers across Gauteng province for comprehensive support.",
     },
     {
       img: '/icons/users-loyalty.png',
@@ -47,24 +47,23 @@ const WhyChoose: React.FC<WhyChooseProps> = ({ isSidebarCollapsed }) => {
     <section 
       className={`py-20 transition-all duration-700 ease-in-out border-b scroll-mt-32 ${
         isDark ? 'bg-gray-900 border-gray-800' : 'bg-white border-gray-100'
-      } ${
-        isSidebarCollapsed ? 'lg:ml-24' : 'lg:ml-64'
-      } ${
-        isSidebarCollapsed ? 'lg:w-[calc(100%-6rem)]' : 'lg:w-[calc(100%-16rem)]'
       }`}
-      style={{
-        transition: 'margin-left 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94), width 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
-      }}
     >
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <span className={`inline-block px-3 py-1 text-sm font-medium rounded-full mb-4 ${
+          <div className={`inline-block px-6 py-3 rounded-xl mb-6 ${
             isDark 
-              ? 'bg-ubuntugift-secondary/50 text-ubuntugift-light' 
-              : 'bg-ubuntugift-light text-ubuntugift-primary'
-          }`}>
-            Why Choose Gift Ai
-          </span>
+              ? 'bg-khambi-accent/20' 
+              : 'bg-khambi-accent/10'
+          }`} style={{ borderColor: '#B8935E', borderWidth: '1px' }}>
+            <span className={`text-2xl font-bold ${
+              isDark 
+                ? 'text-khambi-accent' 
+                : 'text-khambi-primary'
+            }`}>
+              Why Choose Khambi
+            </span>
+          </div>
           <h2 id="why-choose" className={`text-4xl lg:text-5xl font-bold mb-6 ${
             isDark ? 'text-white' : 'text-gray-900'
           }`}>
@@ -88,13 +87,13 @@ const WhyChoose: React.FC<WhyChooseProps> = ({ isSidebarCollapsed }) => {
               }`}
             >
               <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 ${
-                isDark ? 'bg-ubuntugift-secondary/30' : 'bg-ubuntugift-light'
-              } ring-1 ring-ubuntugift-primary/20`}>
+                isDark ? 'bg-khambi-accent/20' : 'bg-khambi-accent/10'
+              } ring-1 ring-khambi-accent/30`}>
                 {('img' in feature && feature.img) ? (
-                  <img src={feature.img} alt={feature.title} className={`${(feature as any).size ?? 'w-8 h-8'} object-contain`} />
+                  <img src={feature.img} alt={feature.title} className={`${(feature as any).size ?? 'w-8 h-8'} object-contain`} style={{ filter: 'sepia(100%) saturate(300%) brightness(70%) hue-rotate(15deg)' }} />
                 ) : (
                   // Fallback to Lucide if needed
-                  <Shield className="w-8 h-8 text-ubuntugift-primary" />
+                  <Shield className="w-8 h-8 text-khambi-accent" />
                 )}
               </div>
               <h3 className={`text-xl font-bold mb-4 ${
@@ -114,19 +113,19 @@ const WhyChoose: React.FC<WhyChooseProps> = ({ isSidebarCollapsed }) => {
           }`}>
             <div className="grid md:grid-cols-4 gap-8 text-center">
               <div>
-                <div className="text-4xl font-bold text-ubuntugift-primary mb-2">1000's</div>
+                <div className="text-4xl font-bold text-khambi-accent mb-2">1000's</div>
                 <div className={isDark ? 'text-gray-300' : 'text-gray-600'}>of Families Cared For</div>
               </div>
               <div>
-                <div className="text-4xl font-bold text-ubuntugift-primary mb-2">25+</div>
+                <div className="text-4xl font-bold text-khambi-accent mb-2">5+</div>
                 <div className={isDark ? 'text-gray-300' : 'text-gray-600'}>Service Locations</div>
               </div>
               <div>
-                <div className="text-4xl font-bold text-ubuntugift-primary mb-2">24/7</div>
+                <div className="text-4xl font-bold text-khambi-accent mb-2">24/7</div>
                 <div className={isDark ? 'text-gray-300' : 'text-gray-600'}>Compassionate Support</div>
               </div>
               <div>
-                <div className="text-4xl font-bold text-ubuntugift-primary mb-2">98%</div>
+                <div className="text-4xl font-bold text-khambi-accent mb-2">98%</div>
                 <div className={isDark ? 'text-gray-300' : 'text-gray-600'}>Satisfaction Rate</div>
               </div>
             </div>

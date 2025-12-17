@@ -6,6 +6,7 @@ import { AnimatedPaymentButton } from './ui/animated-payment-button';
 import ChatBot from './ChatBot';
 import FastClaim from './FastClaim';
 import CasketSelection from './CasketSelection';
+import BurialExtras from './BurialExtras';
 import { ButtonColorful } from './ui/button-colorful';
 import ThreePlan from './ThreePlan';
 
@@ -122,35 +123,35 @@ const ToolsTabs: React.FC<ToolsTabsProps> = ({ isSidebarCollapsed }) => {
   const tabs = [
     { 
       id: 'daytoday', 
-      label: 'Packages', 
+      label: 'Burial Plans', 
       icon: Heart,
-      bgColor: 'bg-orange-500',
-      iconColor: 'text-ubuntugift-primary',
-      hoverBg: 'hover:bg-ubuntugift-light/80'
+      bgColor: 'bg-khambi-primary',
+      iconColor: 'text-khambi-accent',
+      hoverBg: 'hover:bg-khambi-darkgray'
     },
     { 
       id: 'hospital', 
-      label: 'Caskets', 
+      label: 'Coffins & Tombstones', 
       icon: CreditCard,
-      bgColor: 'bg-emerald-500',
-      iconColor: 'text-ubuntugift-primary',
-      hoverBg: 'hover:bg-ubuntugift-light/80'
+      bgColor: 'bg-khambi-accent',
+      iconColor: 'text-khambi-primary',
+      hoverBg: 'hover:bg-khambi-gold'
     },
     { 
       id: 'comprehensive', 
-      label: 'Extras', 
+      label: 'Burial Extras', 
       icon: Shield,
-      bgColor: 'bg-orange-400',
-      iconColor: 'text-ubuntugift-primary',
-      hoverBg: 'hover:bg-ubuntugift-light/80'
+      bgColor: 'bg-khambi-primary',
+      iconColor: 'text-khambi-accent',
+      hoverBg: 'hover:bg-khambi-darkgray'
     },
     { 
       id: 'ai', 
-      label: 'Gift Ai', 
+      label: 'Khambi Ai', 
       icon: Users,
-      bgColor: 'bg-emerald-600',
-      iconColor: 'text-ubuntugift-primary',
-      hoverBg: 'hover:bg-ubuntugift-light/80'
+      bgColor: 'bg-khambi-accent',
+      iconColor: 'text-khambi-primary',
+      hoverBg: 'hover:bg-khambi-gold'
     }
   ];
 
@@ -182,10 +183,10 @@ const ToolsTabs: React.FC<ToolsTabsProps> = ({ isSidebarCollapsed }) => {
               <motion.div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-5 items-start overflow-visible">
                 {/* Introduction Column */}
                 <motion.div 
-                  className={`relative rounded-2xl shadow-lg p-5 border-2 transition-all overflow-visible transform-gpu ring-1 ring-emerald-400/20 shadow-[0_0_40px_rgba(16,185,129,0.15)] ${
+                  className={`relative rounded-2xl shadow-lg p-5 border-2 transition-all overflow-visible transform-gpu ring-1 ring-khambi-accent/20 shadow-[0_0_40px_rgba(16,185,129,0.15)] ${
                     isDark 
-                      ? 'bg-gray-800 border-emerald-700 hover:border-emerald-500' 
-                      : 'bg-white border-emerald-200 hover:border-emerald-400'
+                      ? 'bg-gray-800 border-khambi-accent hover:border-khambi-accent' 
+                      : 'bg-white border-khambi-accent/30 hover:border-khambi-accent'
                   } ${expanded.intro ? 'min-h-[420px]' : 'min-h-[140px]'} `}
                   layout="position"
                   transition={{ 
@@ -210,7 +211,7 @@ const ToolsTabs: React.FC<ToolsTabsProps> = ({ isSidebarCollapsed }) => {
                   >
                     <div>
                       <motion.span
-                        className={`inline-flex items-center rounded-md px-2 py-0.5 border backdrop-blur-sm mb-2 bg-emerald-500/10 border-emerald-200/30 text-white`}
+                        className={`inline-flex items-center rounded-md px-2 py-0.5 border backdrop-blur-sm mb-2 bg-khambi-accent/10 border-khambi-accent/30/30 text-white`}
                         animate={{ scale: [1, 1.05, 1], boxShadow: [
                           '0 0 0px rgba(16,185,129,0.0)',
                           '0 0 18px rgba(16,185,129,0.35)',
@@ -259,21 +260,21 @@ const ToolsTabs: React.FC<ToolsTabsProps> = ({ isSidebarCollapsed }) => {
                         className="inline-flex items-center rounded-full px-3 py-1.5 text-[11px] font-semibold border backdrop-blur-sm bg-white/10 border-white/15 hover:bg-white/15 transition-all"
                         onClick={(e) => { e.stopPropagation(); setShowDayToDayCards(true); setExpanded(prev => ({ ...prev, student: true, family: false, basic: false })); }}
                       >
-                        Single
+                        Bronze
                       </button>
                       <button
                         type="button"
                         className="inline-flex items-center rounded-full px-3 py-1.5 text-[11px] font-semibold border backdrop-blur-sm bg-white/10 border-white/15 hover:bg-white/15 transition-all"
                         onClick={(e) => { e.stopPropagation(); setShowDayToDayCards(true); setExpanded(prev => ({ ...prev, student: false, family: false, basic: true })); }}
                       >
-                        Couples
+                        Silver
                       </button>
                       <button
                         type="button"
                         className="inline-flex items-center rounded-full px-3 py-1.5 text-[11px] font-semibold border backdrop-blur-sm bg-white/10 border-white/15 hover:bg-white/15 transition-all"
                         onClick={(e) => { e.stopPropagation(); setShowDayToDayCards(true); setExpanded(prev => ({ ...prev, student: false, family: true, basic: false })); }}
                       >
-                        Family
+                        Gold
                       </button>
                     </div>
                   )}
@@ -292,15 +293,15 @@ const ToolsTabs: React.FC<ToolsTabsProps> = ({ isSidebarCollapsed }) => {
                     </p>
                     <ul className="space-y-3 mt-4">
                       <li className="flex items-start">
-                        <Check className="w-5 h-5 text-emerald-400 mr-2 mt-0.5" />
+                        <Check className="w-5 h-5 text-khambi-accent mr-2 mt-0.5" />
                         <span className={`text-white`}>Full funeral coverage</span>
                       </li>
                       <li className="flex items-start">
-                        <Check className="w-5 h-5 text-emerald-400 mr-2 mt-0.5" />
+                        <Check className="w-5 h-5 text-khambi-accent mr-2 mt-0.5" />
                         <span className={`text-white`}>Casket selection & venue arrangements</span>
                       </li>
                       <li className="flex items-start">
-                        <Check className="w-5 h-5 text-emerald-400 mr-2 mt-0.5" />
+                        <Check className="w-5 h-5 text-khambi-accent mr-2 mt-0.5" />
                         <span className={`text-white`}>Transportation & documentation</span>
                       </li>
                     </ul>
@@ -311,8 +312,8 @@ const ToolsTabs: React.FC<ToolsTabsProps> = ({ isSidebarCollapsed }) => {
                 <motion.div 
                   className={`order-1 relative z-30 group rounded-2xl shadow-lg p-5 border-2 transition-all overflow-visible transform-gpu ${
                     isDark 
-                      ? 'bg-gray-800 border-green-700 hover:border-green-500' 
-                      : 'bg-white border-green-200 hover:border-green-400'
+                      ? 'bg-gray-800 border-khambi-accent/50 hover:border-khambi-accent' 
+                      : 'bg-white border-khambi-accent/30 hover:border-khambi-accent'
                   } min-h-[140px] `}
                   layout="position"
                   initial={false}
@@ -354,21 +355,21 @@ const ToolsTabs: React.FC<ToolsTabsProps> = ({ isSidebarCollapsed }) => {
                         >
                           <div className="flex flex-col items-start gap-2">
                             <motion.span
-                              className={`inline-flex items-center rounded-md px-2 py-0.5 border backdrop-blur-sm ${isDark ? 'bg-emerald-500/10 border-emerald-200/20' : 'bg-emerald-500/10 border-emerald-500/20'} text-lg font-bold text-emerald-400`}
+                              className={`inline-flex items-center rounded-md px-2 py-0.5 border backdrop-blur-sm ${isDark ? 'bg-khambi-accent/10 border-khambi-accent/30/20' : 'bg-khambi-accent/10 border-khambi-accent/20'} text-lg font-bold text-khambi-accent`}
                               initial={{ opacity: 0, x: -6 }}
                               animate={{ opacity: 1, x: 0 }}
                               exit={{ opacity: 0, x: -6 }}
                               transition={{ duration: 0.18 }}
                             >
-                              Single Member Plan
+                              BRONZE Plan
                             </motion.span>
                             <motion.div
                               layoutId="daytoday-single-price"
-                              className={`inline-flex items-baseline gap-2 rounded-xl border backdrop-blur-sm px-3 py-1 w-fit whitespace-nowrap self-start ${isDark ? 'bg-emerald-500/10 border-emerald-200/20' : 'bg-emerald-500/10 border-emerald-500/20'}`}
+                              className={`inline-flex items-baseline gap-2 rounded-xl border backdrop-blur-sm px-3 py-1 w-fit whitespace-nowrap self-start ${isDark ? 'bg-khambi-accent/10 border-khambi-accent/30/20' : 'bg-khambi-accent/10 border-khambi-accent/20'}`}
                               transition={{ type: 'tween', duration: 0.22, ease: [0.4, 0.0, 0.2, 1] }}
                             >
-                              <span className="text-2xl font-bold text-emerald-400">R385</span>
-                              <span className={`text-white text-sm font-normal`}>/month</span>
+                              <span className="text-2xl font-bold text-khambi-accent">R15,000</span>
+                              <span className={`text-white text-sm font-normal`}>Cover</span>
                             </motion.div>
                           </div>
                         </motion.div>
@@ -381,7 +382,7 @@ const ToolsTabs: React.FC<ToolsTabsProps> = ({ isSidebarCollapsed }) => {
                           exit={{ opacity: 0, y: 6 }}
                           transition={{ duration: 0.18 }}
                         >
-                          Single Member Plan
+                          BRONZE Plan
                         </motion.h3>
                       )}
                     </AnimatePresence>
@@ -395,13 +396,18 @@ const ToolsTabs: React.FC<ToolsTabsProps> = ({ isSidebarCollapsed }) => {
                     aria-hidden={!expanded.student}
                     className="relative z-10"
                   >
-                    <div className={`rounded-xl border ${isDark ? 'bg-emerald-500/10 border-emerald-200/20' : 'bg-emerald-500/10 border-emerald-500/20'} backdrop-blur-sm p-4 mb-6`}>
-                      <ul className="space-y-3">
-                        <li className="flex items-center"><Check className="w-5 h-5 text-emerald-400 mr-2" /> <span className={`text-white`}>Full funeral coverage</span></li>
-                        <li className="flex items-center"><Check className="w-5 h-5 text-emerald-400 mr-2" /> <span className={`text-white`}>Casket selection</span></li>
-                        <li className="flex items-center"><Check className="w-5 h-5 text-emerald-400 mr-2" /> <span className={`text-white`}>Venue arrangements</span></li>
-                        <li className="flex items-center"><Check className="w-5 h-5 text-emerald-400 mr-2" /> <span className={`text-white`}>Transportation</span></li>
-                        <li className="flex items-center"><Check className="w-5 h-5 text-emerald-400 mr-2" /> <span className={`text-white`}>Documentation assistance</span></li>
+                    <div className={`rounded-xl border ${isDark ? 'bg-khambi-accent/10 border-khambi-accent/30/20' : 'bg-khambi-accent/10 border-khambi-accent/20'} backdrop-blur-sm p-4 mb-6`}>
+                      <ul className="space-y-2 text-sm">
+                        <li className="flex items-center"><Check className="w-4 h-4 text-khambi-accent mr-2" /> <span className={`text-white`}>Storage and Preparation</span></li>
+                        <li className="flex items-center"><Check className="w-4 h-4 text-khambi-accent mr-2" /> <span className={`text-white`}>Flat Lid Coffin</span></li>
+                        <li className="flex items-center"><Check className="w-4 h-4 text-khambi-accent mr-2" /> <span className={`text-white`}>Hearse and 1 Family Car</span></li>
+                        <li className="flex items-center"><Check className="w-4 h-4 text-khambi-accent mr-2" /> <span className={`text-white`}>Tent, 50 Chairs & Standard Toilet</span></li>
+                        <li className="flex items-center"><Check className="w-4 h-4 text-khambi-accent mr-2" /> <span className={`text-white`}>Funeral Programs</span></li>
+                        <li className="flex items-center"><Check className="w-4 h-4 text-khambi-accent mr-2" /> <span className={`text-white`}>10KG Ox Liver</span></li>
+                        <li className="flex items-center"><Check className="w-4 h-4 text-khambi-accent mr-2" /> <span className={`text-white`}>Graveside Decor</span></li>
+                        <li className="flex items-center"><Check className="w-4 h-4 text-khambi-accent mr-2" /> <span className={`text-white`}>Bereavement Counseling</span></li>
+                        <li className="flex items-center"><Check className="w-4 h-4 text-khambi-accent mr-2" /> <span className={`text-white`}>Late Estate (Will)</span></li>
+                        <li className="flex items-center"><Check className="w-4 h-4 text-khambi-accent mr-2" /> <span className={`text-white`}>Repatriation</span></li>
                       </ul>
                     </div>
                   </motion.div>
@@ -411,10 +417,10 @@ const ToolsTabs: React.FC<ToolsTabsProps> = ({ isSidebarCollapsed }) => {
                         text="Choose Plan"
                         className="bronze"
                         hoverMessages={[
-                          'Full funeral coverage',
-                          'Casket selection',
-                          'Venue arrangements',
-                          'Transportation',
+                          'R15,000 Cover',
+                          'Flat Lid Coffin',
+                          'Hearse + 1 Family Car',
+                          '50 Chairs & Tent',
                         ]}
                         hoverIcons={['wallet','card','payment','check']}
                         showArrow={false}
@@ -447,13 +453,13 @@ const ToolsTabs: React.FC<ToolsTabsProps> = ({ isSidebarCollapsed }) => {
                           : 'bg-white/30 border-white/40'
                       }`}
                     >
-                      <div className={`text-[10px] uppercase tracking-wider ${isDark ? 'text-green-300' : 'text-green-700'}`}>
+                      <div className={`text-[10px] uppercase tracking-wider ${isDark ? 'text-khambi-accent' : 'text-khambi-primary'}`}>
                         {tabs.find(t => t.id === activeTab)?.label}
                       </div>
-                      <motion.div layoutId="daytoday-single-price" className={`leading-none text-green-600`} transition={{ type: 'tween', duration: 0.22, ease: [0.4, 0.0, 0.2, 1] }}>
+                      <motion.div layoutId="daytoday-single-price" className={`leading-none text-khambi-accent`} transition={{ type: 'tween', duration: 0.22, ease: [0.4, 0.0, 0.2, 1] }}>
                         <span className="text-sm align-top mr-1">R</span>
-                        <span className="text-2xl font-bold">385</span>
-                        <span className={`${isDark ? 'text-gray-300' : 'text-gray-600'} text-[10px] ml-1`}>/mo</span>
+                        <span className="text-2xl font-bold">15,000</span>
+                        <span className={`${isDark ? 'text-gray-300' : 'text-gray-600'} text-[10px] ml-1`}>Cover</span>
                       </motion.div>
                     </div>
                   )}
@@ -463,8 +469,8 @@ const ToolsTabs: React.FC<ToolsTabsProps> = ({ isSidebarCollapsed }) => {
                 <motion.div 
                   className={`order-2 relative group rounded-2xl shadow-lg p-5 border-2 transition-all overflow-visible transform-gpu ${
                     isDark 
-                      ? 'bg-gray-800 border-green-700 hover:border-green-500' 
-                      : 'bg-white border-green-200 hover:border-green-400'
+                      ? 'bg-gray-800 border-khambi-accent/50 hover:border-khambi-accent' 
+                      : 'bg-white border-khambi-accent/30 hover:border-khambi-accent'
                   } min-h-[140px] `}
                   layout="position"
                   initial={false}
@@ -505,21 +511,21 @@ const ToolsTabs: React.FC<ToolsTabsProps> = ({ isSidebarCollapsed }) => {
                           transition={{ duration: 0.18 }}
                         >
                           <motion.span
-                            className={`inline-flex w-fit items-center rounded-md px-2 py-0.5 border backdrop-blur-sm ${isDark ? 'bg-emerald-500/10 border-emerald-200/20' : 'bg-emerald-500/10 border-emerald-500/20'} text-base font-semibold text-emerald-300`}
+                            className={`inline-flex w-fit items-center rounded-md px-2 py-0.5 border backdrop-blur-sm ${isDark ? 'bg-gray-400/20 border-gray-400/30' : 'bg-gray-400/20 border-gray-400/30'} text-base font-semibold text-gray-300`}
                             initial={{ opacity: 0, x: -6 }}
                             animate={{ opacity: 1, x: 0 }}
                             exit={{ opacity: 0, x: -6 }}
                             transition={{ duration: 0.18 }}
                           >
-                            Family Members Plan
+                            SILVER Plan
                           </motion.span>
                           <motion.div
                             layoutId="daytoday-couple-price"
-                            className={`inline-flex items-baseline gap-2 rounded-xl border backdrop-blur-sm px-3 py-1 w-fit whitespace-nowrap self-start ${isDark ? 'bg-emerald-500/10 border-emerald-200/20' : 'bg-emerald-500/10 border-emerald-500/20'}`}
+                            className={`inline-flex items-baseline gap-2 rounded-xl border backdrop-blur-sm px-3 py-1 w-fit whitespace-nowrap self-start ${isDark ? 'bg-gray-400/20 border-gray-400/30' : 'bg-gray-400/20 border-gray-400/30'}`}
                             transition={{ type: 'tween', duration: 0.22, ease: [0.4, 0.0, 0.2, 1] }}
                           >
-                            <span className="text-2xl font-bold text-emerald-400">R674</span>
-                            <span className={`text-white text-sm font-normal`}>/month</span>
+                            <span className="text-2xl font-bold text-gray-300">R20,000</span>
+                            <span className={`text-white text-sm font-normal`}>Cover</span>
                           </motion.div>
                         </motion.div>
                       ) : (
@@ -531,7 +537,7 @@ const ToolsTabs: React.FC<ToolsTabsProps> = ({ isSidebarCollapsed }) => {
                           exit={{ opacity: 0, y: 6 }}
                           transition={{ duration: 0.18 }}
                         >
-                          Family Burial Plan
+                          SILVER Plan
                         </motion.h3>
                       )}
                     </AnimatePresence>
@@ -544,13 +550,19 @@ const ToolsTabs: React.FC<ToolsTabsProps> = ({ isSidebarCollapsed }) => {
                     style={{ overflow: 'hidden' }}
                     aria-hidden={!expanded.basic}
                   >
-                    <div className={`rounded-xl border ${isDark ? 'bg-emerald-500/10 border-emerald-200/20' : 'bg-emerald-500/10 border-emerald-500/20'} backdrop-blur-sm p-4 mb-6`}>
-                      <ul className="space-y-3">
-                        <li className="flex items-center"><Check className="w-5 h-5 text-emerald-400 mr-2" /> <span className={`text-white`}>Coverage for up to 6 members</span></li>
-                        <li className="flex items-center"><Check className="w-5 h-5 text-emerald-400 mr-2" /> <span className={`text-white`}>Premium casket options</span></li>
-                        <li className="flex items-center"><Check className="w-5 h-5 text-emerald-400 mr-2" /> <span className={`text-white`}>Full venue services</span></li>
-                        <li className="flex items-center"><Check className="w-5 h-5 text-emerald-400 mr-2" /> <span className={`text-white`}>Memorial arrangements</span></li>
-                        <li className="flex items-center"><Check className="w-5 h-5 text-emerald-400 mr-2" /> <span className={`text-white`}>Grief counseling</span></li>
+                    <div className={`rounded-xl border ${isDark ? 'bg-gray-400/10 border-gray-400/20' : 'bg-gray-400/10 border-gray-400/20'} backdrop-blur-sm p-4 mb-6`}>
+                      <ul className="space-y-2 text-sm">
+                        <li className="flex items-center"><Check className="w-4 h-4 text-gray-300 mr-2" /> <span className={`text-white`}>Storage and Preparation</span></li>
+                        <li className="flex items-center"><Check className="w-4 h-4 text-gray-300 mr-2" /> <span className={`text-white`}>Face-view Casket</span></li>
+                        <li className="flex items-center"><Check className="w-4 h-4 text-gray-300 mr-2" /> <span className={`text-white`}>Coffin Spray</span></li>
+                        <li className="flex items-center"><Check className="w-4 h-4 text-gray-300 mr-2" /> <span className={`text-white`}>Hearse and 2 Family Cars</span></li>
+                        <li className="flex items-center"><Check className="w-4 h-4 text-gray-300 mr-2" /> <span className={`text-white`}>Tent, 50 Chairs & Standard Toilet</span></li>
+                        <li className="flex items-center"><Check className="w-4 h-4 text-gray-300 mr-2" /> <span className={`text-white`}>Funeral Programs</span></li>
+                        <li className="flex items-center"><Check className="w-4 h-4 text-gray-300 mr-2" /> <span className={`text-white`}>10KG Ox Liver</span></li>
+                        <li className="flex items-center"><Check className="w-4 h-4 text-gray-300 mr-2" /> <span className={`text-white`}>Graveside Decor</span></li>
+                        <li className="flex items-center"><Check className="w-4 h-4 text-gray-300 mr-2" /> <span className={`text-white`}>Bereavement Counseling</span></li>
+                        <li className="flex items-center"><Check className="w-4 h-4 text-gray-300 mr-2" /> <span className={`text-white`}>Late Estate (Will)</span></li>
+                        <li className="flex items-center"><Check className="w-4 h-4 text-gray-300 mr-2" /> <span className={`text-white`}>Repatriation</span></li>
                       </ul>
                     </div>
                   </motion.div>
@@ -560,10 +572,10 @@ const ToolsTabs: React.FC<ToolsTabsProps> = ({ isSidebarCollapsed }) => {
                         text="Choose Plan"
                         className="silver"
                         hoverMessages={[
-                          'Coverage for 6 members',
-                          'Premium caskets',
-                          'Full venue services',
-                          'Memorial arrangements',
+                          'R20,000 Cover',
+                          'Face-view Casket',
+                          'Hearse + 2 Family Cars',
+                          'Coffin Spray',
                         ]}
                         hoverIcons={['wallet','card','payment','check']}
                         showArrow={false}
@@ -596,13 +608,13 @@ const ToolsTabs: React.FC<ToolsTabsProps> = ({ isSidebarCollapsed }) => {
                           : 'bg-white/30 border-white/40'
                       }`}
                     >
-                      <div className={`text-[10px] uppercase tracking-wider ${isDark ? 'text-green-300' : 'text-green-700'}`}>
+                      <div className={`text-[10px] uppercase tracking-wider ${isDark ? 'text-khambi-accent' : 'text-khambi-primary'}`}>
                         {tabs.find(t => t.id === activeTab)?.label}
                       </div>
-                      <motion.div layoutId="daytoday-couple-price" className={`leading-none text-green-600`} transition={{ type: 'tween', duration: 0.22, ease: [0.4, 0.0, 0.2, 1] }}>
+                      <motion.div layoutId="daytoday-couple-price" className={`leading-none text-gray-400`} transition={{ type: 'tween', duration: 0.22, ease: [0.4, 0.0, 0.2, 1] }}>
                         <span className="text-sm align-top mr-1">R</span>
-                        <span className="text-2xl font-bold">674</span>
-                        <span className={`${isDark ? 'text-gray-300' : 'text-gray-600'} text-[10px] ml-1`}>/mo</span>
+                        <span className="text-2xl font-bold">20,000</span>
+                        <span className={`${isDark ? 'text-gray-300' : 'text-gray-600'} text-[10px] ml-1`}>Cover</span>
                       </motion.div>
                     </div>
                   )}
@@ -612,8 +624,8 @@ const ToolsTabs: React.FC<ToolsTabsProps> = ({ isSidebarCollapsed }) => {
                 <motion.div 
                   className={`order-3 relative group rounded-2xl shadow-lg p-5 border-2 transition-all overflow-visible transform-gpu ${
                     isDark 
-                      ? 'bg-gray-800 border-green-700 hover:border-green-500' 
-                      : 'bg-white border-green-200 hover:border-green-400'
+                      ? 'bg-gray-800 border-khambi-accent/50 hover:border-khambi-accent' 
+                      : 'bg-white border-khambi-accent/30 hover:border-khambi-accent'
                   } min-h-[140px] `}
                   layout="position"
                   initial={false}
@@ -653,21 +665,21 @@ const ToolsTabs: React.FC<ToolsTabsProps> = ({ isSidebarCollapsed }) => {
                           transition={{ duration: 0.18 }}
                         >
                           <motion.span
-                            className={`inline-flex w-fit items-center rounded-md px-2 py-0.5 border backdrop-blur-sm ${isDark ? 'bg-emerald-500/10 border-emerald-200/20' : 'bg-emerald-500/10 border-emerald-500/20'} text-base font-semibold text-emerald-300`}
+                            className={`inline-flex w-fit items-center rounded-md px-2 py-0.5 border backdrop-blur-sm ${isDark ? 'bg-yellow-500/20 border-yellow-500/30' : 'bg-yellow-500/20 border-yellow-500/30'} text-base font-semibold text-yellow-400`}
                             initial={{ opacity: 0, x: -6 }}
                             animate={{ opacity: 1, x: 0 }}
                             exit={{ opacity: 0, x: -6 }}
                             transition={{ duration: 0.18 }}
                           >
-                            Extended Family Members Plan
+                            GOLD Plan
                           </motion.span>
                           <motion.div
                             layoutId="daytoday-family-price"
-                            className={`inline-flex items-baseline gap-2 rounded-xl border backdrop-blur-sm px-3 py-1 w-fit whitespace-nowrap self-start ${isDark ? 'bg-emerald-500/10 border-emerald-200/20' : 'bg-emerald-500/10 border-emerald-500/20'}`}
+                            className={`inline-flex items-baseline gap-2 rounded-xl border backdrop-blur-sm px-3 py-1 w-fit whitespace-nowrap self-start ${isDark ? 'bg-yellow-500/20 border-yellow-500/30' : 'bg-yellow-500/20 border-yellow-500/30'}`}
                             transition={{ type: 'tween', duration: 0.22, ease: [0.4, 0.0, 0.2, 1] }}
                           >
-                            <span className="text-2xl font-bold text-emerald-400">R867</span>
-                            <span className={`text-white text-sm font-normal`}>/month</span>
+                            <span className="text-2xl font-bold text-yellow-400">R25,000</span>
+                            <span className={`text-white text-sm font-normal`}>Cover</span>
                           </motion.div>
                         </motion.div>
                       ) : (
@@ -679,7 +691,7 @@ const ToolsTabs: React.FC<ToolsTabsProps> = ({ isSidebarCollapsed }) => {
                           exit={{ opacity: 0, y: 6 }}
                           transition={{ duration: 0.18 }}
                         >
-                          Extended Family Burial Plan
+                          GOLD Plan
                         </motion.h3>
                       )}
                     </AnimatePresence>
@@ -692,14 +704,19 @@ const ToolsTabs: React.FC<ToolsTabsProps> = ({ isSidebarCollapsed }) => {
                     style={{ overflow: 'hidden' }}
                     aria-hidden={!expanded.family}
                   >
-                    <div className={`rounded-xl border ${isDark ? 'bg-emerald-500/10 border-emerald-200/20' : 'bg-emerald-500/10 border-emerald-500/20'} backdrop-blur-sm p-4 mb-6`}>
-                      <ul className="space-y-3">
-                        <li className="flex items-center"><Check className="w-5 h-5 text-emerald-400 mr-2" /> <span className={`text-white`}>Coverage for up to 12 members</span></li>
-                        <li className="flex items-center"><Check className="w-5 h-5 text-emerald-400 mr-2" /> <span className={`text-white`}>Premium & luxury caskets</span></li>
-                        <li className="flex items-center"><Check className="w-5 h-5 text-emerald-400 mr-2" /> <span className={`text-white`}>Multiple venue options</span></li>
-                        <li className="flex items-center"><Check className="w-5 h-5 text-emerald-400 mr-2" /> <span className={`text-white`}>Complete memorial services</span></li>
-                        <li className="flex items-center"><Check className="w-5 h-5 text-emerald-400 mr-2" /> <span className={`text-white`}>Extended grief support</span></li>
-                        <li className="flex items-center"><Check className="w-5 h-5 text-emerald-400 mr-2" /> <span className={`text-white`}>Priority scheduling</span></li>
+                    <div className={`rounded-xl border ${isDark ? 'bg-yellow-500/10 border-yellow-500/20' : 'bg-yellow-500/10 border-yellow-500/20'} backdrop-blur-sm p-4 mb-6`}>
+                      <ul className="space-y-2 text-sm">
+                        <li className="flex items-center"><Check className="w-4 h-4 text-yellow-400 mr-2" /> <span className={`text-white`}>Storage and Preparation</span></li>
+                        <li className="flex items-center"><Check className="w-4 h-4 text-yellow-400 mr-2" /> <span className={`text-white`}>Half-view Casket</span></li>
+                        <li className="flex items-center"><Check className="w-4 h-4 text-yellow-400 mr-2" /> <span className={`text-white`}>Coffin Spray</span></li>
+                        <li className="flex items-center"><Check className="w-4 h-4 text-yellow-400 mr-2" /> <span className={`text-white`}>Hearse and 2 Family Cars</span></li>
+                        <li className="flex items-center"><Check className="w-4 h-4 text-yellow-400 mr-2" /> <span className={`text-white`}>Tent, 100 Chairs & VIP Toilet</span></li>
+                        <li className="flex items-center"><Check className="w-4 h-4 text-yellow-400 mr-2" /> <span className={`text-white`}>Funeral Programs + 1 Digital</span></li>
+                        <li className="flex items-center"><Check className="w-4 h-4 text-yellow-400 mr-2" /> <span className={`text-white`}>10KG Ox Liver</span></li>
+                        <li className="flex items-center"><Check className="w-4 h-4 text-yellow-400 mr-2" /> <span className={`text-white`}>Graveside Decor</span></li>
+                        <li className="flex items-center"><Check className="w-4 h-4 text-yellow-400 mr-2" /> <span className={`text-white`}>Bereavement Counseling</span></li>
+                        <li className="flex items-center"><Check className="w-4 h-4 text-yellow-400 mr-2" /> <span className={`text-white`}>Late Estate (Will)</span></li>
+                        <li className="flex items-center"><Check className="w-4 h-4 text-yellow-400 mr-2" /> <span className={`text-white`}>Repatriation</span></li>
                       </ul>
                     </div>
                   </motion.div>
@@ -707,12 +724,12 @@ const ToolsTabs: React.FC<ToolsTabsProps> = ({ isSidebarCollapsed }) => {
                     <div className="relative">
                       <AnimatedPaymentButton 
                         text="Choose Plan"
-                        className="bronze"
+                        className="gold"
                         hoverMessages={[
-                          'Coverage for 12 members',
-                          'Luxury caskets',
-                          'Multiple venues',
-                          'Complete memorial services',
+                          'R25,000 Cover',
+                          'Half-view Casket',
+                          '100 Chairs & VIP Toilet',
+                          'Digital Programs',
                         ]}
                         hoverIcons={['wallet','card','payment','check']}
                         showArrow={false}
@@ -745,13 +762,13 @@ const ToolsTabs: React.FC<ToolsTabsProps> = ({ isSidebarCollapsed }) => {
                           : 'bg-white/30 border-white/40'
                       }`}
                     >
-                      <div className={`text-[10px] uppercase tracking-wider ${isDark ? 'text-green-300' : 'text-green-700'}`}>
+                      <div className={`text-[10px] uppercase tracking-wider ${isDark ? 'text-khambi-accent' : 'text-khambi-primary'}`}>
                         {tabs.find(t => t.id === activeTab)?.label}
                       </div>
-                      <motion.div layoutId="daytoday-family-price" className={`leading-none text-green-600`}>
+                      <motion.div layoutId="daytoday-family-price" className={`leading-none text-yellow-500`}>
                         <span className="text-sm align-top mr-1">R</span>
-                        <span className="text-2xl font-bold">867</span>
-                        <span className={`ml-1 text-[10px] ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>/mo</span>
+                        <span className="text-2xl font-bold">25,000</span>
+                        <span className={`ml-1 text-[10px] ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>Cover</span>
                       </motion.div>
                     </div>
                   )}
@@ -772,117 +789,10 @@ const ToolsTabs: React.FC<ToolsTabsProps> = ({ isSidebarCollapsed }) => {
 
       case 'comprehensive':
         return (
-          <div className={`w-full max-w-4xl mx-auto px-4 py-8`}>
-            <div className="text-center mb-8">
-              <h2 className={`text-3xl font-bold mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>
-                Add Extras
-              </h2>
-              <p className={`text-lg ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-                Optional services to enhance the funeral
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-4 mb-8">
-              {/* Venue Rental */}
-              <div className={`p-6 rounded-xl border-2 cursor-pointer transition-all ${isDark ? 'bg-gray-800 border-gray-700 hover:border-emerald-500' : 'bg-white border-gray-200 hover:border-emerald-500'}`}>
-                <div className="flex items-start justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className={`w-10 h-10 rounded-full flex items-center justify-center ${isDark ? 'bg-gray-700' : 'bg-gray-100'}`}>
-                      <span className="text-xl">🏛️</span>
-                    </div>
-                    <div>
-                      <h3 className={`font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>Venue Rental</h3>
-                      <p className="text-emerald-600 font-bold">R3,500</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Flowers */}
-              <div className={`p-6 rounded-xl border-2 cursor-pointer transition-all ${isDark ? 'bg-gray-800 border-gray-700 hover:border-emerald-500' : 'bg-white border-gray-200 hover:border-emerald-500'}`}>
-                <div className="flex items-start justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className={`w-10 h-10 rounded-full flex items-center justify-center ${isDark ? 'bg-gray-700' : 'bg-gray-100'}`}>
-                      <span className="text-xl">🌸</span>
-                    </div>
-                    <div>
-                      <h3 className={`font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>Flowers</h3>
-                      <p className="text-emerald-600 font-bold">R1,500</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Music/DJ */}
-              <div className={`p-6 rounded-xl border-2 cursor-pointer transition-all ${isDark ? 'bg-gray-800 border-gray-700 hover:border-emerald-500' : 'bg-white border-gray-200 hover:border-emerald-500'}`}>
-                <div className="flex items-start justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className={`w-10 h-10 rounded-full flex items-center justify-center ${isDark ? 'bg-gray-700' : 'bg-gray-100'}`}>
-                      <span className="text-xl">🎵</span>
-                    </div>
-                    <div>
-                      <h3 className={`font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>Music/DJ</h3>
-                      <p className="text-emerald-600 font-bold">R2,000</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Live Streaming */}
-              <div className={`p-6 rounded-xl border-2 cursor-pointer transition-all ${isDark ? 'bg-gray-800 border-gray-700 hover:border-emerald-500' : 'bg-white border-gray-200 hover:border-emerald-500'}`}>
-                <div className="flex items-start justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className={`w-10 h-10 rounded-full flex items-center justify-center ${isDark ? 'bg-gray-700' : 'bg-gray-100'}`}>
-                      <span className="text-xl">📹</span>
-                    </div>
-                    <div>
-                      <h3 className={`font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>Live Streaming</h3>
-                      <p className="text-emerald-600 font-bold">R1,000</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Catering */}
-              <div className={`p-6 rounded-xl border-2 cursor-pointer transition-all ${isDark ? 'bg-gray-800 border-gray-700 hover:border-emerald-500' : 'bg-white border-gray-200 hover:border-emerald-500'}`}>
-                <div className="flex items-start justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className={`w-10 h-10 rounded-full flex items-center justify-center ${isDark ? 'bg-gray-700' : 'bg-gray-100'}`}>
-                      <span className="text-xl">🍽️</span>
-                    </div>
-                    <div>
-                      <h3 className={`font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>Catering</h3>
-                      <p className="text-emerald-600 font-bold">R5,000</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Transportation */}
-              <div className={`p-6 rounded-xl border-2 cursor-pointer transition-all ${isDark ? 'bg-gray-800 border-gray-700 hover:border-emerald-500' : 'bg-white border-gray-200 hover:border-emerald-500'}`}>
-                <div className="flex items-start justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className={`w-10 h-10 rounded-full flex items-center justify-center ${isDark ? 'bg-gray-700' : 'bg-gray-100'}`}>
-                      <span className="text-xl">🚗</span>
-                    </div>
-                    <div>
-                      <h3 className={`font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>Transportation</h3>
-                      <p className="text-emerald-600 font-bold">R2,500</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className={`p-6 rounded-xl border-2 ${isDark ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
-              <div className="flex items-center justify-between mb-4">
-                <span className={`text-lg font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>Total Amount</span>
-                <span className="text-3xl font-bold text-emerald-600">R0</span>
-              </div>
-              <button className="w-full px-6 py-3 bg-gradient-to-r from-orange-500 to-emerald-500 text-white rounded-lg font-medium hover:shadow-lg transition-all">
-                Continue to Payment
-              </button>
-            </div>
+          <div
+            className={`w-full max-w-[85vw] ${isSidebarCollapsed ? 'md:max-w-[74rem]' : 'md:max-w-[min(74rem,calc(100vw-14rem-0.5rem))]'} mx-auto px-4 md:px-2`}
+          >
+            <BurialExtras />
           </div>
         );
     
@@ -902,10 +812,10 @@ const ToolsTabs: React.FC<ToolsTabsProps> = ({ isSidebarCollapsed }) => {
               <motion.div className="grid md:grid-cols-2 lg:grid-cols-[1.02fr_repeat(3,1fr)] gap-6 md:gap-5 items-start overflow-visible">
                 {/* Introduction Column (Senior-Plan intro) */}
                 <motion.div 
-                  className={`relative rounded-2xl shadow-lg p-5 border-2 transition-all overflow-visible transform-gpu ring-1 ring-emerald-400/20 shadow-[0_0_40px_rgba(16,185,129,0.15)] ${
+                  className={`relative rounded-2xl shadow-lg p-5 border-2 transition-all overflow-visible transform-gpu ring-1 ring-khambi-accent/20 shadow-[0_0_40px_rgba(16,185,129,0.15)] ${
                     isDark 
-                      ? 'bg-gray-800 border-emerald-700 hover:border-emerald-500' 
-                      : 'bg-white border-emerald-200 hover:border-emerald-400'
+                      ? 'bg-gray-800 border-khambi-accent hover:border-khambi-accent' 
+                      : 'bg-white border-khambi-accent/30 hover:border-khambi-accent'
                   } ${expanded.intro ? 'min-h-[420px]' : 'min-h-[140px]'} `}
                   layout="position"
                   transition={{ 
@@ -931,7 +841,7 @@ const ToolsTabs: React.FC<ToolsTabsProps> = ({ isSidebarCollapsed }) => {
                   >
                     <div>
                       <motion.span
-                        className={`inline-flex items-center rounded-md px-2 py-0.5 border backdrop-blur-sm mb-2 bg-emerald-500/10 border-emerald-200/30 text-white`}
+                        className={`inline-flex items-center rounded-md px-2 py-0.5 border backdrop-blur-sm mb-2 bg-khambi-accent/10 border-khambi-accent/30/30 text-white`}
                         animate={{ scale: [1, 1.05, 1], boxShadow: [
                           '0 0 0px rgba(16,185,129,0.0)',
                           '0 0 18px rgba(16,185,129,0.35)',
@@ -1014,15 +924,15 @@ const ToolsTabs: React.FC<ToolsTabsProps> = ({ isSidebarCollapsed }) => {
                     </p>
                     <ul className="space-y-3 mt-4">
                       <li className="flex items-start">
-                        <Check className="w-5 h-5 text-emerald-400 mr-2 mt-0.5" />
+                        <Check className="w-5 h-5 text-khambi-accent mr-2 mt-0.5" />
                         <span className={`text-white`}>GP consultations and virtual care</span>
                       </li>
                       <li className="flex items-start">
-                        <Check className="w-5 h-5 text-emerald-400 mr-2 mt-0.5" />
+                        <Check className="w-5 h-5 text-khambi-accent mr-2 mt-0.5" />
                         <span className={`text-white`}>Acute and chronic medication options</span>
                       </li>
                       <li className="flex items-start">
-                        <Check className="w-5 h-5 text-emerald-400 mr-2 mt-0.5" />
+                        <Check className="w-5 h-5 text-khambi-accent mr-2 mt-0.5" />
                         <span className={`text-white`}>Dental, optical and basic diagnostics</span>
                       </li>
                     </ul>
@@ -1069,8 +979,8 @@ const ToolsTabs: React.FC<ToolsTabsProps> = ({ isSidebarCollapsed }) => {
                 <motion.div 
                   className={`order-1 relative z-30 group rounded-2xl shadow-lg p-5 border-2 transition-all overflow-visible transform-gpu ${
                     isDark 
-                      ? 'bg-gray-800 border-green-700 hover:border-green-500' 
-                      : 'bg-white border-green-200 hover:border-green-400'
+                      ? 'bg-gray-800 border-khambi-accent/50 hover:border-khambi-accent' 
+                      : 'bg-white border-khambi-accent/30 hover:border-khambi-accent'
                   } min-h-[140px] `}
                   layout="position"
                   initial={false}
@@ -1112,7 +1022,7 @@ const ToolsTabs: React.FC<ToolsTabsProps> = ({ isSidebarCollapsed }) => {
                         >
                           <div className="flex items-center gap-2">
                             <motion.span
-                              className={`inline-flex items-center rounded-md px-2 py-0.5 border backdrop-blur-sm ${isDark ? 'bg-emerald-500/10 border-emerald-200/20' : 'bg-emerald-500/10 border-emerald-500/20'} text-lg font-bold text-emerald-400`}
+                              className={`inline-flex items-center rounded-md px-2 py-0.5 border backdrop-blur-sm ${isDark ? 'bg-khambi-accent/10 border-khambi-accent/30/20' : 'bg-khambi-accent/10 border-khambi-accent/20'} text-lg font-bold text-khambi-accent`}
                               initial={{ opacity: 0, x: -8 }}
                               animate={{ opacity: 1, x: 0 }}
                               exit={{ opacity: 0, x: -8 }}
@@ -1137,7 +1047,7 @@ const ToolsTabs: React.FC<ToolsTabsProps> = ({ isSidebarCollapsed }) => {
                               </motion.span>
                             </motion.span>
                             <motion.span
-                              className={`inline-flex items-center rounded-md px-2 py-0.5 border backdrop-blur-sm ${isDark ? 'bg-emerald-500/10 border-emerald-200/20' : 'bg-emerald-500/10 border-emerald-500/20'} text-lg font-bold text-emerald-400`}
+                              className={`inline-flex items-center rounded-md px-2 py-0.5 border backdrop-blur-sm ${isDark ? 'bg-khambi-accent/10 border-khambi-accent/30/20' : 'bg-khambi-accent/10 border-khambi-accent/20'} text-lg font-bold text-khambi-accent`}
                               initial={{ opacity: 0, x: -8 }}
                               animate={{ opacity: 1, x: 0 }}
                               exit={{ opacity: 0, x: -8 }}
@@ -1148,10 +1058,10 @@ const ToolsTabs: React.FC<ToolsTabsProps> = ({ isSidebarCollapsed }) => {
                           </div>
                           <motion.div
                             layoutId="senior-day-header-price"
-                            className={`mt-2 relative z-10 inline-flex items-baseline gap-2 rounded-xl border backdrop-blur-sm px-3 py-1 ${isDark ? 'bg-emerald-500/10 border-emerald-200/20' : 'bg-emerald-500/10 border-emerald-500/20'}`}
+                            className={`mt-2 relative z-10 inline-flex items-baseline gap-2 rounded-xl border backdrop-blur-sm px-3 py-1 ${isDark ? 'bg-khambi-accent/10 border-khambi-accent/30/20' : 'bg-khambi-accent/10 border-khambi-accent/20'}`}
                             transition={{ type: 'tween', duration: 0.22, ease: [0.4, 0.0, 0.2, 1] }}
                           >
-                            <span className="text-2xl font-bold text-emerald-400">R425</span>
+                            <span className="text-2xl font-bold text-khambi-accent">R425</span>
                             <span className={`text-white text-sm font-normal`}>/month</span>
                           </motion.div>
                         </motion.div>
@@ -1178,13 +1088,13 @@ const ToolsTabs: React.FC<ToolsTabsProps> = ({ isSidebarCollapsed }) => {
                     aria-hidden={!expanded.student}
                     className="relative z-10"
                   >
-                    <div className={`rounded-xl border ${isDark ? 'bg-emerald-500/10 border-emerald-200/20' : 'bg-emerald-500/10 border-emerald-500/20'} backdrop-blur-sm p-4 mb-6`}>
+                    <div className={`rounded-xl border ${isDark ? 'bg-khambi-accent/10 border-khambi-accent/30/20' : 'bg-khambi-accent/10 border-khambi-accent/20'} backdrop-blur-sm p-4 mb-6`}>
                       <ul className="space-y-2">
-                        <li className="flex items-start"><Check className="w-4 h-4 text-emerald-400 mr-2 mt-0.5" /> <span className={`text-white text-sm leading-snug`}>Senior Day to Day Plan</span></li>
-                        <li className="flex items-start"><Check className="w-4 h-4 text-emerald-400 mr-2 mt-0.5" /> <span className={`text-white text-sm leading-snug`}>Doctor visits / acute & chronic medication</span></li>
-                        <li className="flex items-start"><Check className="w-4 h-4 text-emerald-400 mr-2 mt-0.5" /> <span className={`text-white text-sm leading-snug`}>Blood tests & x-rays</span></li>
-                        <li className="flex items-start"><Check className="w-4 h-4 text-emerald-400 mr-2 mt-0.5" /> <span className={`text-white text-sm leading-snug`}>Dentistry & optometry</span></li>
-                        <li className="flex items-start"><Check className="w-4 h-4 text-emerald-400 mr-2 mt-0.5" /> <span className={`text-white text-sm leading-snug`}>Funeral benefits</span></li>
+                        <li className="flex items-start"><Check className="w-4 h-4 text-khambi-accent mr-2 mt-0.5" /> <span className={`text-white text-sm leading-snug`}>Senior Day to Day Plan</span></li>
+                        <li className="flex items-start"><Check className="w-4 h-4 text-khambi-accent mr-2 mt-0.5" /> <span className={`text-white text-sm leading-snug`}>Doctor visits / acute & chronic medication</span></li>
+                        <li className="flex items-start"><Check className="w-4 h-4 text-khambi-accent mr-2 mt-0.5" /> <span className={`text-white text-sm leading-snug`}>Blood tests & x-rays</span></li>
+                        <li className="flex items-start"><Check className="w-4 h-4 text-khambi-accent mr-2 mt-0.5" /> <span className={`text-white text-sm leading-snug`}>Dentistry & optometry</span></li>
+                        <li className="flex items-start"><Check className="w-4 h-4 text-khambi-accent mr-2 mt-0.5" /> <span className={`text-white text-sm leading-snug`}>Funeral benefits</span></li>
                       </ul>
                     </div>
                   </motion.div>
@@ -1231,10 +1141,10 @@ const ToolsTabs: React.FC<ToolsTabsProps> = ({ isSidebarCollapsed }) => {
                           : 'bg-white/30 border-white/40'
                       }`}
                     >
-                      <div className={`text-[10px] uppercase tracking-wider ${isDark ? 'text-green-300' : 'text-green-700'}`}>
+                      <div className={`text-[10px] uppercase tracking-wider ${isDark ? 'text-khambi-accent' : 'text-khambi-primary'}`}>
                         {tabs.find(t => t.id === activeTab)?.label}
                       </div>
-                      <motion.div layoutId={`senior-day-header-price`} className={`leading-none text-green-600`} transition={{ type: 'tween', duration: 0.22, ease: [0.4, 0.0, 0.2, 1] }}>
+                      <motion.div layoutId={`senior-day-header-price`} className={`leading-none text-khambi-accent`} transition={{ type: 'tween', duration: 0.22, ease: [0.4, 0.0, 0.2, 1] }}>
                         <span className="text-sm align-top mr-1">R</span>
                         <span className="text-2xl font-bold">425</span>
                         <span className={`${isDark ? 'text-gray-300' : 'text-gray-600'} text-[10px] ml-1`}>/mo</span>
@@ -1247,8 +1157,8 @@ const ToolsTabs: React.FC<ToolsTabsProps> = ({ isSidebarCollapsed }) => {
                 <motion.div 
                   className={`order-3 relative group rounded-2xl shadow-lg p-5 border-2 transition-all overflow-visible transform-gpu ${
                     isDark 
-                      ? 'bg-gray-800 border-green-700 hover:border-green-500' 
-                      : 'bg-white border-green-200 hover:border-green-400'
+                      ? 'bg-gray-800 border-khambi-accent/50 hover:border-khambi-accent' 
+                      : 'bg-white border-khambi-accent/30 hover:border-khambi-accent'
                   } min-h-[140px] `}
                   layout="position"
                   initial={false}
@@ -1289,7 +1199,7 @@ const ToolsTabs: React.FC<ToolsTabsProps> = ({ isSidebarCollapsed }) => {
                         >
                           <div className="flex items-center gap-2">
                             <motion.span
-                              className={`inline-flex items-center rounded-md px-2 py-0.5 border backdrop-blur-sm ${isDark ? 'bg-emerald-500/10 border-emerald-200/20' : 'bg-emerald-500/10 border-emerald-500/20'} text-lg font-bold text-emerald-400`}
+                              className={`inline-flex items-center rounded-md px-2 py-0.5 border backdrop-blur-sm ${isDark ? 'bg-khambi-accent/10 border-khambi-accent/30/20' : 'bg-khambi-accent/10 border-khambi-accent/20'} text-lg font-bold text-khambi-accent`}
                               initial={{ opacity: 0, x: -8 }}
                               animate={{ opacity: 1, x: 0 }}
                               exit={{ opacity: 0, x: -8 }}
@@ -1314,7 +1224,7 @@ const ToolsTabs: React.FC<ToolsTabsProps> = ({ isSidebarCollapsed }) => {
                               </motion.span>
                             </motion.span>
                             <motion.span
-                              className={`inline-flex items-center rounded-md px-2 py-0.5 border backdrop-blur-sm ${isDark ? 'bg-emerald-500/10 border-emerald-200/20' : 'bg-emerald-500/10 border-emerald-500/20'} text-lg font-bold text-emerald-400`}
+                              className={`inline-flex items-center rounded-md px-2 py-0.5 border backdrop-blur-sm ${isDark ? 'bg-khambi-accent/10 border-khambi-accent/30/20' : 'bg-khambi-accent/10 border-khambi-accent/20'} text-lg font-bold text-khambi-accent`}
                               initial={{ opacity: 0, x: -8 }}
                               animate={{ opacity: 1, x: 0 }}
                               exit={{ opacity: 0, x: -8 }}
@@ -1325,10 +1235,10 @@ const ToolsTabs: React.FC<ToolsTabsProps> = ({ isSidebarCollapsed }) => {
                           </div>
                           <motion.div
                             layoutId="senior-hospital-header-price"
-                            className={`mt-2 relative z-10 inline-flex items-baseline gap-2 rounded-xl border backdrop-blur-sm px-3 py-1 ${isDark ? 'bg-emerald-500/10 border-emerald-200/20' : 'bg-emerald-500/10 border-emerald-500/20'}`}
+                            className={`mt-2 relative z-10 inline-flex items-baseline gap-2 rounded-xl border backdrop-blur-sm px-3 py-1 ${isDark ? 'bg-khambi-accent/10 border-khambi-accent/30/20' : 'bg-khambi-accent/10 border-khambi-accent/20'}`}
                             transition={{ type: 'tween', duration: 0.22, ease: [0.4, 0.0, 0.2, 1] }}
                           >
-                            <span className="text-2xl font-bold text-emerald-400">R580</span>
+                            <span className="text-2xl font-bold text-khambi-accent">R580</span>
                             <span className={`text-white text-sm font-normal`}>/month</span>
                           </motion.div>
                         </motion.div>
@@ -1354,12 +1264,12 @@ const ToolsTabs: React.FC<ToolsTabsProps> = ({ isSidebarCollapsed }) => {
                     style={{ overflow: 'hidden' }}
                     aria-hidden={!expanded.family}
                   >
-                    <div className={`rounded-xl border ${isDark ? 'bg-emerald-500/10 border-emerald-200/20' : 'bg-emerald-500/10 border-emerald-500/20'} backdrop-blur-sm p-4 mb-6`}>
+                    <div className={`rounded-xl border ${isDark ? 'bg-khambi-accent/10 border-khambi-accent/30/20' : 'bg-khambi-accent/10 border-khambi-accent/20'} backdrop-blur-sm p-4 mb-6`}>
                       <ul className="space-y-2">
-                        <li className="flex items-start"><Check className="w-4 h-4 text-emerald-400 mr-2 mt-0.5" /> <span className={`text-white text-sm leading-snug`}>Private Hospital Benefits</span></li>
-                        <li className="flex items-start"><Check className="w-4 h-4 text-emerald-400 mr-2 mt-0.5" /> <span className={`text-white text-sm leading-snug`}>Illness</span></li>
-                        <li className="flex items-start"><Check className="w-4 h-4 text-emerald-400 mr-2 mt-0.5" /> <span className={`text-white text-sm leading-snug`}>Accident</span></li>
-                        <li className="flex items-start"><Check className="w-4 h-4 text-emerald-400 mr-2 mt-0.5" /> <span className={`text-white text-sm leading-snug`}>Ambulance & funeral benefits</span></li>
+                        <li className="flex items-start"><Check className="w-4 h-4 text-khambi-accent mr-2 mt-0.5" /> <span className={`text-white text-sm leading-snug`}>Private Hospital Benefits</span></li>
+                        <li className="flex items-start"><Check className="w-4 h-4 text-khambi-accent mr-2 mt-0.5" /> <span className={`text-white text-sm leading-snug`}>Illness</span></li>
+                        <li className="flex items-start"><Check className="w-4 h-4 text-khambi-accent mr-2 mt-0.5" /> <span className={`text-white text-sm leading-snug`}>Accident</span></li>
+                        <li className="flex items-start"><Check className="w-4 h-4 text-khambi-accent mr-2 mt-0.5" /> <span className={`text-white text-sm leading-snug`}>Ambulance & funeral benefits</span></li>
                       </ul>
                     </div>
                   </motion.div>
@@ -1406,10 +1316,10 @@ const ToolsTabs: React.FC<ToolsTabsProps> = ({ isSidebarCollapsed }) => {
                           : 'bg-white/90 border-gray-200'
                       }`}
                     >
-                        <div className={`text-[10px] uppercase tracking-wider ${isDark ? 'text-green-300' : 'text-green-700'}`}>
+                        <div className={`text-[10px] uppercase tracking-wider ${isDark ? 'text-khambi-accent' : 'text-khambi-primary'}`}>
                           {tabs.find(t => t.id === activeTab)?.label}
                         </div>
-                        <motion.div layoutId="senior-hospital-header-price" className={`leading-none text-green-600`}>
+                        <motion.div layoutId="senior-hospital-header-price" className={`leading-none text-khambi-accent`}>
                           <span className="text-sm align-top mr-1">R</span>
                           <span className="text-2xl font-bold">580</span>
                           <span className={`ml-1 text-[10px] ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>/mo</span>
@@ -1422,8 +1332,8 @@ const ToolsTabs: React.FC<ToolsTabsProps> = ({ isSidebarCollapsed }) => {
                 <motion.div 
                   className={`order-2 relative group rounded-2xl shadow-lg p-5 border-2 transition-all overflow-visible transform-gpu ${
                     isDark 
-                      ? 'bg-gray-800 border-green-700 hover:border-green-500' 
-                      : 'bg-white border-green-200 hover:border-green-400'
+                      ? 'bg-gray-800 border-khambi-accent/50 hover:border-khambi-accent' 
+                      : 'bg-white border-khambi-accent/30 hover:border-khambi-accent'
                   } min-h-[140px] `}
                   layout="position"
                   initial={false}
@@ -1465,7 +1375,7 @@ const ToolsTabs: React.FC<ToolsTabsProps> = ({ isSidebarCollapsed }) => {
                         >
                           <div className="flex items-center gap-2">
                             <motion.span
-                              className={`inline-flex items-center rounded-md px-2 py-0.5 border backdrop-blur-sm ${isDark ? 'bg-emerald-500/10 border-emerald-200/20' : 'bg-emerald-500/10 border-emerald-500/20'} text-lg font-bold text-emerald-400`}
+                              className={`inline-flex items-center rounded-md px-2 py-0.5 border backdrop-blur-sm ${isDark ? 'bg-khambi-accent/10 border-khambi-accent/30/20' : 'bg-khambi-accent/10 border-khambi-accent/20'} text-lg font-bold text-khambi-accent`}
                               initial={{ opacity: 0, x: -8 }}
                               animate={{ opacity: 1, x: 0 }}
                               exit={{ opacity: 0, x: -8 }}
@@ -1490,7 +1400,7 @@ const ToolsTabs: React.FC<ToolsTabsProps> = ({ isSidebarCollapsed }) => {
                               </motion.span>
                             </motion.span>
                             <motion.span
-                              className={`inline-flex items-center rounded-md px-2 py-0.5 border backdrop-blur-sm ${isDark ? 'bg-emerald-500/10 border-emerald-200/20' : 'bg-emerald-500/10 border-emerald-500/20'} text-lg font-bold text-emerald-400`}
+                              className={`inline-flex items-center rounded-md px-2 py-0.5 border backdrop-blur-sm ${isDark ? 'bg-khambi-accent/10 border-khambi-accent/30/20' : 'bg-khambi-accent/10 border-khambi-accent/20'} text-lg font-bold text-khambi-accent`}
                               initial={{ opacity: 0, x: -8 }}
                               animate={{ opacity: 1, x: 0 }}
                               exit={{ opacity: 0, x: -8 }}
@@ -1501,10 +1411,10 @@ const ToolsTabs: React.FC<ToolsTabsProps> = ({ isSidebarCollapsed }) => {
                           </div>
                           <motion.div
                             layoutId="senior-comprehensive-header-price"
-                            className={`mt-2 relative z-10 inline-flex items-baseline gap-2 rounded-xl border backdrop-blur-sm px-3 py-1 ${isDark ? 'bg-emerald-500/10 border-emerald-200/20' : 'bg-emerald-500/10 border-emerald-500/20'}`}
+                            className={`mt-2 relative z-10 inline-flex items-baseline gap-2 rounded-xl border backdrop-blur-sm px-3 py-1 ${isDark ? 'bg-khambi-accent/10 border-khambi-accent/30/20' : 'bg-khambi-accent/10 border-khambi-accent/20'}`}
                             transition={{ type: 'tween', duration: 0.22, ease: [0.4, 0.0, 0.2, 1] }}
                           >
-                            <span className="text-2xl font-bold text-emerald-400">R875</span>
+                            <span className="text-2xl font-bold text-khambi-accent">R875</span>
                             <span className={`text-white text-sm font-normal`}>/month</span>
                           </motion.div>
                         </motion.div>
@@ -1530,16 +1440,16 @@ const ToolsTabs: React.FC<ToolsTabsProps> = ({ isSidebarCollapsed }) => {
                     style={{ overflow: 'hidden' }}
                     aria-hidden={!expanded.basic}
                   >
-                    <div className={`rounded-xl border ${isDark ? 'bg-emerald-500/10 border-emerald-200/20' : 'bg-emerald-500/10 border-emerald-500/20'} backdrop-blur-sm p-4 mb-6`}>
+                    <div className={`rounded-xl border ${isDark ? 'bg-khambi-accent/10 border-khambi-accent/30/20' : 'bg-khambi-accent/10 border-khambi-accent/20'} backdrop-blur-sm p-4 mb-6`}>
                       <ul className="space-y-2">
-                        <li className="flex items-start"><Check className="w-4 h-4 text-emerald-400 mr-2 mt-0.5" /> <span className={`text-white text-sm leading-snug`}>Doctor visits</span></li>
-                        <li className="flex items-start"><Check className="w-4 h-4 text-emerald-400 mr-2 mt-0.5" /> <span className={`text-white text-sm leading-snug`}>Acute & chronic medication</span></li>
-                        <li className="flex items-start"><Check className="w-4 h-4 text-emerald-400 mr-2 mt-0.5" /> <span className={`text-white text-sm leading-snug`}>Blood tests & x-rays</span></li>
-                        <li className="flex items-start"><Check className="w-4 h-4 text-emerald-400 mr-2 mt-0.5" /> <span className={`text-white text-sm leading-snug`}>Dentistry & optometry</span></li>
-                        <li className="flex items-start"><Check className="w-4 h-4 text-emerald-400 mr-2 mt-0.5" /> <span className={`text-white text-sm leading-snug`}>Funeral benefits</span></li>
-                        <li className="flex items-start"><Check className="w-4 h-4 text-emerald-400 mr-2 mt-0.5" /> <span className={`text-white text-sm leading-snug`}>Illness</span></li>
-                        <li className="flex items-start"><Check className="w-4 h-4 text-emerald-400 mr-2 mt-0.5" /> <span className={`text-white text-sm leading-snug`}>Accident</span></li>
-                        <li className="flex items-start"><Check className="w-4 h-4 text-emerald-400 mr-2 mt-0.5" /> <span className={`text-white text-sm leading-snug`}>Ambulance & funeral benefits</span></li>
+                        <li className="flex items-start"><Check className="w-4 h-4 text-khambi-accent mr-2 mt-0.5" /> <span className={`text-white text-sm leading-snug`}>Doctor visits</span></li>
+                        <li className="flex items-start"><Check className="w-4 h-4 text-khambi-accent mr-2 mt-0.5" /> <span className={`text-white text-sm leading-snug`}>Acute & chronic medication</span></li>
+                        <li className="flex items-start"><Check className="w-4 h-4 text-khambi-accent mr-2 mt-0.5" /> <span className={`text-white text-sm leading-snug`}>Blood tests & x-rays</span></li>
+                        <li className="flex items-start"><Check className="w-4 h-4 text-khambi-accent mr-2 mt-0.5" /> <span className={`text-white text-sm leading-snug`}>Dentistry & optometry</span></li>
+                        <li className="flex items-start"><Check className="w-4 h-4 text-khambi-accent mr-2 mt-0.5" /> <span className={`text-white text-sm leading-snug`}>Funeral benefits</span></li>
+                        <li className="flex items-start"><Check className="w-4 h-4 text-khambi-accent mr-2 mt-0.5" /> <span className={`text-white text-sm leading-snug`}>Illness</span></li>
+                        <li className="flex items-start"><Check className="w-4 h-4 text-khambi-accent mr-2 mt-0.5" /> <span className={`text-white text-sm leading-snug`}>Accident</span></li>
+                        <li className="flex items-start"><Check className="w-4 h-4 text-khambi-accent mr-2 mt-0.5" /> <span className={`text-white text-sm leading-snug`}>Ambulance & funeral benefits</span></li>
                       </ul>
                     </div>
                   </motion.div>
@@ -1586,10 +1496,10 @@ const ToolsTabs: React.FC<ToolsTabsProps> = ({ isSidebarCollapsed }) => {
                           : 'bg-white/30 border-white/40'
                       }`}
                     >
-                      <div className={`text-[10px] uppercase tracking-wider ${isDark ? 'text-green-300' : 'text-green-700'}`}>
+                      <div className={`text-[10px] uppercase tracking-wider ${isDark ? 'text-khambi-accent' : 'text-khambi-primary'}`}>
                         {tabs.find(t => t.id === activeTab)?.label}
                       </div>
-                      <motion.div layoutId="senior-comprehensive-header-price" className={`leading-none text-green-600`} transition={{ type: 'tween', duration: 0.22, ease: [0.4, 0.0, 0.2, 1] }}>
+                      <motion.div layoutId="senior-comprehensive-header-price" className={`leading-none text-khambi-accent`} transition={{ type: 'tween', duration: 0.22, ease: [0.4, 0.0, 0.2, 1] }}>
                         <span className="text-sm align-top mr-1">R</span>
                         <span className="text-2xl font-bold">875</span>
                         <span className={`${isDark ? 'text-gray-300' : 'text-gray-600'} text-[10px] ml-1`}>/mo</span>
@@ -1637,24 +1547,24 @@ const ToolsTabs: React.FC<ToolsTabsProps> = ({ isSidebarCollapsed }) => {
               {/* Left side - Text content */}
               <div className="text-center lg:text-left">
                 <div className={`inline-flex items-center gap-3 px-4 py-2 rounded-full mb-6 ${
-                  isDark ? 'bg-green-900/50 text-green-400' : 'bg-green-100 text-green-800'
+                  isDark ? 'bg-khambi-accent/20 text-khambi-accent' : 'bg-khambi-accent/10 text-khambi-primary'
                 }`}>
                   <Users className="w-5 h-5" />
                   <span className="font-medium">AI Assistant</span>
                 </div>
                 <h3 className={`text-3xl lg:text-4xl font-bold mb-6 ${isDark ? 'text-white' : 'text-gray-900'}`}>
-                  Talk to Gift
+                  Talk to Khambi Ai
                 </h3>
                 <p className={`text-xl mb-8 leading-relaxed ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
                   Our compassionate AI assistant is here to help you navigate funeral planning with dignity and care. 
-                  Get instant answers to your questions about Gift AI services.
+                  Get instant answers to your questions about Khambi Funeral Services.
                 </p>
 
                 {/* Call to Action */}
                 <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                   <button 
                     onClick={() => setAiView('fastclaim')}
-                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all duration-200 bg-emerald-600 hover:bg-emerald-700 text-white shadow-lg"
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all duration-200 bg-khambi-gold hover:bg-khambi-accent text-white shadow-lg"
                   >
                     <Zap className="w-5 h-5" />
                     Fast Claim
@@ -1679,23 +1589,23 @@ const ToolsTabs: React.FC<ToolsTabsProps> = ({ isSidebarCollapsed }) => {
                     }`}
                   >
                     <Mail className="w-5 h-5" />
-                    Talk with Gift
+                    Talk with Khambi
                   </button>
                 </div>
               </div>
 
-              {/* Right side - Gift AI info card */}
+              {/* Right side - Khambi Ai info card */}
               <div className={`rounded-2xl shadow-lg p-8 border ${
                 isDark ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-100'
               }`}>
                 <div className={`inline-flex items-center gap-3 px-4 py-2 rounded-full mb-6 ${
-                  isDark ? 'bg-emerald-900/50 text-emerald-400' : 'bg-emerald-100 text-emerald-800'
+                  isDark ? 'bg-khambi-accent/20 text-khambi-accent' : 'bg-khambi-accent/10 text-khambi-primary'
                 }`}>
                   <Users className="w-5 h-5" />
-                  <span className="font-medium">Gift - AI Assistant</span>
+                  <span className="font-medium">Khambi Ai</span>
                 </div>
                 <p className={`text-lg mb-6 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
-                  Hello! I'm Gift, your compassionate AI assistant for Gift AI. I'm here to help you with any questions about Gift services, planning, or cultural traditions.
+                  Hello! I'm Khambi Ai, your compassionate AI assistant for Khambi Funeral Services. I'm here to help you with any questions about our services, planning, or cultural traditions.
                 </p>
                 <div className="space-y-4">
                   <div className={`p-4 rounded-lg ${isDark ? 'bg-gray-700/50' : 'bg-gray-50'}`}>
@@ -1779,9 +1689,7 @@ const ToolsTabs: React.FC<ToolsTabsProps> = ({ isSidebarCollapsed }) => {
   };
 
   return (
-    <div id="plans" data-services-section="true" data-gift-ai-section="true" className={`relative z-30 pt-2.5 transition-all duration-700 ease-in-out ${isDark ? 'bg-gray-900' : 'bg-white'} ${isSidebarCollapsed ? 'lg:ml-24 lg:w-[calc(100%-6rem)]' : 'lg:ml-64 lg:w-[calc(100%-16rem)]'}`} style={{
-      transition: 'margin-left 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94), width 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
-    }}>
+    <div id="plans" data-services-section="true" data-gift-ai-section="true" className={`relative z-30 pt-2.5 transition-all duration-700 ease-in-out ${isDark ? 'bg-gray-900' : 'bg-white'}`}>
       <div className="w-full mx-auto px-4">
         {/* Floating Tabs */}
         <div className="flex justify-center mb-12">
@@ -1819,3 +1727,4 @@ const ToolsTabs: React.FC<ToolsTabsProps> = ({ isSidebarCollapsed }) => {
 };
 
 export default ToolsTabs;
+

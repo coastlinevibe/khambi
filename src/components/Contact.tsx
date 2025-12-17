@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Phone, Mail, Clock, X, HelpCircle } from 'lucide-react';
+import { Phone, Mail, Clock, X, HelpCircle, Globe } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import CEOHotlineCTA from './CEOHotlineCTA';
 
@@ -186,25 +186,24 @@ const Contact: React.FC<ContactProps> = ({ isSidebarCollapsed }) => {
     <section 
       className={`py-20 transition-all duration-700 ease-in-out border-b ${
         isDark ? 'bg-gray-900 border-gray-800' : 'bg-white border-gray-100'
-      } ${
-        isSidebarCollapsed ? 'lg:ml-24' : 'lg:ml-64'
-      } ${
-        isSidebarCollapsed ? 'lg:w-[calc(100%-6rem)]' : 'lg:w-[calc(100%-16rem)]'
       }`}
-      style={{
-        transition: 'margin-left 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94), width 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
-      }}
     >
 
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <span className={`inline-block px-3 py-1 text-sm font-medium rounded-full mb-4 ${
+          <div className={`inline-block px-6 py-3 rounded-xl mb-6 ${
             isDark 
-              ? 'bg-green-900/50 text-green-400' 
-              : 'bg-green-100 text-green-800'
-          }`}>
-            Contact Us
-          </span>
+              ? 'bg-khambi-accent/20' 
+              : 'bg-khambi-accent/10'
+          }`} style={{ borderColor: '#B8935E', borderWidth: '1px' }}>
+            <span className={`text-2xl font-bold ${
+              isDark 
+                ? 'text-khambi-accent' 
+                : 'text-khambi-primary'
+            }`}>
+              Contact Us
+            </span>
+          </div>
           <h2 id="contact" className={`text-4xl lg:text-5xl font-bold mb-6 ${
             isDark ? 'text-white' : 'text-gray-900'
           }`}>
@@ -278,32 +277,30 @@ const Contact: React.FC<ContactProps> = ({ isSidebarCollapsed }) => {
                   }`}>Call Us</h4>
                   <p className={`mb-1 ${
                     isDark ? 'text-gray-300' : 'text-gray-600'
-                  }`}>0860 111 222</p>
+                  }`}>012 820 1084</p>
+                  <p className={`mb-1 ${
+                    isDark ? 'text-gray-300' : 'text-gray-600'
+                  }`}>084 583 7299 (Mobile)</p>
                   <p className={`text-sm ${
                     isDark ? 'text-gray-400' : 'text-gray-500'
-                  }`}>Mon - Fri: 8AM - 6PM | Sat: 8AM - 1PM</p>
+                  }`}>24/7 Available</p>
                 </div>
               </div>
 
               <div className="flex items-start">
                 <div className={`w-12 h-12 rounded-xl flex items-center justify-center mr-4 flex-shrink-0 ${
-                  isDark ? 'bg-ubuntugift-secondary/50' : 'bg-ubuntugift-light'
+                  isDark ? 'bg-khambi-accent/20' : 'bg-khambi-accent/10'
                 }`}>
-                  <Mail className="w-6 h-6 text-ubuntugift-primary" />
+                  <Mail className="w-6 h-6 text-khambi-accent" />
                 </div>
                 <div>
                   <h4 className={`font-semibold mb-2 ${
                     isDark ? 'text-white' : 'text-gray-900'
                   }`}>Email Us</h4>
                   <div>
-                    <a href="mailto:support@giftai.co.za" className={`${
+                    <a href="mailto:khambi@khambifunerals.co.za" className={`${
                       isDark ? 'text-gray-300 hover:text-white' : 'text-gray-600 hover:text-gray-900'
-                    }`}>support@giftai.co.za</a>
-                  </div>
-                  <div className="mt-1">
-                    <a href="mailto:info@giftai.co.za" className={`${
-                      isDark ? 'text-gray-300 hover:text-white' : 'text-gray-600 hover:text-gray-900'
-                    }`}>info@giftai.co.za</a>
+                    }`}>khambi@khambifunerals.co.za</a>
                   </div>
                   <p className={`text-sm ${
                     isDark ? 'text-gray-400' : 'text-gray-500'
@@ -311,26 +308,42 @@ const Contact: React.FC<ContactProps> = ({ isSidebarCollapsed }) => {
                 </div>
               </div>
 
-              
-
               <div className="flex items-start">
                 <div className={`w-12 h-12 rounded-xl flex items-center justify-center mr-4 flex-shrink-0 ${
-                  isDark ? 'bg-ubuntugift-secondary/50' : 'bg-ubuntugift-light'
+                  isDark ? 'bg-khambi-accent/20' : 'bg-khambi-accent/10'
                 }`}>
-                  <Clock className="w-6 h-6 text-ubuntugift-primary" />
+                  <Globe className="w-6 h-6 text-khambi-accent" />
                 </div>
                 <div>
                   <h4 className={`font-semibold mb-2 ${
                     isDark ? 'text-white' : 'text-gray-900'
-                  }`}>Emergency Hospital Hotline</h4>
+                  }`}>Visit Our Website</h4>
+                  <div>
+                    <a href="https://www.khambifunerals.com" target="_blank" rel="noopener noreferrer" className={`${
+                      isDark ? 'text-gray-300 hover:text-white' : 'text-gray-600 hover:text-gray-900'
+                    }`}>www.khambifunerals.com</a>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex items-start">
+                <div className={`w-12 h-12 rounded-xl flex items-center justify-center mr-4 flex-shrink-0 ${
+                  isDark ? 'bg-khambi-accent/20' : 'bg-khambi-accent/10'
+                }`}>
+                  <Clock className="w-6 h-6 text-khambi-accent" />
+                </div>
+                <div>
+                  <h4 className={`font-semibold mb-2 ${
+                    isDark ? 'text-white' : 'text-gray-900'
+                  }`}>24/7 Emergency Support</h4>
                   <p className={`mb-1 ${
                     isDark ? 'text-gray-300' : 'text-gray-600'
                   }`}>
-                    <a href="tel:0860911911" className="font-semibold text-ubuntugift-primary hover:underline">0860-911-911</a>
+                    <a href="tel:0845837299" className="font-semibold text-khambi-accent hover:underline">084 583 7299</a>
                   </p>
                   <p className={`text-sm ${
                     isDark ? 'text-gray-400' : 'text-gray-500'
-                  }`}>24/7 Available • Always here when you need us</p>
+                  }`}>Always here when you need us</p>
                 </div>
               </div>
             </div>
@@ -350,7 +363,7 @@ const Contact: React.FC<ContactProps> = ({ isSidebarCollapsed }) => {
               </h3>
               {/* CEO Hotline moved from sidebar */}
               <div className="mb-6">
-                <CEOHotlineCTA href="/ceo-hotline" variant="emerald" />
+                <CEOHotlineCTA href="/ceo-hotline" variant="gold" />
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <button

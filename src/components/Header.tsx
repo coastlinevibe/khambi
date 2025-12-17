@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Phone, Mail, ChevronLeft, ChevronRight, Home, Settings, HelpCircle, MessageSquare, Users, Package, BookOpen, Star, Menu, X } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
+import './Header.css';
 
 interface HeaderProps {
   activeSection: string;
@@ -38,7 +39,7 @@ const Header: React.FC<HeaderProps> = ({
     <>
       {/* Desktop Sidebar */}
       <aside
-        className={`fixed left-0 top-0 z-40 h-screen transition-all duration-300 ease-in-out hidden md:block ${
+        className={`sidebar-fixed fixed left-0 top-0 z-40 h-screen overflow-hidden transition-all duration-300 ease-in-out hidden md:block ${
           isSidebarCollapsed ? 'w-24' : 'w-64'
         } ${isDark ? 'bg-gray-900 border-gray-800' : 'bg-white border-gray-200'} border-r`}
       >
@@ -56,21 +57,25 @@ const Header: React.FC<HeaderProps> = ({
             )}
           </button>
           {!isSidebarCollapsed && (
-            <div className="ml-4 flex flex-col">
-              <span className={`text-lg font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>GiftAi</span>
-              <span className={`text-xs ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>Funeral Services</span>
+            <div className="ml-4 flex items-center">
+              <img 
+                src="/images/l1.jpg" 
+                alt="Khambi Funeral Services" 
+                className="h-14 w-auto object-contain"
+                style={{ imageRendering: 'high-quality' }}
+              />
             </div>
           )}
         </div>
 
         {/* Navigation */}
-        <nav className={`flex flex-col gap-2 p-4 ${isSidebarCollapsed ? 'px-2 items-center' : ''}`}>
+        <nav className={`flex flex-col gap-2 p-4 overflow-hidden ${isSidebarCollapsed ? 'px-2 items-center' : ''}`}>
           <ul className={`space-y-1 ${isSidebarCollapsed ? 'w-full flex flex-col items-center' : ''}`}>
             {navItems.map((item) => {
               const isActive = activeSection === item.id;
               const baseClasses = `group flex items-center rounded-lg ${isSidebarCollapsed ? 'justify-center w-12 h-12' : 'px-3 py-2'} text-sm font-medium transition-all duration-200 ${
                 isActive
-                  ? `text-white ${isDark ? 'bg-ubuntugift-primary' : 'bg-ubuntugift-primary'}`
+                  ? `text-white ${isDark ? 'bg-khambi-accent' : 'bg-khambi-accent'}`
                   : `hover:bg-gray-100 ${isDark ? 'text-gray-300 hover:bg-gray-800' : 'text-gray-700 hover:bg-gray-100'}`
               }`;
 
@@ -132,24 +137,24 @@ const Header: React.FC<HeaderProps> = ({
                   if (toolsSection) {
                     toolsSection.scrollIntoView({ behavior: 'smooth' });
                   }
-                  // Navigate to gift-ai section
-                  onNavigate('gift-ai');
+                  // Navigate to khambi-ai section
+                  onNavigate('khambi-ai');
                   // Try to trigger AI chat after a delay
                   setTimeout(() => {
                     // Try multiple selectors for the AI chat trigger
                     const aiButton = document.querySelector('[data-tab-id="ai"]') ||
-                                   document.querySelector('.gift-ai-tab') ||
-                                   document.querySelector('button[aria-label*="Gift AI" i]') ||
+                                   document.querySelector('.khambi-ai-tab') ||
+                                   document.querySelector('button[aria-label*="Khambi Ai" i]') ||
                                    document.querySelector('button[aria-label*="AI" i]');
                     if (aiButton) {
                       (aiButton as HTMLElement).click();
                     } else {
                       // Fallback: dispatch custom event for AI chat
-                      window.dispatchEvent(new CustomEvent('openGiftAI'));
+                      window.dispatchEvent(new CustomEvent('openKhambiAI'));
                     }
                   }, 500);
                 }}
-                aria-label="Talk to Gift AI"
+                aria-label="Talk to Khambi Ai"
                 className={`rounded-lg text-sm font-medium transition-colors border ${
                   isDark
                     ? 'border-gray-600 text-gray-200 hover:bg-gray-700'
@@ -161,7 +166,7 @@ const Header: React.FC<HeaderProps> = ({
                 ) : (
                   <div className="tooltip-container">
                     <span className="tooltip">Talk Now</span>
-                    <span className="text">Gift AI</span>
+                    <span className="text">Khambi Ai</span>
                   </div>
                 )}
               </button>
@@ -170,11 +175,11 @@ const Header: React.FC<HeaderProps> = ({
                   e.preventDefault();
                   window.dispatchEvent(new Event('openCallModal'));
                 }}
-                aria-label="Call GiftAi"
+                aria-label="Call Khambi"
                 className={`rounded-lg text-sm font-medium transition-colors ${
                   isDark
-                    ? 'bg-ubuntugift-primary text-ubuntugift-light hover:bg-ubuntugift-secondary'
-                    : 'bg-ubuntugift-primary text-ubuntugift-light hover:bg-ubuntugift-secondary'
+                    ? 'bg-khambi-primary text-white hover:bg-khambi-darkgray'
+                    : 'bg-khambi-primary text-white hover:bg-khambi-darkgray'
                 } ${isSidebarCollapsed ? 'w-10 h-10 flex items-center justify-center mx-auto px-0' : 'w-full px-3 py-2'} text-center`}
               >
                 {isSidebarCollapsed ? (
@@ -188,7 +193,7 @@ const Header: React.FC<HeaderProps> = ({
         </div>
 
         {/* Contact Information - Always visible */}
-        <div className={`p-6 mt-auto transition-all duration-300 ${
+        <div className={`p-6 mt-auto transition-all duration-300 overflow-hidden ${
           isDark
             ? 'border-t border-gray-700 bg-gradient-to-b from-gray-800 to-gray-900'
             : 'border-t border-gray-200 bg-gradient-to-b from-gray-50 to-gray-100'
@@ -203,17 +208,17 @@ const Header: React.FC<HeaderProps> = ({
               isSidebarCollapsed ? 'justify-center' : 'space-x-3'
             }`}>
               <div className={`p-2 rounded-lg ${
-                isDark ? 'bg-ubuntugift-primary' : 'bg-ubuntugift-light'
+                isDark ? 'bg-khambi-accent' : 'bg-khambi-accent/20'
               }`}>
                 <Phone className={`w-4 h-4 ${
-                  isDark ? 'text-ubuntugift-light' : 'text-ubuntugift-primary'
+                  isDark ? 'text-white' : 'text-khambi-primary'
                 }`} />
               </div>
               {!isSidebarCollapsed && (
                 <div className="flex flex-col">
                   <span className={`text-sm font-medium ${
                     isDark ? 'text-white' : 'text-gray-900'
-                  }`}>0860 111 222</span>
+                  }`}>012 820 1084</span>
                   <span className={`text-xs ${
                     isDark ? 'text-gray-400' : 'text-gray-500'
                   }`}>24/7 Support Line</span>
@@ -224,17 +229,17 @@ const Header: React.FC<HeaderProps> = ({
               isSidebarCollapsed ? 'justify-center' : 'space-x-3'
             }`}>
               <div className={`p-2 rounded-lg ${
-                isDark ? 'bg-ubuntugift-primary' : 'bg-ubuntugift-light'
+                isDark ? 'bg-khambi-accent' : 'bg-khambi-accent/20'
               }`}>
                 <Mail className={`w-4 h-4 ${
-                  isDark ? 'text-ubuntugift-light' : 'text-ubuntugift-primary'
+                  isDark ? 'text-white' : 'text-khambi-primary'
                 }`} />
               </div>
               {!isSidebarCollapsed && (
                 <div className="flex flex-col">
                   <span className={`text-sm font-medium ${
                     isDark ? 'text-white' : 'text-gray-900'
-                  }`}>admin@giftai.co.za</span>
+                  }`}>khambi@khambifunerals.co.za</span>
                   <span className={`text-xs ${
                     isDark ? 'text-gray-400' : 'text-gray-500'
                   }`}>Email us anytime</span>
@@ -249,16 +254,20 @@ const Header: React.FC<HeaderProps> = ({
       <header className="md:hidden fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-200 dark:bg-gray-900/95 dark:border-gray-800">
         <div className="flex items-center justify-between px-4 py-3">
           {/* Logo */}
-          <div className="flex flex-col">
-            <span className={`text-lg font-bold ${isDark ? 'text-white' : 'text-orange-600'}`}>GiftAi</span>
-            <span className={`text-xs ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>Funeral Services</span>
+          <div className="flex items-center">
+            <img 
+              src="/images/l1.jpg" 
+              alt="Khambi Funeral Services" 
+              className="h-12 w-auto object-contain"
+              style={{ imageRendering: 'high-quality' }}
+            />
           </div>
 
           {/* Hamburger Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className={`p-2 rounded-lg transition-colors ${
-              isDark ? 'hover:bg-gray-800 text-gray-300' : 'hover:bg-orange-100 text-orange-600'
+              isDark ? 'hover:bg-gray-800 text-gray-300' : 'hover:bg-khambi-accent/10 text-khambi-primary'
             }`}
             aria-label="Toggle mobile menu"
           >
@@ -301,8 +310,8 @@ const Header: React.FC<HeaderProps> = ({
                         }}
                         className={`w-full flex items-center px-4 py-3 rounded-lg text-left transition-colors ${
                           isActive
-                            ? `text-white ${isDark ? 'bg-ubuntugift-primary' : 'bg-ubuntugift-primary'}`
-                            : `${isDark ? 'text-gray-300 hover:bg-gray-800' : 'text-white hover:bg-transparent'}`
+                            ? `text-white ${isDark ? 'bg-khambi-accent' : 'bg-khambi-accent'}`
+                            : `${isDark ? 'text-gray-300 hover:bg-gray-800' : 'text-gray-700 hover:bg-gray-100'}`
                         }`}
                       >
                         <item.icon className="w-5 h-5 mr-3" />
@@ -323,7 +332,7 @@ const Header: React.FC<HeaderProps> = ({
           {[
             { id: 'hero', label: 'Home', icon: Home },
             { id: 'tools-tabs', label: 'Services', icon: Package },
-            { id: 'gift-ai', label: 'Gift AI', icon: MessageSquare },
+            { id: 'khambi-ai', label: 'Khambi Ai', icon: MessageSquare },
             { id: 'contact', label: 'Support', icon: Phone }
           ].map((item) => {
             const isActive = activeSection === item.id;
@@ -331,29 +340,29 @@ const Header: React.FC<HeaderProps> = ({
               <button
                 key={item.id}
                 onClick={() => {
-                  if (item.id === 'gift-ai') {
+                  if (item.id === 'khambi-ai') {
                     // Navigate to tools section where Gift AI is located
                     const toolsSection = document.getElementById('tools-tabs');
                     if (toolsSection) {
                       toolsSection.scrollIntoView({ behavior: 'smooth' });
                     }
-                    // Navigate to gift-ai section
-                    onNavigate('gift-ai');
+                    // Navigate to khambi-ai section
+                    onNavigate('khambi-ai');
                     // Try to trigger AI chat after a delay
                     setTimeout(() => {
                       // Try multiple selectors for the AI chat trigger
                       const aiButton = document.querySelector('[data-tab-id="ai"]') ||
-                                     document.querySelector('.gift-ai-tab') ||
-                                     document.querySelector('button[aria-label*="Gift AI" i]');
+                                     document.querySelector('.khambi-ai-tab') ||
+                                     document.querySelector('button[aria-label*="Khambi Ai" i]');
                       if (aiButton) {
                         (aiButton as HTMLElement).click();
                         // After clicking the AI tab, wait and click "Talk with Gift"
                         setTimeout(() => {
                           const talkButton = document.querySelector('button:has(.lucide-mail)') ||
                                            document.querySelector('button:has([d*="M21.75"])') ||
-                                           document.querySelector('button:contains("Talk with Gift")') ||
+                                           document.querySelector('button:contains("Talk with Khambi")') ||
                                            Array.from(document.querySelectorAll('button')).find(btn => 
-                                             btn.textContent?.includes('Talk with Gift')
+                                             btn.textContent?.includes('Talk with Khambi')
                                            );
                           if (talkButton) {
                             (talkButton as HTMLElement).click();
@@ -367,8 +376,8 @@ const Header: React.FC<HeaderProps> = ({
                 }}
                 className={`flex flex-col items-center justify-center p-2 rounded-lg transition-all duration-200 min-w-0 ${
                   isActive
-                    ? 'text-white bg-ubuntugift-primary'
-                    : 'text-gray-700 dark:text-gray-300 hover:text-ubuntugift-primary hover:bg-gray-50 dark:hover:bg-gray-800'
+                    ? 'text-white bg-khambi-accent'
+                    : 'text-gray-700 dark:text-gray-300 hover:text-khambi-accent hover:bg-gray-50 dark:hover:bg-gray-800'
                 }`}
               >
                 <item.icon className={`w-6 h-6 mb-1 transition-transform duration-200 ${
@@ -389,3 +398,4 @@ const Header: React.FC<HeaderProps> = ({
 };
 
 export default Header;
+

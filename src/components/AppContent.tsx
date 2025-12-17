@@ -34,21 +34,20 @@ const AppContent: React.FC<AppContentProps> = ({
 }) => {
 
   return (
-    <div className="min-h-screen overflow-x-hidden">
+    <>
+      {/* Header/Sidebar - Fixed, outside scrolling container */}
+      <Header 
+        activeSection={activeSection}
+        setActiveSection={setActiveSection}
+        onNavigate={scrollToSection}
+        isSidebarCollapsed={isSidebarCollapsed}
+        setIsSidebarCollapsed={setIsSidebarCollapsed}
+        isFooterInView={isFooterInView}
+      />
       
-      
-      <div className="flex min-h-screen w-full">
-        <Header 
-          activeSection={activeSection}
-          setActiveSection={setActiveSection}
-          onNavigate={scrollToSection}
-          isSidebarCollapsed={isSidebarCollapsed}
-          setIsSidebarCollapsed={setIsSidebarCollapsed}
-          isFooterInView={isFooterInView}
-        />
-        
-        <div className="flex-1 w-0">
-          <main className="w-full">
+      {/* Main content area - with proper margin for fixed sidebar */}
+      <div className={`min-h-screen transition-all duration-300 ${isSidebarCollapsed ? 'md:ml-24' : 'md:ml-64'}`}>
+        <main className="w-full">
             <Hero isSidebarCollapsed={isSidebarCollapsed} specificSlide={specificSlide} />
             <IntersectionObserverWrapper>
               <Suspense fallback={<div className="h-32 bg-gray-100 animate-pulse"></div>}>
@@ -107,17 +106,8 @@ const AppContent: React.FC<AppContentProps> = ({
               </Suspense>
             </IntersectionObserverWrapper>
           </main>
-          
-          <div
-            className={`${isSidebarCollapsed ? 'lg:pl-24' : 'lg:pl-64'}`}
-            style={{
-              transition: 'padding-left 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
-            }}
-          >
-          </div>
         </div>
-      </div>
-    </div>
+      </>
   );
 };
 

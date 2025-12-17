@@ -17,16 +17,16 @@ const FAQs: React.FC<FAQsProps> = ({ isSidebarCollapsed }) => {
   // Selected 8 most relevant FAQs from the list provided by the user
   const faqs = [
     {
-      question: "What services does Grace Ai provide?",
-      answer: "We offer comprehensive funeral services including traditional ceremonies, modern memorials, casket selection, transportation, and personalized planning to honor your loved one according to your cultural traditions."
+      question: "What services does Khambi Funeral Services provide?",
+      answer: "We offer comprehensive funeral services including traditional ceremonies, modern memorials, casket selection (flat lid, face-view, and half-view), transportation with hearse and family cars, graveside decor, bereavement counseling, late estate services, and repatriation."
     },
     {
-      question: "How much does a basic funeral cost?",
-      answer: "Our Basic Dignity Package starts at R8,500 and includes essential services like casket, transportation, and ceremony coordination. Premium packages range from R18,500 to R35,000 depending on your needs."
+      question: "What funeral packages do you offer?",
+      answer: "We offer three packages: Bronze (R15,000 cover) with flat lid coffin, Silver (R20,000 cover) with face-view casket and coffin spray, and Gold (R25,000 cover) with half-view casket, funeral programs, and VIP facilities. All packages include essential services like transportation, chairs, ox liver, and bereavement counseling."
     },
     {
       question: "Do you serve all cultural and religious traditions?",
-      answer: "Yes, we honor all cultural and religious traditions across Limpopo province. Our team includes cultural specialists who understand and respect diverse customs, from traditional African ceremonies to various religious observances."
+      answer: "Yes, we honor all cultural and religious traditions across Gauteng province. Our team includes cultural specialists who understand and respect diverse customs, from traditional African ceremonies to various religious observances."
     },
     {
       question: "Can I pre-plan my funeral arrangements?",
@@ -34,19 +34,19 @@ const FAQs: React.FC<FAQsProps> = ({ isSidebarCollapsed }) => {
     },
     {
       question: "What if I need services outside regular hours?",
-      answer: "Our compassionate team is available 24/7 for emergencies. We understand that loss can happen at any time and we're here to support families whenever they need us, including weekends and holidays."
+      answer: "Our compassionate team is available 24/7 for emergencies at 084 583 7299. We understand that loss can happen at any time and we're here to support families whenever they need us, including weekends and holidays."
     },
     {
-      question: "Do you offer payment plans or financial assistance?",
-      answer: "Yes, we offer flexible payment options and can connect families with available community support resources. Our transparent pricing ensures no hidden fees, and we're committed to making dignified services accessible."
+      question: "What's included in the Bronze package?",
+      answer: "The Bronze package (R15,000 cover) includes: Flat Lid Coffin, Hearse + 1 Family Car, 50 Chairs & Standard Toilet, 10KG Ox Liver, Graveside Decor, Bereavement Counseling, Late Estate (Will), and Repatriation services."
     },
     {
       question: "Can I customize the ceremony according to our traditions?",
       answer: "Absolutely. We work closely with families to create personalized ceremonies that reflect your loved one's life, values, and cultural heritage. From music selections to traditional rituals, we honor your unique wishes."
     },
     {
-      question: "What support do you provide to grieving families?",
-      answer: "Beyond funeral services, we offer compassionate guidance, connect families with grief support resources, and ensure every detail is handled with dignity. Our team provides emotional support throughout the planning and ceremony process."
+      question: "How can I contact Khambi Funeral Services?",
+      answer: "You can reach us at 012 820 1084 (main line), 084 583 7299 (mobile/24-7 emergency), email us at khambi@khambifunerals.co.za, or visit our website at www.khambifunerals.com. We're based in Gauteng and serve families throughout the province."
     }
   ];
 
@@ -66,24 +66,23 @@ const FAQs: React.FC<FAQsProps> = ({ isSidebarCollapsed }) => {
     <section 
       className={`py-20 transition-all duration-700 ease-in-out border-b scroll-mt-32 ${
         isDark ? 'bg-gray-900 border-gray-800' : 'bg-white border-gray-100'
-      } ${
-        isSidebarCollapsed ? 'lg:ml-24' : 'lg:ml-64'
-      } ${
-        isSidebarCollapsed ? 'lg:w-[calc(100%-6rem)]' : 'lg:w-[calc(100%-16rem)]'
       }`}
-      style={{
-        transition: 'margin-left 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94), width 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
-      }}
     >
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <span className={`inline-block mt-2.5 px-4 py-1.5 text-base font-medium rounded-full mb-4 ${
+          <div className={`inline-block px-6 py-3 rounded-xl mb-6 ${
             isDark 
-              ? 'bg-ubuntugift-secondary/50 text-ubuntugift-light' 
-              : 'bg-ubuntugift-light text-ubuntugift-primary'
-          }`}>
-            Common Questions
-          </span>
+              ? 'bg-khambi-accent/20' 
+              : 'bg-khambi-accent/10'
+          }`} style={{ borderColor: '#B8935E', borderWidth: '1px' }}>
+            <span className={`text-2xl font-bold ${
+              isDark 
+                ? 'text-khambi-accent' 
+                : 'text-khambi-primary'
+            }`}>
+              Common Questions
+            </span>
+          </div>
           <h2 id="faqs" className={`text-4xl lg:text-5xl font-bold mb-6 ${
             isDark ? 'text-white' : 'text-gray-900'
           }`}>
@@ -96,15 +95,15 @@ const FAQs: React.FC<FAQsProps> = ({ isSidebarCollapsed }) => {
               onClick={() => setShowFaqs(v => !v)}
               className={`px-4 py-2 rounded-lg border text-sm font-semibold transition-colors flex items-center gap-2 ${
                 isDark
-                  ? 'bg-ubuntugift-secondary/30 text-ubuntugift-light hover:bg-ubuntugift-secondary/50 border-ubuntugift-secondary'
-                  : 'bg-ubuntugift-light text-ubuntugift-primary hover:bg-ubuntugift-light/80 border-ubuntugift-primary'
+                  ? 'bg-khambi-accent/20 text-khambi-accent hover:bg-khambi-accent/30 border-khambi-accent'
+                  : 'bg-khambi-accent/10 text-khambi-primary hover:bg-khambi-accent/20 border-khambi-accent'
               }`}
             >
               {showFaqs ? 'Hide FAQs' : 'Show Frequently Asked Questions'}
               <ChevronDown className={`w-6 h-6 flex-shrink-0 transition-transform duration-300 ${
                 showFaqs ? 'rotate-180' : ''
               } ${
-                isDark ? 'text-gray-400' : 'text-gray-400'
+                isDark ? 'text-khambi-accent' : 'text-khambi-primary'
               }`} />
             </button>
             {showFaqs && (
@@ -225,10 +224,10 @@ const FAQs: React.FC<FAQsProps> = ({ isSidebarCollapsed }) => {
                 onClick={() => {
                   window.dispatchEvent(new Event('openCallModal'));
                 }}
-                aria-label="Call Day1Health"
-                className="bg-ubuntugift-primary text-ubuntugift-light px-6 py-3 rounded-xl font-semibold hover:bg-ubuntugift-secondary transition-colors text-center"
+                aria-label="Call Khambi Funerals"
+                className="bg-khambi-primary text-white px-6 py-3 rounded-xl font-semibold hover:bg-khambi-darkgray transition-colors text-center"
               >
-                Call 0860 111 222
+                Call 012 820 1084
               </button>
               <button
                 onClick={() => {
@@ -238,7 +237,11 @@ const FAQs: React.FC<FAQsProps> = ({ isSidebarCollapsed }) => {
                   try { sessionStorage.setItem('openProspective', '1'); } catch {}
                   window.dispatchEvent(new Event('openProspective'));
                 }}
-                className="border-2 border-ubuntugift-primary text-ubuntugift-primary px-6 py-3 rounded-xl font-semibold hover:bg-ubuntugift-primary hover:text-ubuntugift-light transition-colors"
+                className={`border-2 px-6 py-3 rounded-xl font-semibold transition-colors ${
+                  isDark 
+                    ? 'border-khambi-accent text-khambi-accent hover:bg-khambi-accent hover:text-black' 
+                    : 'border-khambi-primary text-khambi-primary hover:bg-khambi-primary hover:text-white'
+                }`}
               >
                 Email Us
               </button>

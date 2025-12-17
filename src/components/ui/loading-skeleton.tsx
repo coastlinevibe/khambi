@@ -9,9 +9,9 @@ export const LoadingSkeleton: React.FC<LoadingSkeletonProps> = ({ className = ''
     <div className={`animate-pulse ${className}`}>
       <div className="hero-loading">
         <div className="text-center">
-          <div className="w-16 h-16 border-4 border-white border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <h1 className="text-2xl font-bold mb-2">Gift AI</h1>
-          <p className="text-lg opacity-80">Loading your compassionate experience...</p>
+          <div className="w-16 h-16 border-4 border-khambi-accent border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <h1 className="text-2xl font-bold mb-2 text-khambi-accent">Khambi Funeral Services</h1>
+          <p className="text-lg opacity-80">Honoring lives with dignity and compassion...</p>
         </div>
       </div>
     </div>

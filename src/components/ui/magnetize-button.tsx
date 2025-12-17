@@ -68,10 +68,10 @@ function MagnetizeButton({
         <Button
             className={cn(
                 "min-w-40 relative touch-none",
-                "bg-green-600 dark:bg-green-700",
-                "hover:bg-green-700 dark:hover:bg-green-800",
+                "bg-khambi-primary dark:bg-khambi-primary",
+                "hover:bg-khambi-darkgray dark:hover:bg-khambi-darkgray",
                 "text-white dark:text-white",
-                "border border-green-700 dark:border-green-800",
+                "border border-khambi-accent dark:border-khambi-accent",
                 "transition-all duration-300",
                 "rounded-sm", // Using rounded-sm for slight corner rounding
                 className
@@ -90,7 +90,7 @@ function MagnetizeButton({
                     animate={particlesControl}
                     className={cn(
                         "absolute w-2 h-2 rounded-sm",
-                        "bg-green-500/90 dark:bg-green-400/90",
+                        "bg-khambi-accent/90 dark:bg-khambi-accent/90",
                         "transition-opacity duration-300",
                         isAttracting ? "opacity-100" : "opacity-40"
                     )}

@@ -32,11 +32,11 @@ const MemberSignUpForm: React.FC<MemberSignUpFormProps> = ({ planType, onClose }
   const getPlanTitle = () => {
     switch (planType) {
       case 'single':
-        return 'Single Member Plan';
+        return 'BRONZE Plan';
       case 'family':
-        return 'Family Members Plan';
+        return 'SILVER Plan';
       case 'extended':
-        return 'Extended Family Members Plan';
+        return 'GOLD Plan';
       default:
         return 'Member Plan';
     }

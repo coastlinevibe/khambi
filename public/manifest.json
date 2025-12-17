@@ -1,14 +1,14 @@
 {
-  "name": "Day1Health - Health Insurance Solutions",
-  "short_name": "Day1Health",
-  "description": "Affordable and comprehensive medical insurance solutions for your health and wellbeing",
+  "name": "Khambi Funeral Services",
+  "short_name": "Khambi",
+  "description": "Professional and compassionate funeral services with AI-powered 24/7 support",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
   "orientation": "portrait-primary",
   "background_color": "#ffffff",
-  "theme_color": "#3b82f6",
-  "categories": ["health", "medical", "insurance"],
+  "theme_color": "#000000",
+  "categories": ["funeral", "services", "memorial"],
   "icons": [
     {
       "src": "/icons/icon.svg",

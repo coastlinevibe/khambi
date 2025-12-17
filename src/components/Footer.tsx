@@ -1,5 +1,5 @@
 import React from 'react';
-import { Mail, Phone } from 'lucide-react';
+import { Mail, Phone, Globe } from 'lucide-react';
 import BB8Toggle from './BB8Toggle';
 import { useTheme } from '../contexts/ThemeContext';
 
@@ -31,37 +31,45 @@ const Footer: React.FC<FooterProps> = ({ id, isSidebarCollapsed }) => {
             <p className={`text-xl mb-6 -mt-6 max-w-md ${
               isDark ? 'text-gray-300' : 'text-gray-600'
             }`}>
-              Compassionate funeral services for Limpopo families.
+              Compassionate funeral services with dignity and respect.
             </p>
             <p className={`leading-relaxed mb-6 ${
               isDark ? 'text-gray-400' : 'text-gray-500'
             }`}>
-              We honor every life with dignity and respect, providing comprehensive funeral services across Limpopo province.
+              We honor every life with dignity and respect, providing comprehensive funeral services.
               Our experienced team supports families through every step of their journey with compassion and cultural sensitivity.
             </p>
             
             {/* Contact Information */}
             <div className="space-y-4">
               <div className="flex items-center space-x-3">
-                <Mail className="w-5 h-5 text-ubuntugift-primary" />
-                <a href="mailto:admin@giftai.co.za" className={isDark ? 'text-gray-300 hover:text-white' : 'text-gray-700 hover:text-gray-900'}>admin@giftai.co.za</a>
+                <Mail className="w-5 h-5 text-khambi-accent" />
+                <a href="mailto:admin@khambifunerals.co.za" className={isDark ? 'text-gray-300 hover:text-white' : 'text-gray-700 hover:text-gray-900'}>admin@khambifunerals.co.za</a>
               </div>
               <div className="flex items-center space-x-3">
-                <Mail className="w-5 h-5 text-ubuntugift-primary" />
-                <a href="mailto:support@giftai.co.za" className={isDark ? 'text-gray-300 hover:text-white' : 'text-gray-700 hover:text-gray-900'}>support@giftai.co.za</a>
+                <Mail className="w-5 h-5 text-khambi-accent" />
+                <a href="mailto:khambi@khambifunerals.co.za" className={isDark ? 'text-gray-300 hover:text-white' : 'text-gray-700 hover:text-gray-900'}>khambi@khambifunerals.co.za</a>
               </div>
               <div className="flex items-center space-x-3">
-                <Phone className="w-5 h-5 text-ubuntugift-primary" />
-                <span className={isDark ? 'text-gray-300' : 'text-gray-700'}>0860 111 222</span>
+                <Phone className="w-5 h-5 text-khambi-accent" />
+                <span className={isDark ? 'text-gray-300' : 'text-gray-700'}>012 820 1084</span>
+              </div>
+              <div className="flex items-center space-x-3">
+                <Phone className="w-5 h-5 text-khambi-accent" />
+                <span className={isDark ? 'text-gray-300' : 'text-gray-700'}>084 583 7299 (Mobile)</span>
+              </div>
+              <div className="flex items-center space-x-3">
+                <Globe className="w-5 h-5 text-khambi-accent" />
+                <a href="https://www.khambifunerals.com" target="_blank" rel="noopener noreferrer" className={isDark ? 'text-gray-300 hover:text-white' : 'text-gray-700 hover:text-gray-900'}>www.khambifunerals.com</a>
               </div>
               {/* Logo moved here, ensure it's clearly lower to align with theme toggle */}
               <div className="pt-[70px]">
                 <div className="relative w-64 h-[111px] flex items-center justify-center">
-                  <div className={`absolute inset-0 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 ${isDark ? 'bg-gray-900 border-2 border-gray-700' : 'bg-white border-2 border-ubuntugift-primary'}`}>
+                  <div className={`absolute inset-0 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 ${isDark ? 'bg-gray-900 border-2 border-khambi-accent' : 'bg-white border-2 border-khambi-accent'}`}>
                     <div className="absolute inset-0 flex items-center justify-center p-1.5">
                       <img 
-                        src="/assets/images/Logo.jpg" 
-                        alt="Day 1 Health Logo" 
+                        src="/images/l1.jpg" 
+                        alt="Khambi Funeral Services Logo" 
                         className="w-full h-full object-contain"
                       />
                     </div>
@@ -122,16 +130,24 @@ const Footer: React.FC<FooterProps> = ({ id, isSidebarCollapsed }) => {
             }`}>Get in Touch</h3>
             <div className="space-y-4">
               <div className="flex items-center space-x-3">
-                <Phone className="w-5 h-5 text-ubuntugift-primary" />
-                <span className={isDark ? 'text-gray-400' : 'text-gray-600'}>0860 111 222</span>
+                <Phone className="w-5 h-5 text-khambi-accent" />
+                <span className={isDark ? 'text-gray-400' : 'text-gray-600'}>012 820 1084</span>
               </div>
               <div className="flex items-center space-x-3">
-                <Mail className="w-5 h-5 text-ubuntugift-primary" />
-                <a href="mailto:admin@giftai.co.za" className={isDark ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'}>admin@giftai.co.za</a>
+                <Phone className="w-5 h-5 text-khambi-accent" />
+                <span className={isDark ? 'text-gray-400' : 'text-gray-600'}>084 583 7299 (Mobile)</span>
               </div>
               <div className="flex items-center space-x-3">
-                <Mail className="w-5 h-5 text-ubuntugift-primary" />
-                <a href="mailto:sales@giftai.co.za" className={isDark ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'}>sales@giftai.co.za</a>
+                <Mail className="w-5 h-5 text-khambi-accent" />
+                <a href="mailto:khambi@khambifunerals.co.za" className={isDark ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'}>khambi@khambifunerals.co.za</a>
+              </div>
+              <div className="flex items-center space-x-3">
+                <Globe className="w-5 h-5 text-khambi-accent" />
+                <a href="https://www.khambifunerals.com" target="_blank" rel="noopener noreferrer" className={isDark ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'}>www.khambifunerals.com</a>
+              </div>
+              <div className="flex items-center space-x-3 pt-2 border-t border-gray-700">
+                <Globe className="w-5 h-5 text-khambi-accent" />
+                <a href="/admin/dashboard" className={`font-semibold ${isDark ? 'text-khambi-accent hover:text-khambi-gold' : 'text-khambi-accent hover:text-khambi-gold'}`}>Admin Dashboard</a>
               </div>
             </div>
 
@@ -154,8 +170,8 @@ const Footer: React.FC<FooterProps> = ({ id, isSidebarCollapsed }) => {
             <div className="flex flex-wrap gap-6 text-sm">
               <a href="/privacy-policy" className={`pl-2 font-semibold transition-colors ${
                 isDark 
-                  ? 'text-gray-300 hover:text-white bg-ubuntugift-secondary/30 border border-ubuntugift-secondary rounded-lg px-3 py-1.5 text-base' 
-                  : 'text-gray-800 hover:text-gray-900 bg-ubuntugift-light border border-ubuntugift-secondary rounded-lg px-3 py-1.5 text-base'
+                  ? 'text-gray-300 hover:text-white bg-khambi-darkgray/30 border border-khambi-accent rounded-lg px-3 py-1.5 text-base' 
+                  : 'text-gray-800 hover:text-gray-900 bg-khambi-accent/10 border border-khambi-accent rounded-lg px-3 py-1.5 text-base'
               }`}>
                 Privacy Policy
               </a>
@@ -164,7 +180,7 @@ const Footer: React.FC<FooterProps> = ({ id, isSidebarCollapsed }) => {
             <div className={`text-sm ${
               isDark ? 'text-gray-400' : 'text-gray-600'
             }`}>
-              &copy; 2025 Gift Ai. All rights reserved.
+              &copy; 2025 Khambi Funeral Services. All rights reserved.
             </div>
           </div>
 

@@ -6,15 +6,8 @@ import {
   Check, 
   Scan, 
   Mic, 
-  FileText, 
-  Package, 
-  Plus,
-  CreditCard,
-  Flower2,
-  Music,
-  Video,
-  Car,
-  UtensilsCrossed
+  FileText,
+  CreditCard
 } from 'lucide-react';
 
 interface FastClaimProps {
@@ -123,9 +116,9 @@ const FastClaim: React.FC<FastClaimProps> = ({ onClose }) => {
                 <div key={step.id} className="flex items-start gap-3">
                   <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold ${
                     isCompleted 
-                      ? 'bg-emerald-600 text-white' 
+                      ? 'bg-khambi-accent text-black' 
                       : isActive 
-                        ? 'bg-emerald-600 text-white'
+                        ? 'bg-khambi-accent text-black'
                         : isDark 
                           ? 'bg-gray-700 text-gray-400' 
                           : 'bg-gray-200 text-gray-600'
@@ -155,7 +148,7 @@ const FastClaim: React.FC<FastClaimProps> = ({ onClose }) => {
               <p className={`text-xs ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
                 Our support team is here to assist you
               </p>
-              <button className="mt-3 text-sm text-emerald-600 hover:text-emerald-700 font-medium">
+              <button className="mt-3 text-sm text-khambi-accent hover:text-khambi-gold font-medium">
                 Contact Support
               </button>
             </div>
@@ -190,11 +183,11 @@ const FastClaim: React.FC<FastClaimProps> = ({ onClose }) => {
                       onClick={() => alert('Camera scanner will open')}
                       className={`p-6 rounded-xl border-2 border-dashed transition-all ${
                         isDark 
-                          ? 'border-emerald-500/50 hover:border-emerald-500 hover:bg-emerald-500/10' 
-                          : 'border-emerald-600/50 hover:border-emerald-600 hover:bg-emerald-50'
+                          ? 'border-khambi-accent/50 hover:border-khambi-accent hover:bg-khambi-accent/10' 
+                          : 'border-khambi-accent/50 hover:border-khambi-accent hover:bg-khambi-accent/10'
                       }`}
                     >
-                      <Scan className={`w-8 h-8 mx-auto mb-3 ${isDark ? 'text-emerald-400' : 'text-emerald-600'}`} />
+                      <Scan className={`w-8 h-8 mx-auto mb-3 ${isDark ? 'text-khambi-accent' : 'text-khambi-accent'}`} />
                       <div className={`font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>Scan ID</div>
                       <div className={`text-xs mt-1 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>Quick verification</div>
                     </button>
@@ -203,11 +196,11 @@ const FastClaim: React.FC<FastClaimProps> = ({ onClose }) => {
                       onClick={() => alert('Voice verification will start')}
                       className={`p-6 rounded-xl border-2 border-dashed transition-all ${
                         isDark 
-                          ? 'border-emerald-500/50 hover:border-emerald-500 hover:bg-emerald-500/10' 
-                          : 'border-emerald-600/50 hover:border-emerald-600 hover:bg-emerald-50'
+                          ? 'border-khambi-accent/50 hover:border-khambi-accent hover:bg-khambi-accent/10' 
+                          : 'border-khambi-accent/50 hover:border-khambi-accent hover:bg-khambi-accent/10'
                       }`}
                     >
-                      <Mic className={`w-8 h-8 mx-auto mb-3 ${isDark ? 'text-emerald-400' : 'text-emerald-600'}`} />
+                      <Mic className={`w-8 h-8 mx-auto mb-3 ${isDark ? 'text-khambi-accent' : 'text-khambi-accent'}`} />
                       <div className={`font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>Voice Verify</div>
                       <div className={`text-xs mt-1 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>Say policy number</div>
                     </button>
@@ -216,11 +209,11 @@ const FastClaim: React.FC<FastClaimProps> = ({ onClose }) => {
                       onClick={() => alert('Manual entry form')}
                       className={`p-6 rounded-xl border-2 border-dashed transition-all ${
                         isDark 
-                          ? 'border-emerald-500/50 hover:border-emerald-500 hover:bg-emerald-500/10' 
-                          : 'border-emerald-600/50 hover:border-emerald-600 hover:bg-emerald-50'
+                          ? 'border-khambi-accent/50 hover:border-khambi-accent hover:bg-khambi-accent/10' 
+                          : 'border-khambi-accent/50 hover:border-khambi-accent hover:bg-khambi-accent/10'
                       }`}
                     >
-                      <FileText className={`w-8 h-8 mx-auto mb-3 ${isDark ? 'text-emerald-400' : 'text-emerald-600'}`} />
+                      <FileText className={`w-8 h-8 mx-auto mb-3 ${isDark ? 'text-khambi-accent' : 'text-khambi-accent'}`} />
                       <div className={`font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>Manual Entry</div>
                       <div className={`text-xs mt-1 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>Type policy number</div>
                     </button>
@@ -251,7 +244,7 @@ const FastClaim: React.FC<FastClaimProps> = ({ onClose }) => {
                   <div className="flex justify-end">
                     <button
                       onClick={() => setCurrentStep('details')}
-                      className="px-8 py-3 bg-emerald-600 text-white rounded-xl font-semibold hover:bg-emerald-700 transition-colors"
+                      className="px-8 py-3 bg-khambi-accent text-black rounded-xl font-semibold hover:bg-khambi-gold transition-colors"
                     >
                       Continue
                     </button>
@@ -279,10 +272,10 @@ const FastClaim: React.FC<FastClaimProps> = ({ onClose }) => {
 
                   {/* Scan Death Certificate */}
                   <div className={`p-6 rounded-xl border-2 border-dashed ${
-                    isDark ? 'border-emerald-500/50 bg-gray-800' : 'border-emerald-600/50 bg-emerald-50'
+                    isDark ? 'border-khambi-accent/50 bg-gray-800' : 'border-khambi-accent/50 bg-khambi-accent/10'
                   }`}>
                     <div className="text-center">
-                      <Scan className={`w-12 h-12 mx-auto mb-3 ${isDark ? 'text-emerald-400' : 'text-emerald-600'}`} />
+                      <Scan className={`w-12 h-12 mx-auto mb-3 ${isDark ? 'text-khambi-accent' : 'text-khambi-accent'}`} />
                       <h3 className={`font-semibold mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>
                         Scan Death Certificate
                       </h3>
@@ -291,7 +284,7 @@ const FastClaim: React.FC<FastClaimProps> = ({ onClose }) => {
                       </p>
                       <button
                         onClick={() => alert('Camera will open to scan death certificate')}
-                        className="bg-emerald-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-emerald-700 transition-colors"
+                        className="bg-khambi-accent text-black px-6 py-2 rounded-lg font-semibold hover:bg-khambi-gold transition-colors"
                       >
                         Scan Document
                       </button>
@@ -358,7 +351,7 @@ const FastClaim: React.FC<FastClaimProps> = ({ onClose }) => {
                     </button>
                     <button
                       onClick={() => setCurrentStep('casket')}
-                      className="px-8 py-3 bg-emerald-600 text-white rounded-xl font-semibold hover:bg-emerald-700 transition-colors"
+                      className="px-8 py-3 bg-khambi-accent text-black rounded-xl font-semibold hover:bg-khambi-gold transition-colors"
                     >
                       Continue
                     </button>
@@ -377,54 +370,67 @@ const FastClaim: React.FC<FastClaimProps> = ({ onClose }) => {
                 >
                   <div>
                     <h2 className={`text-3xl font-bold mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>
-                      Select Casket
+                      Select Coffin
                     </h2>
                     <p className={`${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-                      Choose a casket for the funeral service
+                      Choose a coffin for the funeral service
                     </p>
                   </div>
 
-                  {/* Casket Options */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {/* Coffin Options with Images */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     {[
-                      { id: '1', name: 'Oak Premium', price: 15000, description: 'Solid oak with brass handles' },
-                      { id: '2', name: 'Pine Standard', price: 8500, description: 'Quality pine with silver handles' },
-                      { id: '3', name: 'Mahogany Deluxe', price: 25000, description: 'Premium mahogany with gold accents' },
-                      { id: '4', name: 'Basic Dignity', price: 5000, description: 'Simple and dignified option' },
+                      { id: '1', name: 'Cherry Elegance', price: 12500, description: 'Deep cherry wood with silver handles', image: '/images/cas1.jpg' },
+                      { id: '2', name: 'Pecan Heritage', price: 15800, description: 'Medium brown pecan with gold handles', image: '/images/cas2.jpg' },
+                      { id: '3', name: 'Mahogany Prestige', price: 18900, description: 'Rich mahogany with gold handles', image: '/images/cas3.jpg' },
+                      { id: '4', name: 'Charcoal Dignity', price: 14200, description: 'Dark grey steel with silver handles', image: '/images/cas4.jpg' },
+                      { id: '5', name: 'Navy Serenity', price: 16500, description: 'Deep blue steel with gold handles', image: '/images/cas5.jpg' },
+                      { id: '6', name: 'Pecan Comfort', price: 13800, description: 'Light pecan wood with ruffled interior', image: '/images/cas6.jpg' },
                     ].map((casket) => (
                       <button
                         key={casket.id}
                         onClick={() => setClaimData({
                           ...claimData,
                           casket: casket,
-                          totalAmount: casket.price
+                          totalAmount: casket.price + Object.entries(claimData.extras).reduce((sum, [key, value]) => {
+                            if (value) {
+                              const extraPrices = { venue: 2500, flowers: 1500, music: 2000, streaming: 1000, catering: 5000, transportation: 2500 };
+                              return sum + (extraPrices[key as keyof typeof extraPrices] || 0);
+                            }
+                            return sum;
+                          }, 0)
                         })}
-                        className={`p-6 rounded-xl border-2 text-left transition-all ${
+                        style={{ borderColor: '#B8935E', borderWidth: '1px' }}
+                        className={`rounded-xl overflow-hidden text-left transition-all ${
                           claimData.casket?.id === casket.id
-                            ? 'border-emerald-600 bg-emerald-50 dark:bg-emerald-900/20'
-                            : isDark
-                              ? 'border-gray-700 hover:border-gray-600 bg-gray-800'
-                              : 'border-gray-200 hover:border-gray-300 bg-white'
-                        }`}
+                            ? 'ring-2 ring-khambi-accent shadow-lg'
+                            : ''
+                        } ${isDark ? 'bg-gray-800' : 'bg-white'}`}
                       >
-                        <div className="flex items-start justify-between mb-3">
-                          <Package className={`w-8 h-8 ${
-                            claimData.casket?.id === casket.id
-                              ? 'text-emerald-600'
-                              : isDark ? 'text-gray-400' : 'text-gray-600'
-                          }`} />
+                        {/* Image */}
+                        <div className="aspect-video relative overflow-hidden">
+                          <img
+                            src={casket.image}
+                            alt={casket.name}
+                            className="w-full h-full object-cover"
+                          />
                           {claimData.casket?.id === casket.id && (
-                            <Check className="w-6 h-6 text-emerald-600" />
+                            <div className="absolute top-2 right-2 w-8 h-8 rounded-full bg-khambi-accent flex items-center justify-center">
+                              <Check className="w-5 h-5 text-black" />
+                            </div>
                           )}
                         </div>
-                        <h3 className={`font-bold text-lg mb-1 ${isDark ? 'text-white' : 'text-gray-900'}`}>
-                          {casket.name}
-                        </h3>
-                        <p className={`text-sm mb-3 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-                          {casket.description}
-                        </p>
-                        <div className="text-2xl font-bold text-emerald-600">
-                          R{casket.price.toLocaleString()}
+                        {/* Details */}
+                        <div className="p-4">
+                          <h3 className={`font-bold text-lg mb-1 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                            {casket.name}
+                          </h3>
+                          <p className={`text-sm mb-2 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+                            {casket.description}
+                          </p>
+                          <div className="text-xl font-bold text-khambi-accent">
+                            R{casket.price.toLocaleString()}
+                          </div>
                         </div>
                       </button>
                     ))}
@@ -445,7 +451,7 @@ const FastClaim: React.FC<FastClaimProps> = ({ onClose }) => {
                     <button
                       onClick={() => setCurrentStep('extras')}
                       disabled={!claimData.casket}
-                      className="px-8 py-3 bg-emerald-600 text-white rounded-xl font-semibold hover:bg-emerald-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="px-8 py-3 bg-khambi-accent text-black rounded-xl font-semibold hover:bg-khambi-gold transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       Continue
                     </button>
@@ -467,21 +473,20 @@ const FastClaim: React.FC<FastClaimProps> = ({ onClose }) => {
                       Add Extras
                     </h2>
                     <p className={`${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-                      Optional services to enhance the funeral
+                      Optional services to enhance the funeral (select multiple)
                     </p>
                   </div>
 
-                  {/* Extras Grid */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {/* Extras Grid with Images */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     {[
-                      { key: 'venue', icon: Package, label: 'Venue Rental', price: 3500 },
-                      { key: 'flowers', icon: Flower2, label: 'Flowers', price: 1500 },
-                      { key: 'music', icon: Music, label: 'Music/DJ', price: 2000 },
-                      { key: 'streaming', icon: Video, label: 'Live Streaming', price: 1000 },
-                      { key: 'catering', icon: UtensilsCrossed, label: 'Catering', price: 5000 },
-                      { key: 'transportation', icon: Car, label: 'Transportation', price: 2500 },
+                      { key: 'venue', label: 'Venue Rental', price: 2500, image: '/images/venue1.jpg', description: 'Community hall for 100-150 guests' },
+                      { key: 'flowers', label: 'Flowers', price: 1500, image: '/images/flowers1.jpg', description: 'Elegant white roses and lilies' },
+                      { key: 'music', label: 'Music/DJ', price: 2000, image: '/images/music1.jpg', description: 'Professional sound system' },
+                      { key: 'streaming', label: 'Live Streaming', price: 1000, image: '/images/stream1.jpg', description: 'Single camera live stream' },
+                      { key: 'catering', label: 'Catering', price: 3000, image: '/images/catering1.jpg', description: 'Light refreshments for 50 people' },
+                      { key: 'transportation', label: 'Transportation', price: 1500, image: '/images/transport1.jpg', description: 'Extra family car' },
                     ].map((extra) => {
-                      const Icon = extra.icon;
                       const isSelected = claimData.extras[extra.key as keyof typeof claimData.extras];
                       
                       return (
@@ -489,18 +494,9 @@ const FastClaim: React.FC<FastClaimProps> = ({ onClose }) => {
                           key={extra.key}
                           onClick={() => {
                             const newExtras = { ...claimData.extras, [extra.key]: !isSelected };
+                            const extraPrices = { venue: 2500, flowers: 1500, music: 2000, streaming: 1000, catering: 3000, transportation: 1500 };
                             const extrasTotal = Object.entries(newExtras).reduce((sum, [key, value]) => {
-                              if (value) {
-                                const extraItem = [
-                                  { key: 'venue', price: 3500 },
-                                  { key: 'flowers', price: 1500 },
-                                  { key: 'music', price: 2000 },
-                                  { key: 'streaming', price: 1000 },
-                                  { key: 'catering', price: 5000 },
-                                  { key: 'transportation', price: 2500 },
-                                ].find(e => e.key === key);
-                                return sum + (extraItem?.price || 0);
-                              }
+                              if (value) return sum + (extraPrices[key as keyof typeof extraPrices] || 0);
                               return sum;
                             }, 0);
                             
@@ -510,29 +506,35 @@ const FastClaim: React.FC<FastClaimProps> = ({ onClose }) => {
                               totalAmount: (claimData.casket?.price || 0) + extrasTotal
                             });
                           }}
-                          className={`p-6 rounded-xl border-2 text-left transition-all ${
-                            isSelected
-                              ? 'border-emerald-600 bg-emerald-50 dark:bg-emerald-900/20'
-                              : isDark
-                                ? 'border-gray-700 hover:border-gray-600 bg-gray-800'
-                                : 'border-gray-200 hover:border-gray-300 bg-white'
-                          }`}
+                          style={{ borderColor: '#B8935E', borderWidth: '1px' }}
+                          className={`rounded-xl overflow-hidden text-left transition-all ${
+                            isSelected ? 'ring-2 ring-khambi-accent shadow-lg' : ''
+                          } ${isDark ? 'bg-gray-800' : 'bg-white'}`}
                         >
-                          <div className="flex items-center justify-between">
-                            <div className="flex items-center gap-3">
-                              <Icon className={`w-6 h-6 ${
-                                isSelected ? 'text-emerald-600' : isDark ? 'text-gray-400' : 'text-gray-600'
-                              }`} />
-                              <div>
-                                <div className={`font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>
-                                  {extra.label}
-                                </div>
-                                <div className="text-emerald-600 font-bold">
-                                  R{extra.price.toLocaleString()}
-                                </div>
+                          {/* Image */}
+                          <div className="aspect-video relative overflow-hidden">
+                            <img
+                              src={extra.image}
+                              alt={extra.label}
+                              className="w-full h-full object-cover"
+                            />
+                            {isSelected && (
+                              <div className="absolute top-2 right-2 w-8 h-8 rounded-full bg-khambi-accent flex items-center justify-center">
+                                <Check className="w-5 h-5 text-black" />
                               </div>
+                            )}
+                          </div>
+                          {/* Details */}
+                          <div className="p-4">
+                            <h3 className={`font-bold mb-1 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                              {extra.label}
+                            </h3>
+                            <p className={`text-sm mb-2 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+                              {extra.description}
+                            </p>
+                            <div className="text-lg font-bold text-khambi-accent">
+                              R{extra.price.toLocaleString()}
                             </div>
-                            {isSelected && <Check className="w-6 h-6 text-emerald-600" />}
                           </div>
                         </button>
                       );
@@ -545,7 +547,7 @@ const FastClaim: React.FC<FastClaimProps> = ({ onClose }) => {
                       <span className={`text-lg font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>
                         Total Amount
                       </span>
-                      <span className="text-3xl font-bold text-emerald-600">
+                      <span className="text-3xl font-bold text-khambi-accent">
                         R{claimData.totalAmount.toLocaleString()}
                       </span>
                     </div>
@@ -565,7 +567,7 @@ const FastClaim: React.FC<FastClaimProps> = ({ onClose }) => {
                     </button>
                     <button
                       onClick={() => setCurrentStep('payment')}
-                      className="px-8 py-3 bg-emerald-600 text-white rounded-xl font-semibold hover:bg-emerald-700 transition-colors"
+                      className="px-8 py-3 bg-khambi-accent text-black rounded-xl font-semibold hover:bg-khambi-gold transition-colors"
                     >
                       Continue to Payment
                     </button>
@@ -610,12 +612,12 @@ const FastClaim: React.FC<FastClaimProps> = ({ onClose }) => {
                       {Object.entries(claimData.extras).map(([key, value]) => {
                         if (value) {
                           const extras = {
-                            venue: { label: 'Venue Rental', price: 3500 },
+                            venue: { label: 'Venue Rental', price: 2500 },
                             flowers: { label: 'Flowers', price: 1500 },
                             music: { label: 'Music/DJ', price: 2000 },
                             streaming: { label: 'Live Streaming', price: 1000 },
-                            catering: { label: 'Catering', price: 5000 },
-                            transportation: { label: 'Transportation', price: 2500 },
+                            catering: { label: 'Catering', price: 3000 },
+                            transportation: { label: 'Transportation', price: 1500 },
                           };
                           const extra = extras[key as keyof typeof extras];
                           return (
@@ -636,7 +638,7 @@ const FastClaim: React.FC<FastClaimProps> = ({ onClose }) => {
                           <span className={`text-lg font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>
                             Total
                           </span>
-                          <span className="text-2xl font-bold text-emerald-600">
+                          <span className="text-2xl font-bold text-khambi-accent">
                             R{claimData.totalAmount.toLocaleString()}
                           </span>
                         </div>
@@ -690,7 +692,7 @@ const FastClaim: React.FC<FastClaimProps> = ({ onClose }) => {
                               isDark 
                                 ? 'bg-gray-700 border-gray-600 text-white' 
                                 : 'bg-white border-gray-300 text-gray-900'
-                            } focus:ring-2 focus:ring-emerald-500 focus:border-transparent`}
+                            } focus:ring-2 focus:ring-khambi-accent focus:border-transparent`}
                           />
                         </div>
                       </div>
@@ -714,7 +716,7 @@ const FastClaim: React.FC<FastClaimProps> = ({ onClose }) => {
                         alert('Claim submitted successfully! Reference: CLM-' + Date.now());
                         if (onClose) onClose();
                       }}
-                      className="px-8 py-3 bg-emerald-600 text-white rounded-xl font-semibold hover:bg-emerald-700 transition-colors flex items-center gap-2"
+                      className="px-8 py-3 bg-khambi-accent text-black rounded-xl font-semibold hover:bg-khambi-gold transition-colors flex items-center gap-2"
                     >
                       <CreditCard className="w-5 h-5" />
                       Submit Claim

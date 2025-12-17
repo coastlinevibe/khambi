@@ -14,10 +14,13 @@ const JuniorExecutivePlanDetailPage = lazy(() => import('./components/JuniorExec
 const ProceduresPage = lazy(() => import('./components/ProceduresPage'));
 const CasketsPage = lazy(() => import('./components/CasketsPage'));
 const AdminLogin = lazy(() => import('./components/AdminLogin'));
+const LoginPage = lazy(() => import('./components/LoginPage'));
+const AuthDebug = lazy(() => import('./components/AuthDebug'));
 const AdminDashboard = lazy(() => import('./components/AdminDashboard'));
 const AdminOnboarding = lazy(() => import('./components/AdminOnboarding'));
 const NotFoundPage = lazy(() => import('./components/NotFoundPage'));
 const PrivacyPolicy = lazy(() => import('./components/PrivacyPolicy'));
+import ProtectedRoute from './components/ProtectedRoute';
 import { ThemeProvider } from './contexts/ThemeContext';
 
 function CasketsPageWrapper() {
@@ -250,7 +253,16 @@ export default function App() {
           <Route path="/procedures" element={<ProceduresPage />} />
           <Route path="/caskets" element={<CasketsPageWrapper />} />
           <Route path="/admin" element={<AdminLogin />} />
-          <Route path="/admin/dashboard" element={<AdminDashboard />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/auth-debug" element={<AuthDebug />} />
+          <Route 
+            path="/admin/dashboard" 
+            element={
+              <ProtectedRoute requireManager>
+                <AdminDashboard />
+              </ProtectedRoute>
+            } 
+          />
           <Route path="/admin/onboarding" element={<AdminOnboarding />} />
           <Route path="/privacy-policy" element={<PrivacyPolicyWrapper />} />
           <Route path="*" element={<NotFoundPage />} />

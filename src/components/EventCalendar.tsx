@@ -1,13 +1,14 @@
 import { useState, useMemo, useCallback } from "react";
 import { Calendar, dateFnsLocalizer, View } from "react-big-calendar";
 import { format, parse, startOfWeek, getDay } from "date-fns";
+import { enUS } from "date-fns/locale";
 import { useTheme } from "../contexts/ThemeContext";
 import { Calendar as CalendarIcon, Plus, Eye, Edit, Trash2, MapPin, Clock, User } from "lucide-react";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "./EventCalendar.css";
 
 const locales = {
-  "en-US": require("date-fns/locale/en-US"),
+  "en-US": enUS,
 };
 
 const localizer = dateFnsLocalizer({

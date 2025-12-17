@@ -35,50 +35,13 @@ export default defineConfig({
     },
     rollupOptions: {
       output: {
-        manualChunks: (id) => {
-          // Vendor chunks
-          if (id.includes('node_modules')) {
-            if (id.includes('react') || id.includes('react-dom')) {
-              return 'vendor-react';
-            }
-            if (id.includes('framer-motion')) {
-              return 'vendor-animations';
-            }
-            if (id.includes('lucide-react') || id.includes('react-icons')) {
-              return 'vendor-icons';
-            }
-            if (id.includes('@radix-ui')) {
-              return 'vendor-ui';
-            }
-            if (id.includes('tsparticles') || id.includes('react-beautiful-dnd')) {
-              return 'vendor-heavy';
-            }
-            return 'vendor-misc';
-          }
-          
-          // Component chunks
-          if (id.includes('/components/ui/')) {
-            return 'ui-components';
-          }
-          if (id.includes('/components/')) {
-            return 'components';
-          }
+        manualChunks: {
+          'vendor-react': ['react', 'react-dom', 'react-router-dom'],
+          'vendor-ui': ['lucide-react', 'framer-motion'],
         },
-        // Optimize chunk loading
         chunkFileNames: 'assets/[name]-[hash].js',
         entryFileNames: 'assets/[name]-[hash].js',
         assetFileNames: 'assets/[name]-[hash].[ext]',
-      },
-      // Enable tree shaking
-      treeshake: {
-        moduleSideEffects: false,
-        propertyReadSideEffects: false,
-        unknownGlobalSideEffects: false,
-      },
-      // Reduce bundle size
-      external: (id) => {
-        // Don't bundle large dependencies that can be loaded separately
-        return false;
       },
     },
     // Enable gzip compression
